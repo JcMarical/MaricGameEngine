@@ -1,0 +1,3 @@
+﻿  SandboxApp.cpp
+D:\Project\Git Project\MaricGameEngine\SandBox\src\SandboxApp.cpp(17,5): error C2731: “main”: 无法重载函数
+D:\Project\Git Project\MaricGameEngine\SandBox\src\SandboxApp.cpp(17,5): message : 参见“main”的声明
