@@ -11,3 +11,6 @@
 	#error CryDust only support Window!
 
 #endif // CD_PLATFORM_WINDOWS
+
+
+#define BIT(x) (1 << x)

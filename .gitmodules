@@ -1,0 +1,3 @@
+[submodule "MaricGameEngine/vendor/spdlog"]
+	path = MaricGameEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git

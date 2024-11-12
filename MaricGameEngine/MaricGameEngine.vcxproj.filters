@@ -18,6 +18,12 @@
     <ClCompile Include="src\CryDust\Application.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Log.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cdpch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CryDust.h">
@@ -30,6 +36,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\EntryPoint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\ApplicationEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\KeyEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\MouseEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cdpch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

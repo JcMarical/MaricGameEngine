@@ -46,6 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -53,6 +54,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CD_PLATFORM_WINDOWS;CD_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)MaricGameEngine\vendor\spdlog\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>cdpch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>cdpch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,13 +83,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\cdpch.h" />
     <ClInclude Include="src\CryDust.h" />
     <ClInclude Include="src\CryDust\Application.h" />
     <ClInclude Include="src\CryDust\Core.h" />
     <ClInclude Include="src\CryDust\EntryPoint.h" />
+    <ClInclude Include="src\CryDust\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\CryDust\Events\Event.h" />
+    <ClInclude Include="src\CryDust\Events\KeyEvent.h" />
+    <ClInclude Include="src\CryDust\Events\MouseEvent.h" />
+    <ClInclude Include="src\CryDust\Log.h" />
+    <ClInclude Include="src\CryDust\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CryDust\Application.cpp" />
+    <ClCompile Include="src\cdpch.cpp" />
+    <ClCompile Include="src\CryDust\Log.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

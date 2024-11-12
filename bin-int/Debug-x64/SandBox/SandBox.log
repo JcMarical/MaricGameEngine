@@ -1,3 +1,4 @@
-﻿  SandboxApp.cpp
-D:\Project\Git Project\MaricGameEngine\SandBox\src\SandboxApp.cpp(17,5): error C2731: “main”: 无法重载函数
-D:\Project\Git Project\MaricGameEngine\SandBox\src\SandboxApp.cpp(17,5): message : 参见“main”的声明
+﻿    正在创建库 D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\SandBox\SandBox.lib 和对象 D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\SandBox\SandBox.exp
+  SandBox.vcxproj -> D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\SandBox\SandBox.exe
+  'pwsh.exe' 不是内部或外部命令，也不是可运行的程序
+  或批处理文件。

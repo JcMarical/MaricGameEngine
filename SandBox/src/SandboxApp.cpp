@@ -14,15 +14,8 @@ public:
 	}
 };
 
-int main()
-{
-	printf("CryDust MariGameEngine!!!\n");
-	Sandbox* sandBox = new Sandbox();
-	sandBox->Run();
-	delete sandBox;
-}
 
-CryDust::Application* CreateApplication()
+CryDust::Application* CryDust::CreateApplication()
 {
 	return new Sandbox();
 }

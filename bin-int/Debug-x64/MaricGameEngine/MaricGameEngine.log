@@ -1,5 +1,7 @@
 ﻿  Application.cpp
-    正在创建库 D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\MaricGameEngine\MaricGameEngine.lib 和对象 D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\MaricGameEngine\MaricGameEngine.exp
-  MaricGameEngine.vcxproj -> D:\Project\Git Project\MaricGameEngine\bin\Debug-x64\MaricGameEngine\MaricGameEngine.dll
-  'pwsh.exe' 不是内部或外部命令，也不是可运行的程序
-  或批处理文件。
+D:\Project\Git Project\MaricGameEngine\MaricGameEngine\src\CryDust\Application.cpp : fatal  error C1083: 无法打开预编译头文件: “D:\Project\Git Project\MaricGameEngine\bin-int\Debug-x64\MaricGameEngine\MaricGameEngine.pch”: No such file or directory
+  cdpch.cpp
+D:\Project\Git Project\MaricGameEngine\MaricGameEngine\src\cdpch.cpp : fatal  error C1083: 无法打开预编译头文件: “D:\Project\Git Project\MaricGameEngine\bin-int\Debug-x64\MaricGameEngine\MaricGameEngine.pch”: No such file or directory
+  Log.cpp
+D:\Project\Git Project\MaricGameEngine\MaricGameEngine\src\CryDust\Log.cpp : fatal  error C1083: 无法打开预编译头文件: “D:\Project\Git Project\MaricGameEngine\bin-int\Debug-x64\MaricGameEngine\MaricGameEngine.pch”: No such file or directory
+  正在生成代码...
