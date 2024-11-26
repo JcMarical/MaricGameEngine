@@ -121,7 +121,7 @@ project "SandBox"
         includedirs
         {
             "CryDust/vendor/spdlog/include",
-            "CryDust/src"
+            "CryDust/src",
             "CryDust/vendor"
         }
     
