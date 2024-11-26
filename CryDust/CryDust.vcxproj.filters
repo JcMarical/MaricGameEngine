@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CryDust">
+      <UniqueIdentifier>{537BDE3B-BF5A-5DD7-C872-E8AD34D1C338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CryDust\Events">
+      <UniqueIdentifier>{D7CB337C-C399-2782-AC2D-98A8989A03E7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CryDust\ImGui">
+      <UniqueIdentifier>{BDE2B8CD-29A3-3404-F2DD-7D815E5D79E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CryDust.h" />
+    <ClInclude Include="src\CryDust\Application.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\EntryPoint.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\ApplicationEvent.h">
+      <Filter>CryDust\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\Event.h">
+      <Filter>CryDust\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\KeyEvent.h">
+      <Filter>CryDust\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Events\MouseEvent.h">
+      <Filter>CryDust\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\ImGui\ImGuiLayer.h">
+      <Filter>CryDust\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Layer.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\LayerStack.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Log.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Window.h">
+      <Filter>CryDust</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cdpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CryDust\Application.cpp">
+      <Filter>CryDust</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp">
+      <Filter>CryDust\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Layer.cpp">
+      <Filter>CryDust</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\LayerStack.cpp">
+      <Filter>CryDust</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Log.cpp">
+      <Filter>CryDust</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cdpch.cpp" />
+  </ItemGroup>
+</Project>

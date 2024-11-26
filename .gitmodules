@@ -1,3 +1,7 @@
-[submodule "MaricGameEngine/vendor/spdlog"]
-	path = MaricGameEngine/vendor/spdlog
+[submodule "CryDust/vendor/spdlog"]
+	path = CryDust/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "CryDust/vendor/GLFW"]
+	path = CryDust/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
+
