@@ -104,7 +104,7 @@ public:
 		
 		if (m_Event.GetEventType() == T::GetStaticType())
 		{
-			//m_Event.m_Handled |= func(static_cast<T&>(m_Event));  //如果事件类型匹配，那么将事件转换为T类型，并调用传入的处理函数func。处理函数的执行结果被存储在m_Event的m_Handled成员变量中。
+			m_Event.Handled = func(*(T*)&m_Event); //如果事件类型匹配，那么将事件转换为T类型，并调用传入的处理函数func。处理函数的执行结果被存储在m_Event的m_Handled成员变量中。
 			return true;
 		}
 		return false;
