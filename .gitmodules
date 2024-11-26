@@ -5,3 +5,6 @@
 	path = CryDust/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
 
+[submodule "CryDust/vendor/imgui"]
+	path = CryDust/vendor/imgui
+	url = https://github.com/TheCherno/imgui
