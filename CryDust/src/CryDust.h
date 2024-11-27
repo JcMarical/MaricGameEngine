@@ -7,6 +7,9 @@
 #include "CryDust/Layer.h"
 #include "CryDust/Log.h"
 
+#include "CryDust/Input.h"
+#include "CryDust/KeyCodes.h"
+#include "CryDust/MouseButtonCodes.h"
 
 #include "CryDust/ImGui/ImGuiLayer.h"
  

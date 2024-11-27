@@ -23,6 +23,9 @@
 	#define CORE_DEBUG_ASSERT(x,...)
 #endif
 
+#ifdef HZ_DEBUG
+#define HZ_ENABLE_ASSERTS
+#endif
 
 
 #define BIT(x)  (1 << x)

@@ -30,6 +30,7 @@ project "CryDust"
     location "CryDust"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -68,7 +69,6 @@ project "CryDust"
     filter "system:windows"
         buildoptions "/utf-8"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
 
@@ -84,28 +84,29 @@ project "CryDust"
 
         postbuildcommands
         {
-            ("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
+            ("{COPYFILE} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/SandBox/\"")
         }
 
     filter "configurations:Debug"
         defines "CD_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "CD_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "CD_DIST"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
 project "SandBox"
         location "SandBox"
         kind "ConsoleApp"
         language "C++"
+        staticruntime "off"
 
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -134,7 +135,6 @@ project "SandBox"
     filter "system:windows"
         buildoptions "/utf-8"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         --windows项目预处理宏定义
@@ -145,15 +145,15 @@ project "SandBox"
      
     filter "configurations:Debug"
         defines "CD_DEBUG"
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines "CD_RELEASE"
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
     filter "configurations:Dist"
         defines "CD_DIST"
-        buildoptions "/MD"
+       runtime "Release"
         optimize "On"

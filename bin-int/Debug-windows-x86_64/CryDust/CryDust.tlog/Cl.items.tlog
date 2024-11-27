@@ -4,5 +4,6 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Layer.cpp;D:\Project\Git Proj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\LayerStack.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\LayerStack.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Log.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Log.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiOpenGLRenderer.obj
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsInput.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsInput.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsWindow.obj
 D:\Project\Git Project\CryDust\CryDust\src\cdpch.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\cdpch.obj

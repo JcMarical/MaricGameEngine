@@ -6,18 +6,27 @@ public:
 	ExampleLayer()
 		: Layer("Example")
 	{
+
 	}
 
 	void OnUpdate() override
 	{
 		DEBUG_INFO("ExampleLayer::Update");
+		if (CryDust::Input::IsKeyPressed(CD_KEY_TAB))
+			DEBUG_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(CryDust::Event& event) override
 	{
 		DEBUG_TRACE("{0}", event.ToString());
+		if (event.GetEventType() == CryDust::EventType::KeyPressed)
+		{
+			CryDust::KeyPressedEvent& e = (CryDust::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == CD_KEY_TAB)
+				DEBUG_TRACE("Tab key is pressed (event)!");
+			DEBUG_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
-
 
 };
 

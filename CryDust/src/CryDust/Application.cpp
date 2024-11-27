@@ -2,6 +2,7 @@
 #include "cdpch.h"
 #include "Application.h"
 
+#include "Input.h"
 
 #include "Events/ApplicationEvent.h"
 #include <glad/glad.h>
