@@ -8,3 +8,6 @@
 [submodule "CryDust/vendor/imgui"]
 	path = CryDust/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "CryDust/vendor/glm"]
+	path = CryDust/vendor/glm
+	url = https://github.com/g-truc/glm

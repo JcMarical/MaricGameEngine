@@ -7,6 +7,8 @@
 #include "Events/ApplicationEvent.h"
 #include "Window.h"
 
+#include "CryDust/ImGui/ImGuiLayer.h"
+
 namespace CryDust {
 
 	class CRYDUST_API Application
@@ -33,6 +35,7 @@ namespace CryDust {
 
 	private:
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

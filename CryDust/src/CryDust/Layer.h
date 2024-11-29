@@ -15,6 +15,8 @@ namespace CryDust
 		//分离
 		virtual void OnDetach() {}
 		//每帧调用
+
+		virtual void OnImGuiRender() {}
 		virtual void OnUpdate() {}
 		//事件接收
 		virtual void OnEvent(Event& event) {}

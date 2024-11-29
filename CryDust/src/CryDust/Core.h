@@ -3,11 +3,18 @@
 
 
 #ifdef CD_PLATFORM_WINDOWS
+
+
+#if CD_DYNAMIC_LINK
 	#ifdef CD_BUILD_DLL
 		#define CRYDUST_API __declspec(dllexport)
 	#else
 		#define CRYDUST_API __declspec(dllimport)
 	#endif
+#else
+    #define CRYDUST_API
+#endif
+
 #else
 	#error CryDust only support Window!
 

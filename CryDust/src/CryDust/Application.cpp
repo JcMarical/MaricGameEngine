@@ -1,5 +1,11 @@
 
 #include "cdpch.h"
+
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
+
+
 #include "Application.h"
 
 #include "Input.h"
@@ -8,11 +14,15 @@
 #include <glad/glad.h>
 
 
+
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
  
 namespace CryDust {
 
 	Application* Application::s_Instance = nullptr;
+
+	
 
 	Application::Application()
 	{
@@ -23,6 +33,9 @@ namespace CryDust {
 
 		m_Window = std::unique_ptr<Window> (Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -71,9 +84,13 @@ namespace CryDust {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
-			{
 				layer->OnUpdate();
-			}
+
+			//IMGUI渲染
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 
 			m_Window->OnUpdate();
