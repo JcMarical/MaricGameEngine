@@ -8,7 +8,7 @@
 #include "Window.h"
 
 #include "CryDust/ImGui/ImGuiLayer.h"
-
+#include "CryDust/Renderer/Shader.h"
 namespace CryDust {
 
 	class CRYDUST_API Application
@@ -29,6 +29,8 @@ namespace CryDust {
 		inline static Application& Get() { return *s_Instance; }
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 	private:
 
 
