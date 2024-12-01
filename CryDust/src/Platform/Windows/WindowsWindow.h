@@ -3,7 +3,7 @@
 #include "CryDust/Window.h"
 
 #include "GLFW/glfw3.h"
-
+#include "CryDust/Renderer/GraphicsContext.h"
 struct GLFWwindow;
 
 namespace CryDust {
@@ -34,6 +34,7 @@ namespace CryDust {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

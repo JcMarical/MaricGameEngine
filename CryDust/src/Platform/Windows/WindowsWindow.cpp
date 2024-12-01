@@ -6,7 +6,7 @@
 #include "CryDust/Events/MouseEvent.h"
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace CryDust {
 
@@ -52,10 +52,13 @@ namespace CryDust {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
+		//glfwMakeContextCurrent(m_Window);
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		CORE_DEBUG_ASSERT(status, "Failed to initailize GLAD!!!");
+		//int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		//CORE_DEBUG_ASSERT(status, "Failed to initailize GLAD!!!");
+
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -176,7 +179,7 @@ namespace CryDust {
 	void WindowsWindow :: OnUpdate()
 	{
 		glfwPollEvents();		//处理所有挂起的事件
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 
