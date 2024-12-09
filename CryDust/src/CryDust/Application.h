@@ -10,6 +10,7 @@
 #include "CryDust/ImGui/ImGuiLayer.h"
 #include "CryDust/Renderer/Shader.h"
 #include "CryDust/Renderer/Buffer.h"
+#include "CryDust/Renderer/VertexArray.h"
 namespace CryDust {
 
 	class CRYDUST_API Application
@@ -30,17 +31,17 @@ namespace CryDust {
 		inline static Application& Get() { return *s_Instance; }
 
 
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 
 	private:
 
 
 		bool OnWindowClose(WindowCloseEvent& e);
-
-
+	
 	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
