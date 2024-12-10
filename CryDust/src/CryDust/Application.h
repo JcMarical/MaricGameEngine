@@ -11,6 +11,8 @@
 #include "CryDust/Renderer/Shader.h"
 #include "CryDust/Renderer/Buffer.h"
 #include "CryDust/Renderer/VertexArray.h"
+
+#include "CryDust/Renderer/OrthographicCamera.h"
 namespace CryDust {
 
 	class CRYDUST_API Application
@@ -36,6 +38,8 @@ namespace CryDust {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 	private:
 

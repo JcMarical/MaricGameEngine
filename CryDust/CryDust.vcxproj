@@ -163,6 +163,7 @@
     <ClInclude Include="src\CryDust\MouseButtonCodes.h" />
     <ClInclude Include="src\CryDust\Renderer\Buffer.h" />
     <ClInclude Include="src\CryDust\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\CryDust\Renderer\RenderCommand.h" />
     <ClInclude Include="src\CryDust\Renderer\Renderer.h" />
     <ClInclude Include="src\CryDust\Renderer\RendererAPI.h" />
@@ -600,6 +601,7 @@
     <ClCompile Include="src\CryDust\Layer.cpp" />
     <ClCompile Include="src\CryDust\LayerStack.cpp" />
     <ClCompile Include="src\CryDust\Log.cpp" />
+    <ClCompile Include="src\CryDust\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\CryDust\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Renderer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\RendererAPI.cpp" />

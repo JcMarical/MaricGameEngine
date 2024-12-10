@@ -11,8 +11,8 @@ namespace CryDust {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		CORE_DEBUG_ASSERT(false, "Unknown RendererAPI!");
@@ -23,8 +23,8 @@ namespace CryDust {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::OpenGL:  return new OpenGLIndexBuffer(indices, size);
+			case RendererAPI::API::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, size);
 		}
 
 		CORE_DEBUG_ASSERT(false, "Unknown RendererAPI!");
