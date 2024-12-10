@@ -10,8 +10,8 @@ namespace CryDust {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::OpenGL:  return new OpenGLVertexArray();
+		case RendererAPI::API::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL:  return new OpenGLVertexArray();
 		}
 
 		CORE_DEBUG_ASSERT(false, "Unknown RendererAPI!");
