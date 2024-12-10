@@ -11,11 +11,12 @@
 #include "CryDust/Renderer/Shader.h"
 #include "CryDust/Renderer/Buffer.h"
 #include "CryDust/Renderer/VertexArray.h"
+#include "CryDust/Core/Timestep.h"
 
-#include "CryDust/Renderer/OrthographicCamera.h"
+#include "CryDust/ImGui/ImGuiLayer.h"
 namespace CryDust {
 
-	class CRYDUST_API Application
+	class  Application
 	{
 	public:
 		Application();
@@ -32,15 +33,6 @@ namespace CryDust {
 
 		inline static Application& Get() { return *s_Instance; }
 
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
-
 	private:
 
 
@@ -51,6 +43,8 @@ namespace CryDust {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+
+		float m_LastFrameTime = 0.0f;
 
 	private:
 		static Application* s_Instance;

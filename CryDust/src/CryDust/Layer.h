@@ -1,7 +1,7 @@
 #pragma once
 #include "CryDust/Core.h"
-
 #include "CryDust/Events/Event.h"
+#include "CryDust/Core/Timestep.h"
 
 namespace CryDust
 {
@@ -18,6 +18,7 @@ namespace CryDust
 
 		virtual void OnImGuiRender() {}
 		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts){}
 		//事件接收
 		virtual void OnEvent(Event& event) {}
 

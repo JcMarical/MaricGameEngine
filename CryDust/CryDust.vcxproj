@@ -149,6 +149,7 @@
     <ClInclude Include="src\CryDust.h" />
     <ClInclude Include="src\CryDust\Application.h" />
     <ClInclude Include="src\CryDust\Core.h" />
+    <ClInclude Include="src\CryDust\Core\Timestep.h" />
     <ClInclude Include="src\CryDust\EntryPoint.h" />
     <ClInclude Include="src\CryDust\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CryDust\Events\Event.h" />
