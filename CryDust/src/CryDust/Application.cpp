@@ -96,11 +96,12 @@ namespace CryDust {
 				layer->OnUpdate(timestep);
 
 			//IMGUI渲染
+			/*
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-
+			*/
 
 			m_Window->OnUpdate();
 		}

@@ -9,7 +9,7 @@ class ExampleLayer : public CryDust::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		//构造初始数据
 		m_VertexArray.reset(CryDust::VertexArray::Create());
@@ -101,7 +101,7 @@ public:
 				color = v_Color;
 			}
 		)";
-		m_Shader.reset(CryDust::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = CryDust::Shader::Create("VertexPosColor",vertexSrc, fragmentSrc);
 
 
 		///正方形Shader
@@ -137,20 +137,23 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(CryDust::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = CryDust::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_TextureShader.reset(CryDust::Shader::Create("assets/shaders/Texture.glsl"));
+
+		//文件读取shader
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = CryDust::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<CryDust::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<CryDust::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 
 	virtual void OnImGuiRender() override
 	{
+
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
@@ -158,32 +161,17 @@ public:
 
 	void OnUpdate(CryDust::Timestep ts) override
 	{
-		//相机控制
-		if (CryDust::Input::IsKeyPressed(CD_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-		else if (CryDust::Input::IsKeyPressed(CD_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (CryDust::Input::IsKeyPressed(CD_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		else if (CryDust::Input::IsKeyPressed(CD_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (CryDust::Input::IsKeyPressed(CD_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		if (CryDust::Input::IsKeyPressed(CD_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
+		//相机更新
+		m_CameraController.OnUpdate(ts);
 
 		//渲染指令
 		CryDust::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		CryDust::RenderCommand::Clear();
 
-		//相机位置
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
+
 
 		//局内渲染
-		CryDust::Renderer::BeginScene(m_Camera);
+		CryDust::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -201,11 +189,13 @@ public:
 				CryDust::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		CryDust::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		CryDust::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		m_ChernoLogoTexture->Bind();
-		CryDust::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		CryDust::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Triangle
 		// CryDust::Renderer::Submit(m_Shader, m_VertexArray);
@@ -215,11 +205,12 @@ public:
 
 
 
-	void OnEvent(CryDust::Event& event) override
+	void OnEvent(CryDust::Event& e) override
 	{
-
+		m_CameraController.OnEvent(e);
 	}
 private:
+	CryDust::ShaderLibrary m_ShaderLibrary;
 	CryDust::Ref<CryDust::Shader> m_Shader;
 	CryDust::Ref<CryDust::VertexArray> m_VertexArray;
 
@@ -228,14 +219,8 @@ private:
 
 	CryDust::Ref<CryDust::Texture2D> m_Texture, m_ChernoLogoTexture;
 
-	CryDust::OrthographicCamera m_Camera;
 
-
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 5.0f;
-
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 180.0f;
+	CryDust::OrthographicCameraController m_CameraController;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };

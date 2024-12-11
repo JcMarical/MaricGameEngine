@@ -25,9 +25,17 @@ namespace CryDust {
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
+
+		// 从文件路径扩展名字（不传入名字则自动提供）
+		auto lastSlash = filepath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filepath.rfind('.');
+		auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -45,7 +53,7 @@ namespace CryDust {
 	std::string OpenGLShader::ReadFile(const std::string& filepath)
 	{
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary); //其实没咋看懂,和|区别
 		if (in)
 		{
 			in.seekg(0, std::ios::end);//seek To get：基地址为结束地址，偏移量为0
@@ -94,7 +102,13 @@ namespace CryDust {
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs(shaderSources.size());
+
+
+		CORE_DEBUG_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now"); //目前只支持两个shader
+		std::array<GLenum, 2> glShaderIDs;
+		int glShaderIDIndex = 0;
+
+
 		//编译着色器
 		for (auto& kv : shaderSources)
 		{
@@ -126,7 +140,8 @@ namespace CryDust {
 			}
 
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			//glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
 		m_RendererID = program;

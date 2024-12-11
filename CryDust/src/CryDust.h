@@ -12,6 +12,8 @@
 #include "CryDust/Input.h"
 #include "CryDust/KeyCodes.h"
 #include "CryDust/MouseButtonCodes.h"
+#include "CryDust/OrthographicCameraController.h"
+
 
 #include "CryDust/ImGui/ImGuiLayer.h"
 
@@ -25,6 +27,7 @@
 #include "CryDust/Renderer/VertexArray.h"
 		  
 #include "CryDust/Renderer/OrthographicCamera.h"
+
 // -----------------------------------
 
 

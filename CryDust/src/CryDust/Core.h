@@ -30,8 +30,8 @@
 	#define CORE_DEBUG_ASSERT(x,...)
 #endif
 
-#ifdef HZ_DEBUG
-#define HZ_ENABLE_ASSERTS
+#ifdef CD_DEBUG
+#define CD_ENABLE_ASSERTS
 #endif
 
 
