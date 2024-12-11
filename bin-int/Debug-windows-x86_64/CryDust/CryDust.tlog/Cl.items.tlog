@@ -14,6 +14,7 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\VertexArray.cpp;D:\P
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLBuffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLBuffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLContext.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLContext.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLRendererAPI.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLRendererAPI.obj
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLShader.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLVertexArray.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLVertexArray.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsInput.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsInput.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsWindow.obj
