@@ -170,6 +170,7 @@ public:
 		m_TextureShader.reset(CryDust::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_ChernoLogoTexture = CryDust::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -231,6 +232,9 @@ public:
 		m_Texture->Bind();
 		CryDust::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+		m_ChernoLogoTexture->Bind();
+		CryDust::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Triangle
 		// CryDust::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -250,7 +254,7 @@ private:
 	CryDust::Ref<CryDust::Shader> m_FlatColorShader, m_TextureShader;
 	CryDust::Ref<CryDust::VertexArray> m_SquareVA;
 
-	CryDust::Ref<CryDust::Texture2D> m_Texture;
+	CryDust::Ref<CryDust::Texture2D> m_Texture, m_ChernoLogoTexture;
 
 	CryDust::OrthographicCamera m_Camera;
 
