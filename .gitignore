@@ -3,6 +3,12 @@
 bin/
 /bin/
 bin-int/
-
+/bin-int/
+bin-int\
 # Files
 *.user
+/bin-int
+
+/bin-int/Debug-windows-x86_64
+/bin-int/Debug-windows-x86_64/CryDust
+*.obj

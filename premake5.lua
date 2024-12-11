@@ -19,13 +19,17 @@ IncludeDir["GLFW"] = "CryDust/vendor/GLFW/include"
 IncludeDir["Glad"] = "CryDust/vendor/Glad/include"
 IncludeDir["ImGui"] = "CryDust/vendor/imgui"
 IncludeDir["glm"] = "CryDust/vendor/glm"
+IncludeDir["stb_image"] = "CryDust/vendor/stb_image"
 -- 这个include，相当于把glfw下的premake5.lua内容拷贝到这里
-include "CryDust/vendor/GLFW"
-include "CryDust/vendor/Glad"
-include "CryDust/vendor/imgui"
 
 
+group "Dependencies"
 
+    include "CryDust/vendor/GLFW"
+    include "CryDust/vendor/Glad"
+    include "CryDust/vendor/imgui"
+    
+group ""
 
 project "CryDust"
     location "CryDust"
@@ -48,6 +52,8 @@ project "CryDust"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
     }
@@ -65,7 +71,8 @@ project "CryDust"
         "%{IncludeDir.GLFW}",        
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
     }
 
     links

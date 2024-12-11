@@ -21,7 +21,7 @@ public:
 		};
 
 		///设置顶点缓冲
-		std::shared_ptr<CryDust::VertexBuffer> vertexBuffer;
+		CryDust::Ref<CryDust::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(CryDust::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 
@@ -38,31 +38,32 @@ public:
 
 		//设置索引数组
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<CryDust::IndexBuffer> indexBuffer;
+		CryDust::Ref<CryDust::IndexBuffer> indexBuffer;
 		indexBuffer.reset(CryDust::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		///新增正方形顶点数组
 		m_SquareVA.reset(CryDust::VertexArray::Create());
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f,0.0f,0.0f,
+			 0.5f, -0.5f, 0.0f,1.0f,0.0f,
+			 0.5f,  0.5f, 0.0f,1.0f,1.0f,
+			-0.5f,  0.5f, 0.0f,0.0f,1.0f
 		};
 
 		///正方形顶点缓冲
-		std::shared_ptr<CryDust::VertexBuffer> squareVB;
+		CryDust::Ref<CryDust::VertexBuffer> squareVB;
 		squareVB.reset(CryDust::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ CryDust::ShaderDataType::Float3, "a_Position" }
+			{ CryDust::ShaderDataType::Float3, "a_Position" },
+			{ CryDust::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 
 		///正方形索引换成
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<CryDust::IndexBuffer> squareIB;
+		CryDust::Ref<CryDust::IndexBuffer> squareIB;
 		squareIB.reset(CryDust::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 		//着色器程序
@@ -138,6 +139,41 @@ public:
 
 		m_FlatColorShader.reset(CryDust::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+			out vec2 v_TexCoord;
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(CryDust::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+
 	}
 
 	virtual void OnImGuiRender() override
@@ -146,7 +182,7 @@ public:
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 	}
-	
+
 	void OnUpdate(CryDust::Timestep ts) override
 	{
 		//相机控制
@@ -192,7 +228,11 @@ public:
 				CryDust::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
-		CryDust::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		CryDust::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		// Triangle
+		// CryDust::Renderer::Submit(m_Shader, m_VertexArray);
 
 		CryDust::Renderer::EndScene();
 	}
@@ -203,23 +243,25 @@ public:
 	{
 
 	}
-	private:
-		std::shared_ptr<CryDust::Shader> m_Shader;
-		std::shared_ptr<CryDust::VertexArray> m_VertexArray;
+private:
+	CryDust::Ref<CryDust::Shader> m_Shader;
+	CryDust::Ref<CryDust::VertexArray> m_VertexArray;
 
-		std::shared_ptr<CryDust::Shader> m_FlatColorShader;
-		std::shared_ptr<CryDust::VertexArray> m_SquareVA;
+	CryDust::Ref<CryDust::Shader> m_FlatColorShader, m_TextureShader;
+	CryDust::Ref<CryDust::VertexArray> m_SquareVA;
 
-		CryDust::OrthographicCamera m_Camera;
+	CryDust::Ref<CryDust::Texture2D> m_Texture;
+
+	CryDust::OrthographicCamera m_Camera;
 
 
-		glm::vec3 m_CameraPosition;
-		float m_CameraMoveSpeed = 5.0f;
+	glm::vec3 m_CameraPosition;
+	float m_CameraMoveSpeed = 5.0f;
 
-		float m_CameraRotation = 0.0f;
-		float m_CameraRotationSpeed = 180.0f;
+	float m_CameraRotation = 0.0f;
+	float m_CameraRotationSpeed = 180.0f;
 
-		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
+	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 class Sandbox : public CryDust::Application
@@ -230,7 +272,7 @@ public:
 		PushLayer(new ExampleLayer());	//推送到层栈
 		//PushOverlay(new CryDust::ImGuiLayer());
 	}
-	 
+
 	~Sandbox()
 	{
 	}
