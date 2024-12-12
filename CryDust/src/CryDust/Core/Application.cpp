@@ -80,14 +80,15 @@ namespace CryDust {
 
 		CORE_DEBUG_TRACE("{0}",e.ToString());
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend();++it)
 		{
 			//处理了就直接停止
+			(*it)->OnEvent(e);
 			if (e.Handled)
 			{
 				break;
 			}
-			(*--it)->OnEvent(e);
+
 		}
 	}
 
