@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CryDust/Window.h"
+#include "CryDust/Core/Window.h"
 
 #include "GLFW/glfw3.h"
 #include "CryDust/Renderer/GraphicsContext.h"

@@ -57,17 +57,38 @@
     <ClInclude Include="src\CryDust.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Application.h">
-      <Filter>src\CryDust</Filter>
+    <ClInclude Include="src\CryDust\Core\Application.h">
+      <Filter>src\CryDust\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Core.h">
-      <Filter>src\CryDust</Filter>
+    <ClInclude Include="src\CryDust\Core\Core.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\EntryPoint.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Input.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\KeyCodes.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Layer.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\LayerStack.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Log.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\MouseButtonCodes.h">
+      <Filter>src\CryDust\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Core\Timestep.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\EntryPoint.h">
-      <Filter>src\CryDust</Filter>
+    <ClInclude Include="src\CryDust\Core\Window.h">
+      <Filter>src\CryDust\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Events\ApplicationEvent.h">
       <Filter>src\CryDust\Events</Filter>
@@ -84,24 +105,6 @@
     <ClInclude Include="src\CryDust\ImGui\ImGuiLayer.h">
       <Filter>src\CryDust\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Input.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\KeyCodes.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\Layer.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\LayerStack.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\Log.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\MouseButtonCodes.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Buffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
@@ -109,6 +112,9 @@
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\OrthographicCameraController.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\RenderCommand.h">
@@ -128,9 +134,6 @@
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h">
       <Filter>src\CryDust\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CryDust\Window.h">
-      <Filter>src\CryDust</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1410,13 +1413,19 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\OrthographicCameraController.h">
-      <Filter>src\CryDust</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CryDust\Application.cpp">
-      <Filter>src\CryDust</Filter>
+    <ClCompile Include="src\CryDust\Core\Application.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Core\Layer.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Core\LayerStack.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Core\Log.cpp">
+      <Filter>src\CryDust\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp">
       <Filter>src\CryDust\ImGui</Filter>
@@ -1424,19 +1433,13 @@
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp">
       <Filter>src\CryDust\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\CryDust\Layer.cpp">
-      <Filter>src\CryDust</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CryDust\LayerStack.cpp">
-      <Filter>src\CryDust</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CryDust\Log.cpp">
-      <Filter>src\CryDust</Filter>
-    </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\OrthographicCamera.cpp">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Renderer\OrthographicCameraController.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\RenderCommand.cpp">
@@ -1486,9 +1489,6 @@
     </ClCompile>
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CryDust\OrthographicCameraController.cpp">
-      <Filter>src\CryDust</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -146,33 +146,33 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\CryDust\OrthographicCameraController.h" />
     <ClInclude Include="src\CryDust.h" />
-    <ClInclude Include="src\CryDust\Application.h" />
-    <ClInclude Include="src\CryDust\Core.h" />
+    <ClInclude Include="src\CryDust\Core\Application.h" />
+    <ClInclude Include="src\CryDust\Core\Core.h" />
+    <ClInclude Include="src\CryDust\Core\EntryPoint.h" />
+    <ClInclude Include="src\CryDust\Core\Input.h" />
+    <ClInclude Include="src\CryDust\Core\KeyCodes.h" />
+    <ClInclude Include="src\CryDust\Core\Layer.h" />
+    <ClInclude Include="src\CryDust\Core\LayerStack.h" />
+    <ClInclude Include="src\CryDust\Core\Log.h" />
+    <ClInclude Include="src\CryDust\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\CryDust\Core\Timestep.h" />
-    <ClInclude Include="src\CryDust\EntryPoint.h" />
+    <ClInclude Include="src\CryDust\Core\Window.h" />
     <ClInclude Include="src\CryDust\Events\ApplicationEvent.h" />
     <ClInclude Include="src\CryDust\Events\Event.h" />
     <ClInclude Include="src\CryDust\Events\KeyEvent.h" />
     <ClInclude Include="src\CryDust\Events\MouseEvent.h" />
     <ClInclude Include="src\CryDust\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\CryDust\Input.h" />
-    <ClInclude Include="src\CryDust\KeyCodes.h" />
-    <ClInclude Include="src\CryDust\Layer.h" />
-    <ClInclude Include="src\CryDust\LayerStack.h" />
-    <ClInclude Include="src\CryDust\Log.h" />
-    <ClInclude Include="src\CryDust\MouseButtonCodes.h" />
     <ClInclude Include="src\CryDust\Renderer\Buffer.h" />
     <ClInclude Include="src\CryDust\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\CryDust\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\CryDust\Renderer\RenderCommand.h" />
     <ClInclude Include="src\CryDust\Renderer\Renderer.h" />
     <ClInclude Include="src\CryDust\Renderer\RendererAPI.h" />
     <ClInclude Include="src\CryDust\Renderer\Shader.h" />
     <ClInclude Include="src\CryDust\Renderer\Texture.h" />
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h" />
-    <ClInclude Include="src\CryDust\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -601,17 +601,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CryDust\OrthographicCameraController.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\CryDust\Application.cpp" />
+    <ClCompile Include="src\CryDust\Core\Application.cpp" />
+    <ClCompile Include="src\CryDust\Core\Layer.cpp" />
+    <ClCompile Include="src\CryDust\Core\LayerStack.cpp" />
+    <ClCompile Include="src\CryDust\Core\Log.cpp" />
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\CryDust\Layer.cpp" />
-    <ClCompile Include="src\CryDust\LayerStack.cpp" />
-    <ClCompile Include="src\CryDust\Log.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\CryDust\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\CryDust\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Renderer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\RendererAPI.cpp" />
