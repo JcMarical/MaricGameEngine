@@ -10,14 +10,20 @@ int main(int argc, char** argv)
 
 	//logger日志系统
 	CryDust::Log::Init();
-	CORE_DEBUG_WARN("Initialized DebugLogger!!!");
-	int a = 5;
-	DEBUG_INFO("Hello! Var = {0}", a);
+
 
 	//
+	CD_PROFILE_BEGIN_SESSION("Startup", "CryDustProfile - Startup.json");
 	auto app = CryDust::CreateApplication();
+	CD_PROFILE_END_SESSION();
+
+	CD_PROFILE_BEGIN_SESSION("Runtime", "CryDustProfile-Runtime.json");
 	app->Run();
+	CD_PROFILE_END_SESSION();
+
+	CD_PROFILE_BEGIN_SESSION("Startup", "CryDustProfile-Shutdown.json");
 	delete app;
+	CD_PROFILE_END_SESSION();
 }
 
 #endif

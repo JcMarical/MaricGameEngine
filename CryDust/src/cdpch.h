@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "CryDust/Core/Log.h"
+#include "CryDust/Debug/Instrumentor.h"
 
 
 #ifdef CD_PLATFORM_WINDOWS
