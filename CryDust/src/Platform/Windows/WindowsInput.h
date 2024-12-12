@@ -1,5 +1,5 @@
 #pragma once
-#include "CryDust/Input.h"
+#include "CryDust/Core/Input.h"
 namespace CryDust {
 	class WindowsInput : public Input
 	{

@@ -4,6 +4,7 @@
 
 #include "OrthographicCamera.h"
 #include "Shader.h"
+
 namespace CryDust {
 	
 	/// <summary>

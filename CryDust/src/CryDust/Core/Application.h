@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
+#include "CryDust/Events/Event.h"
 
-#include "Events/ApplicationEvent.h"
+#include "CryDust/Events/ApplicationEvent.h"
 #include "Window.h"
 #include "CryDust/Core/LayerStack.h"
 #include "CryDust/ImGui/ImGuiLayer.h"

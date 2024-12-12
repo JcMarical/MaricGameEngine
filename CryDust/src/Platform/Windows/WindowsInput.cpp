@@ -1,6 +1,6 @@
 #include "cdpch.h"
 #include "WindowsInput.h"
-#include "CryDust/Application.h"
+#include "CryDust/Core/Application.h"
 #include <GLFW/glfw3.h>
 namespace CryDust {
 	Input* Input::s_Instance = new WindowsInput();

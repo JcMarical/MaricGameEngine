@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "CryDust/Core.h"
+#include "CryDust/Core/Core.h"
 namespace CryDust {
 	class CRYDUST_API Input
 	{

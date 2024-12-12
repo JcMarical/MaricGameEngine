@@ -1,7 +1,7 @@
 #include "cdpch.h"
 #include "OrthographicCameraController.h"
-#include "CryDust/Input.h"
-#include "CryDust/KeyCodes.h"
+#include "CryDust/Core/Input.h"
+#include "CryDust/Core/KeyCodes.h"
 namespace CryDust {
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
 		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)

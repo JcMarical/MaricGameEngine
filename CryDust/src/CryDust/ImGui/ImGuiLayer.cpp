@@ -8,7 +8,7 @@
 #include "backends/imgui_impl_opengl3.h"
 
 
-#include "CryDust/Application.h"
+#include "CryDust/Core/Application.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>

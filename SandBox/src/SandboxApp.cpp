@@ -1,9 +1,11 @@
 #include <CryDust.h>
+#include <CryDust/Core/EntryPoint.h>
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "Sandbox2D.h"
 
 class ExampleLayer : public CryDust::Layer
 {
@@ -12,7 +14,7 @@ public:
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		//构造初始数据
-		m_VertexArray.reset(CryDust::VertexArray::Create());
+		m_VertexArray = CryDust::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 					-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -43,7 +45,7 @@ public:
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		///新增正方形顶点数组
-		m_SquareVA.reset(CryDust::VertexArray::Create());
+		m_SquareVA= CryDust::VertexArray::Create();
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f,0.0f,0.0f,
 			 0.5f, -0.5f, 0.0f,1.0f,0.0f,
@@ -230,7 +232,8 @@ class Sandbox : public CryDust::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());	//推送到层栈
+		//PushLayer(new ExampleLayer());	//推送到层栈
+		PushLayer(new Sandbox2D());
 		//PushOverlay(new CryDust::ImGuiLayer());
 	}
 

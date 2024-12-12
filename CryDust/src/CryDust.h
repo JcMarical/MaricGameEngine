@@ -20,6 +20,7 @@
 // ---Renderer------------------------
 
 #include "CryDust/Renderer/Renderer.h"
+#include "CryDust/Renderer/Renderer2D.h"
 #include "CryDust/Renderer/RenderCommand.h"
 		  
 #include "CryDust/Renderer/Buffer.h"
@@ -34,6 +35,6 @@
 
 //--------Entry Point----------
 
-#include "CryDust/Core/EntryPoint.h"
+//#include "CryDust/Core/EntryPoint.h"
 
 //-----------------------------

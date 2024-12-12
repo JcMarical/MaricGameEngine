@@ -10,7 +10,7 @@
 
 #include "Input.h"
 
-#include "Events/ApplicationEvent.h"
+#include "CryDust/Events/ApplicationEvent.h"
 
 #include "CryDust/Renderer/Renderer.h"
 #include <glfw/glfw3.h>
@@ -102,12 +102,12 @@ namespace CryDust {
 			}
 
 			//IMGUI渲染
-			/*
+			
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-			*/
+			
 
 			m_Window->OnUpdate();
 		}

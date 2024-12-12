@@ -3,7 +3,7 @@
 
 #include "cdpch.h"
 
-#include "Crydust/Core.h"
+#include "CryDust/Core/Core.h"
 #include "Crydust/Events/Event.h"
 
 

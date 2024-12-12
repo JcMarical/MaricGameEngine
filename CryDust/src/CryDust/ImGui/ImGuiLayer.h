@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CryDust/Layer.h"
+#include "CryDust/Core/Layer.h"
 
 #include "CryDust/Events/ApplicationEvent.h"
 #include "CryDust/Events/KeyEvent.h"
