@@ -24,6 +24,8 @@ namespace CryDust {
 
 	Application::Application()
 	{
+
+		CD_PROFILE_FUNCTION();
 		//构造单例
 		CORE_DEBUG_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -43,6 +45,8 @@ namespace CryDust {
 
 	Application::~Application()
 	{
+
+		CD_PROFILE_FUNCTION();
 		Renderer::Shutdown();
 	}
 
@@ -50,12 +54,16 @@ namespace CryDust {
 
 	void Application::PushLayer(Layer* layer)
 	{
+
+		CD_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+
+		CD_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
@@ -64,6 +72,8 @@ namespace CryDust {
 
 	void Application:: OnEvent(Event& e)
 	{
+
+		CD_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(CD_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(CD_BIND_EVENT_FN(Application::OnWindowResize));
@@ -83,8 +93,12 @@ namespace CryDust {
 
 	void Application::Run()
 	{
+
+		CD_PROFILE_FUNCTION();
 		while (m_Running)
 		{
+
+			CD_PROFILE_FUNCTION();
 			//循环绘制
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
@@ -96,19 +110,29 @@ namespace CryDust {
 			//没有缩小化
 			if (!m_Minimized)
 			{
+
+				CD_PROFILE_SCOPE("LayerStack OnUpdate");
+
 				for (Layer* layer : m_LayerStack)
 					layer->OnUpdate(timestep);
+
+
+				//IMGUI渲染
+
+				m_ImGuiLayer->Begin();
+
+				{
+					CD_PROFILE_SCOPE("LayerStack OnImGuiRender");
+					for (Layer* layer : m_LayerStack)
+						layer->OnImGuiRender();
+
+				}
+
+				m_ImGuiLayer->End();
+
 			}
-
-			//IMGUI渲染
-			
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
-			
-
 			m_Window->OnUpdate();
+
 		}
 	}
 
@@ -122,6 +146,7 @@ namespace CryDust {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		CD_PROFILE_FUNCTION();
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

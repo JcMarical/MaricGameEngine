@@ -7,10 +7,12 @@ namespace CryDust {
 	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
+
 		CORE_DEBUG_ASSERT(windowHandle, "Window handle is null!")
 	}
 	void OpenGLContext::Init()
 	{
+		CD_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CORE_DEBUG_ASSERT(status, "Failed to initialize Glad!");
@@ -22,6 +24,7 @@ namespace CryDust {
 	}
 	void OpenGLContext::SwapBuffers()
 	{
+		CD_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

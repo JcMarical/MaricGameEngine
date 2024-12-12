@@ -27,16 +27,21 @@ namespace CryDust {
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		CD_PROFILE_FUNCTION();
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		CD_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+
+		CD_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -45,13 +50,17 @@ namespace CryDust {
 
 		if (s_GLFWWindowCount == 0)
 		{
+			CD_PROFILE_FUNCTION("glfwInit");
 			int success = glfwInit();
 			CORE_DEBUG_ASSERT(success, "Could not intialize GLFW"); //断言（正式发布可以被去掉）
 			glfwSetErrorCallback(GLFWErrorCallback);
 
 		}
-
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		{
+			CD_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			++s_GLFWWindowCount;
+		}
 		//glfwMakeContextCurrent(m_Window);
 
 		//int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -170,6 +179,7 @@ namespace CryDust {
 
 	void WindowsWindow::Shutdown()
 	{
+		CD_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 		--s_GLFWWindowCount;
 		if (s_GLFWWindowCount == 0)
@@ -184,6 +194,7 @@ namespace CryDust {
 	/// </summary>
 	void WindowsWindow :: OnUpdate()
 	{
+		CD_PROFILE_FUNCTION();
 		glfwPollEvents();		//处理所有挂起的事件
 		m_Context->SwapBuffers();
 	}
@@ -195,6 +206,7 @@ namespace CryDust {
 	/// <param name="enabled"></param>
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		CD_PROFILE_FUNCTION();
 		if (enabled)
 			glfwSwapInterval(1);
 		else

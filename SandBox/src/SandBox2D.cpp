@@ -11,11 +11,13 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	CD_PROFILE_FUNCTION();
 	m_CheckerboardTexture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()
 {
+	CD_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(CryDust::Timestep ts)
@@ -23,10 +25,9 @@ void Sandbox2D::OnUpdate(CryDust::Timestep ts)
 
 	CD_PROFILE_FUNCTION();
 	// Update
-	{
-		CD_PROFILE_SCOPE("CameraController::OnUpdate");
+
 		m_CameraController.OnUpdate(ts);
-	}
+	
 	{
 		CD_PROFILE_SCOPE("Renderer Prep");
 		CryDust::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });

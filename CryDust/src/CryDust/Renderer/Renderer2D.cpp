@@ -15,6 +15,7 @@ namespace CryDust {
 	static Renderer2DStorage* s_Data;
 	void Renderer2D::Init()
 	{
+		CD_PROFILE_FUNCTION();
 		s_Data = new Renderer2DStorage();
 		s_Data->QuadVertexArray = VertexArray::Create();
 		float squareVertices[5 * 4] = {
@@ -43,11 +44,12 @@ namespace CryDust {
 	}
 	void Renderer2D::Shutdown()
 	{
+		CD_PROFILE_FUNCTION();
 		delete s_Data;
 	}
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-
+		CD_PROFILE_FUNCTION();
 
 
 		s_Data->TextureShader->Bind();
@@ -55,6 +57,7 @@ namespace CryDust {
 	}
 	void Renderer2D::EndScene()
 	{
+		CD_PROFILE_FUNCTION();
 	}
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 	{
@@ -62,7 +65,7 @@ namespace CryDust {
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-
+		CD_PROFILE_FUNCTION();
 		//传入颜色
 		s_Data->TextureShader->SetFloat4("u_Color", color);
 		//s_Data->TextureShader->SetFloat("u_TilingFactor", 1.0f);
@@ -75,6 +78,7 @@ namespace CryDust {
 	}
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
+		CD_PROFILE_FUNCTION();
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
