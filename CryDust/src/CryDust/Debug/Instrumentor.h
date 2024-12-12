@@ -133,7 +133,7 @@ namespace CryDust {
 		bool m_Stopped;
 	};
 }
-#define CD_PROFILE 1
+#define CD_PROFILE 0
 #if CD_PROFILE
 #define CD_PROFILE_BEGIN_SESSION(name, filepath) ::CryDust::Instrumentor::Get().BeginSession(name, filepath)
 #define CD_PROFILE_END_SESSION() ::CryDust::Instrumentor::Get().EndSession()
