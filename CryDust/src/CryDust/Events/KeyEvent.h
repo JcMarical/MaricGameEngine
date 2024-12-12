@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Event.h"
+#include "CryDust/Events/Event.h"
 
 
 namespace CryDust
@@ -8,7 +8,7 @@ namespace CryDust
 	/// <summary>
 	/// 按键基类抽象事件，不能单独创建
 	/// </summary>
-	class CRYDUST_API KeyEvent : public Event
+	class  KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const{ return m_KeyCode; }
@@ -25,7 +25,7 @@ namespace CryDust
 	/// <summary>
 	/// 按键按下事件
 	/// </summary>
-	class CRYDUST_API KeyPressedEvent : public KeyEvent
+	class  KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode,int repeatCount)
@@ -57,7 +57,7 @@ namespace CryDust
 	/// <summary>
 	/// 按键释放事件
 	/// </summary>
-	class CRYDUST_API KeyReleasedEvent : public KeyEvent
+	class  KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent (int keycode)
@@ -82,7 +82,7 @@ namespace CryDust
 	/// <summary>
 	/// 
 	/// </summary>
-	class CRYDUST_API KeyTypedEvent : public KeyEvent
+	class  KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

@@ -1,7 +1,7 @@
 #include <CryDust.h>
 #include <CryDust/Core/EntryPoint.h>
-#include "Platform/OpenGL/OpenGLShader.h"
-#include "imgui/imgui.h"
+
+#include <imgui/imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,8 +23,7 @@ public:
 		};
 
 		///设置顶点缓冲
-		CryDust::Ref<CryDust::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(CryDust::VertexBuffer::Create(vertices, sizeof(vertices)));
+		CryDust::Ref<CryDust::VertexBuffer> vertexBuffer = CryDust::VertexBuffer::Create(vertices, sizeof(vertices));
 
 
 		CryDust::BufferLayout layout = {
@@ -40,8 +39,8 @@ public:
 
 		//设置索引数组
 		uint32_t indices[3] = { 0, 1, 2 };
-		CryDust::Ref<CryDust::IndexBuffer> indexBuffer;
-		indexBuffer.reset(CryDust::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		CryDust::Ref<CryDust::IndexBuffer> indexBuffer = CryDust::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
+
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		///新增正方形顶点数组
@@ -54,8 +53,7 @@ public:
 		};
 
 		///正方形顶点缓冲
-		CryDust::Ref<CryDust::VertexBuffer> squareVB;
-		squareVB.reset(CryDust::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		CryDust::Ref<CryDust::VertexBuffer> squareVB = CryDust::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ CryDust::ShaderDataType::Float3, "a_Position" },
 			{ CryDust::ShaderDataType::Float2, "a_TexCoord" }
@@ -65,8 +63,7 @@ public:
 
 		///正方形索引换成
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		CryDust::Ref<CryDust::IndexBuffer> squareIB;
-		squareIB.reset(CryDust::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		CryDust::Ref<CryDust::IndexBuffer> squareIB = CryDust::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 		//着色器程序
 		std::string vertexSrc = R"(
@@ -148,8 +145,8 @@ public:
 		m_Texture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = CryDust::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetInt("u_Texture", 0);
 
 	}
 
@@ -178,8 +175,8 @@ public:
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		//绑定
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<CryDust::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+		m_FlatColorShader->Bind();
+		m_FlatColorShader->SetFloat3("u_Color", m_SquareColor);
 
 
 		for (int y = 0; y < 20; y++)

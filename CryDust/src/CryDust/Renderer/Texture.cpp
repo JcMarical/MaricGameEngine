@@ -1,7 +1,7 @@
 #include "cdpch.h"
-#include "Texture.h"
+#include "CryDust/Renderer/Texture.h"
 
-#include "Renderer.h"
+#include "CryDust/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace CryDust {

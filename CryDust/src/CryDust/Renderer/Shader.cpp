@@ -1,7 +1,7 @@
 #include "cdpch.h"
-#include "Shader.h"
+#include "CryDust/Renderer/Shader.h"
 
-#include "Renderer.h"
+#include "CryDust/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 
@@ -12,7 +12,7 @@ namespace CryDust {
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(filepath);
+		case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(filepath);
 		}
 		CORE_DEBUG_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
@@ -24,7 +24,7 @@ namespace CryDust {
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:    CORE_DEBUG_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
 		CORE_DEBUG_ASSERT(false, "Unknown RendererAPI!");

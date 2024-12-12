@@ -1,14 +1,11 @@
 #pragma 
 
 #include "cdpch.h"
-#include "LayerStack.h"
+#include "CryDust/Core/LayerStack.h"
 
 
 namespace CryDust {
-	LayerStack::LayerStack()
-	{
-		//m_LayerInsert = m_Layers.begin();
-	}
+
 
 	LayerStack::~LayerStack()
 	{

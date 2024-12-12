@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core.h"
+#include "CryDust/Core/Core.h"
 #include "CryDust/Events/Event.h"
 
 #include "CryDust/Events/ApplicationEvent.h"
-#include "Window.h"
+#include "CryDust/Core/Window.h"
 #include "CryDust/Core/LayerStack.h"
 #include "CryDust/ImGui/ImGuiLayer.h"
 #include "CryDust/Renderer/Shader.h"

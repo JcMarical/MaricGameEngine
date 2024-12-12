@@ -1,16 +1,16 @@
 #pragma once
 
 #include "CryDust/Core/Core.h"
-#include "Layer.h"
+#include "CryDust/Core/Layer.h"
 
 #include <vector>
 
 namespace CryDust
 {
-	class CRYDUST_API LayerStack
+	class  LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);

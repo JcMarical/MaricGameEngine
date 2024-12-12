@@ -1,5 +1,5 @@
 #include "cdpch.h"
-#include "OrthographicCamera.h"
+#include "CryDust/Renderer/OrthographicCameraController.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

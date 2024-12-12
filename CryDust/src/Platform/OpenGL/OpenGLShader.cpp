@@ -1,5 +1,5 @@
 #include "cdpch.h"
-#include "OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 #include <glad/glad.h>
 
@@ -57,11 +57,18 @@ namespace CryDust {
 		if (in)
 		{
 			in.seekg(0, std::ios::end);//seek To get：基地址为结束地址，偏移量为0
-			result.resize(in.tellg()); //获得的大小
-			in.seekg(0, std::ios::beg);//基地址为起始地址，偏移量为0
-			in.read(&result[0], result.size());
-			in.close();
-			;
+			size_t size = in.tellg();
+			if (size != -1)
+			{
+				result.resize(size);
+				in.seekg(0, std::ios::beg);
+				in.read(&result[0], size);
+				in.close();
+			}
+			else
+			{
+				CORE_DEBUG_ERROR("Could not read from file '{0}'", filepath);
+			}
 		}
 		else
 		{

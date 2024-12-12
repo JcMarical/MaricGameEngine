@@ -1,5 +1,5 @@
 #pragma once
-#include "Event.h"
+#include "CryDust/Events/Event.h"
 
 
 
@@ -8,7 +8,7 @@ namespace CryDust {
 		/// <summary>
 	/// 窗口关闭事件
 	/// </summary>
-	class CRYDUST_API WindowCloseEvent : public Event
+	class  WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -22,7 +22,7 @@ namespace CryDust {
 	/// <summary>
 	/// 窗口大小变化事件
 	/// </summary>
-	class CRYDUST_API  WindowResizeEvent : public Event
+	class   WindowResizeEvent : public Event
 	{
 	public:
 
@@ -56,26 +56,26 @@ namespace CryDust {
 
 
 
-	class CRYDUST_API AppTickEvent : public Event
+	class  AppTickEvent : public Event
 	{
 	public:
-		AppTickEvent() {}
+		AppTickEvent()  = default;
 		EVENT_CLASS_TYPE(AppTick)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class CRYDUST_API AppUpdateEvent : public Event
+	class  AppUpdateEvent : public Event
 	{
 	public:
-		AppUpdateEvent() {}
+		AppUpdateEvent() = default;		
 		EVENT_CLASS_TYPE(AppUpdate)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class CRYDUST_API AppRenderEvent : public Event
+	class  AppRenderEvent : public Event
 	{
 	public:
-		AppRenderEvent() {}
+		AppRenderEvent() = default;
 		EVENT_CLASS_TYPE(AppRender)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};

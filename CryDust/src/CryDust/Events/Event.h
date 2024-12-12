@@ -53,7 +53,7 @@ namespace CryDust{
 ///定义获取事件种类的相关函数，便于快速重写
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override {return category;}
 
-class CRYDUST_API Event
+class  Event
 {
 	/// <summary>
 	/// 友元：事件发送器

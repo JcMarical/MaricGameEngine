@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Event.h"
+#include "CryDust/Events/Event.h"
 
 namespace CryDust {
 
-	class CRYDUST_API MouseMovedEvent : public Event
+	class  MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x,float y)
@@ -28,7 +28,7 @@ namespace CryDust {
 	};
 
 
-	class CRYDUST_API MouseScrolledEvent : public Event
+	class  MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
@@ -56,7 +56,7 @@ namespace CryDust {
 	/// <summary>
 	/// 鼠标按键基类
 	/// </summary>
-	class CRYDUST_API MouseButtonEvent : public Event
+	class  MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -72,7 +72,7 @@ namespace CryDust {
 
 
 
-	class CRYDUST_API MouseButtonPressedEvent : public MouseButtonEvent
+	class  MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -89,7 +89,7 @@ namespace CryDust {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class CRYDUST_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class  MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

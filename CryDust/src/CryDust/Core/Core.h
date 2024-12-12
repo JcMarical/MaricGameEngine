@@ -2,6 +2,7 @@
 
 #include <memory>
 
+/*
 #ifdef CD_PLATFORM_WINDOWS
 
 
@@ -19,7 +20,7 @@
 	#error CryDust only support Window!
 
 #endif // CD_PLATFORM_WINDOWS
-
+*/
 
 #ifdef CD_ENABLE_ASSERTS
 	#define DEBUG_ASSERT(x,...) {if(!(x)){ DEBUG_ERROR("Assertion Failed: {0}",__VA_ARGS__);__debugbreak();}}

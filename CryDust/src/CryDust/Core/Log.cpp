@@ -1,12 +1,12 @@
 
 #include "cdpch.h"
-#include "Log.h"
+#include "CryDust/Core/Log.h"
 
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/sinks/stdout_color_sinks.h>
 namespace CryDust
 {
-	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+	Ref<spdlog::logger> Log::s_CoreLogger;
+	Ref<spdlog::logger> Log::s_ClientLogger;
 
 	//logger基础设置，初始化调用
 	void Log::Init()

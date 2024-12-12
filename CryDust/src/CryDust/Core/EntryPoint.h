@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CryDust/Core/Core.h"
 
 #ifdef CD_PLATFORM_WINDOWS
 

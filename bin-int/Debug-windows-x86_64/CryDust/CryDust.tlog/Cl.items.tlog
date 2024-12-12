@@ -5,6 +5,7 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Log.cpp;D:\Project\Git P
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiBuild.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiBuild.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiLayer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiLayer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Buffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Buffer.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\GraphicsContext.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\GraphicsContext.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\OrthographicCamera.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OrthographicCamera.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\OrthographicCameraController.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OrthographicCameraController.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\RenderCommand.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\RenderCommand.obj

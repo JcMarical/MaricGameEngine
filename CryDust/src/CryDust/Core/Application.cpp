@@ -6,9 +6,9 @@
 #include "backends/imgui_impl_opengl3.h"
 
 
-#include "Application.h"
+#include "CryDust/Core/Application.h"
 
-#include "Input.h"
+#include "CryDust/Core/Input.h"
 
 #include "CryDust/Events/ApplicationEvent.h"
 
@@ -17,7 +17,6 @@
 
 
 
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
  
 namespace CryDust {
 
@@ -30,8 +29,8 @@ namespace CryDust {
 		s_Instance = this;
 
 
-		m_Window = std::unique_ptr<Window> (Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window = Window::Create();
+		m_Window->SetEventCallback(CD_BIND_EVENT_FN(Application::OnEvent));
 
 
 		Renderer::Init();
@@ -44,7 +43,7 @@ namespace CryDust {
 
 	Application::~Application()
 	{
-
+		Renderer::Shutdown();
 	}
 
 	//---------LayerStack----------
@@ -66,8 +65,8 @@ namespace CryDust {
 	void Application:: OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
+		dispatcher.Dispatch<WindowCloseEvent>(CD_BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(CD_BIND_EVENT_FN(Application::OnWindowResize));
 
 		CORE_DEBUG_TRACE("{0}",e.ToString());
 
