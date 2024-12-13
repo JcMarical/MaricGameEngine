@@ -1,5 +1,18 @@
-﻿  Renderer.cpp
+﻿  Application.cpp
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(74,1): warning C4005: “IMGUI_VERSION”: 宏重定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(25,1): message : 参见“IMGUI_VERSION”的前一个定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(75,1): warning C4005: “IMGUI_VERSION_NUM”: 宏重定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(26,1): message : 参见“IMGUI_VERSION_NUM”的前一个定义
+  ImGuiLayer.cpp
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(74,1): warning C4005: “IMGUI_VERSION”: 宏重定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(25,1): message : 参见“IMGUI_VERSION”的前一个定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(75,1): warning C4005: “IMGUI_VERSION_NUM”: 宏重定义
+D:\Project\Git Project\CryDust\CryDust\vendor\imgui\imgui.h(26,1): message : 参见“IMGUI_VERSION_NUM”的前一个定义
+  Renderer.cpp
   Renderer2D.cpp
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(132,21): warning C4244: “初始化”: 从“__int64”转换到“uint32_t”，可能丢失数据
+  Texture.cpp
+  OpenGLTexture.cpp
+  WindowsInput.cpp
   正在生成代码...
   CryDust.vcxproj -> D:\Project\Git Project\CryDust\bin\Debug-windows-x86_64\CryDust\CryDust.lib
