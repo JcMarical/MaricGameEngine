@@ -68,6 +68,12 @@ namespace CryDust {
 		layer->OnAttach();
 	}
 
+
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	//----------Event------------
 
 	void Application:: OnEvent(Event& e)
