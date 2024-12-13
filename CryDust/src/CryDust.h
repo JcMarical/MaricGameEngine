@@ -25,6 +25,7 @@
 		  
 #include "CryDust/Renderer/Buffer.h"
 #include "CryDust/Renderer/Shader.h"
+#include "CryDust/Renderer/Framebuffer.h"
 #include "CryDust/Renderer/Texture.h"
 #include "CryDust/Renderer/VertexArray.h"
 		  

@@ -1,5 +1,5 @@
 #pragma once
-#include "CryDust/Core/Core.h"
+#include "CryDust/Core/Base.h"
 #include "CryDust/Events/Event.h"
 #include "CryDust/Core/Timestep.h"
 

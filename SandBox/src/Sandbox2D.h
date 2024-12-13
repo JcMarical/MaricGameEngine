@@ -16,7 +16,7 @@ private:
 	// Temp
 	CryDust::Ref<CryDust::VertexArray> m_SquareVA;
 	CryDust::Ref<CryDust::Shader> m_FlatColorShader;
-
+	CryDust::Ref<CryDust::Framebuffer> m_Framebuffer;
 	CryDust::Ref<CryDust::Texture2D> m_CheckerboardTexture;
 
 

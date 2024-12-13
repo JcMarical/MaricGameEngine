@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CryDust/Core/Core.h"
+#include "CryDust/Core/Base.h"
 #include "CryDust/Core/Layer.h"
 
 #include <vector>

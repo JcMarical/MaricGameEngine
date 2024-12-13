@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CryDust/Core/Core.h"
+#include "CryDust/Core/Base.h"
 #include "cdpch.h"
 
 

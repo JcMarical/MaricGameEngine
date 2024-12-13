@@ -148,7 +148,7 @@
   <ItemGroup>
     <ClInclude Include="src\CryDust.h" />
     <ClInclude Include="src\CryDust\Core\Application.h" />
-    <ClInclude Include="src\CryDust\Core\Core.h" />
+    <ClInclude Include="src\CryDust\Core\Base.h" />
     <ClInclude Include="src\CryDust\Core\EntryPoint.h" />
     <ClInclude Include="src\CryDust\Core\Input.h" />
     <ClInclude Include="src\CryDust\Core\KeyCodes.h" />
@@ -175,8 +175,10 @@
     <ClInclude Include="src\CryDust\Renderer\Shader.h" />
     <ClInclude Include="src\CryDust\Renderer\Texture.h" />
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h" />
+    <ClInclude Include="src\CryDust\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
@@ -610,6 +612,7 @@
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\CryDust\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\CryDust\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\CryDust\Renderer\OrthographicCameraController.cpp" />
@@ -622,6 +625,7 @@
     <ClCompile Include="src\CryDust\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
