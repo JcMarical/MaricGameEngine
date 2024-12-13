@@ -178,3 +178,48 @@ project "SandBox"
         defines "CD_DIST"
        runtime "Release"
         optimize "on"
+
+
+
+project "CryDust-Editor"
+    location "CryDust-Editor"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+    includedirs
+    {
+        "CryDust/vendor/spdlog/include",
+        "CryDust/vendor",
+        "CryDust/src",
+        "%{IncludeDir.glm}"
+    }
+    links
+    {
+        "CryDust"
+    }
+    filter "system:windows"
+        buildoptions "/utf-8"
+        systemversion "latest"
+        
+
+    filter "configurations:Debug"
+        defines "CD_DEBUG"
+        runtime "Debug"
+        symbols "on"
+    filter "configurations:Release"
+        defines "CD_RELEASE"
+        runtime "Release"
+        optimize "on"
+    filter "configurations:Dist"
+        defines "CD_DIST"
+        runtime "Release"
+        optimize "on"      

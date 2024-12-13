@@ -18,7 +18,7 @@ namespace CryDust {
 	class  Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "CryDust App");
 		virtual ~Application();
 		void OnEvent(Event& e);
 		void Run();
