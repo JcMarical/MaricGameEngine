@@ -1,6 +1,6 @@
 workspace "CryDust"
-	architecture "x64"
-	startproject "SandBox"
+	architecture "x86_64"
+	startproject "CryDust-Editor"
 
 	configurations
 	{
@@ -209,7 +209,10 @@ project "CryDust-Editor"
     filter "system:windows"
         buildoptions "/utf-8"
         systemversion "latest"
-        
+    defines
+    {
+        "CD_PLATFORM_WINDOWS";
+    }
 
     filter "configurations:Debug"
         defines "CD_DEBUG"

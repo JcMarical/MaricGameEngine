@@ -10,6 +10,8 @@ namespace CryDust {
 		{
 			PushLayer(new EditorLayer());
 		}
+
+
 		~CryDustEditor()
 		{
 		}

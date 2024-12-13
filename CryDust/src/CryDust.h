@@ -11,7 +11,7 @@
 
 #include "CryDust/Core/Input.h"
 #include "CryDust/Core/KeyCodes.h"
-#include "CryDust/Core/MouseButtonCodes.h"
+#include "CryDust/Core/MouseCodes.h"
 
 
 
