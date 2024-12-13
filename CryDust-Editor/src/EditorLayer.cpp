@@ -10,53 +10,46 @@ namespace CryDust {
 	void EditorLayer::OnAttach()
 	{
 		CD_PROFILE_FUNCTION();
-		m_CheckerboardTexture = CryDust::Texture2D::Create("assets/textures/Checkerboard.png");
-		CryDust::FramebufferSpecification fbSpec;
+		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
-		m_Framebuffer = CryDust::Framebuffer::Create(fbSpec);
+		m_Framebuffer = Framebuffer::Create(fbSpec);
+		//创建Scene
+		m_ActiveScene = CreateRef<Scene>();
+		//创建实体
+		auto square = m_ActiveScene->CreateEntity();
+		//Scene添加上transform组件
+		m_ActiveScene->Reg().emplace<TransformComponent>(square);
+
+		//Scene添加上精灵渲染器组件
+		m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+		//复制长方形实体
+		m_SquareEntity = square;
 	}
 	void EditorLayer::OnDetach()
 	{
 		CD_PROFILE_FUNCTION();
 	}
-	void EditorLayer::OnUpdate(CryDust::Timestep ts)
+	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		CD_PROFILE_FUNCTION();
 		// Update
 		if (m_ViewportFocused)
 			m_CameraController.OnUpdate(ts);
 		// Render
-		CryDust::Renderer2D::ResetStats();
-		{
-			CD_PROFILE_SCOPE("Renderer Prep");
-			m_Framebuffer->Bind();
-			CryDust::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			CryDust::RenderCommand::Clear();
-		}
-		{
-			static float rotation = 0.0f;
-			rotation += ts * 50.0f;
-			CD_PROFILE_SCOPE("Renderer Draw");
-			CryDust::Renderer2D::BeginScene(m_CameraController.GetCamera());
-			CryDust::Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-			CryDust::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			CryDust::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
-			CryDust::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
-			CryDust::Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 20.0f);
-			CryDust::Renderer2D::EndScene();
-			CryDust::Renderer2D::BeginScene(m_CameraController.GetCamera());
-			for (float y = -5.0f; y < 5.0f; y += 0.5f)
-			{
-				for (float x = -5.0f; x < 5.0f; x += 0.5f)
-				{
-					glm::vec4 color = { (x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f };
-					CryDust::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
-				}
-			}
-			CryDust::Renderer2D::EndScene();
-			m_Framebuffer->Unbind();
-		}
+		//帧缓冲重置
+		Renderer2D::ResetStats();
+		m_Framebuffer->Bind();
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		RenderCommand::Clear();
+		
+
+		Renderer2D::BeginScene(m_CameraController.GetCamera());
+		// Update scene 拿到scene后，不断更新
+		m_ActiveScene->OnUpdate(ts);
+		Renderer2D::EndScene();
+		m_Framebuffer->Unbind();
 	}
 	void EditorLayer::OnImGuiRender()
 	{

@@ -20,6 +20,7 @@ IncludeDir["Glad"] = "CryDust/vendor/Glad/include"
 IncludeDir["ImGui"] = "CryDust/vendor/imgui"
 IncludeDir["glm"] = "CryDust/vendor/glm"
 IncludeDir["stb_image"] = "CryDust/vendor/stb_image"
+IncludeDir["entt"] = "CryDust/vendor/entt/include"
 -- 这个include，相当于把glfw下的premake5.lua内容拷贝到这里
 
 
@@ -72,6 +73,7 @@ project "CryDust"
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}",
 		"%{IncludeDir.stb_image}"
     }
 
@@ -200,7 +202,8 @@ project "CryDust-Editor"
         "CryDust/vendor/spdlog/include",
         "CryDust/vendor",
         "CryDust/src",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}"
     }
     links
     {
