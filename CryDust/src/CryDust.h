@@ -18,6 +18,7 @@
 #include "CryDust/ImGui/ImGuiLayer.h"
 //---------ECS----------
 #include "CryDust/Scene/Scene.h"
+#include "CryDust/Scene/Entity.h"
 #include "CryDust/Scene/Components.h"
 // ---Renderer------------------------
 

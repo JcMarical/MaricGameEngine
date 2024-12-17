@@ -17,13 +17,13 @@ namespace CryDust {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 		//创建Scene
 		m_ActiveScene = CreateRef<Scene>();
-		//创建实体
-		auto square = m_ActiveScene->CreateEntity();
-		//Scene添加上transform组件
-		m_ActiveScene->Reg().emplace<TransformComponent>(square);
 
-		//Scene添加上精灵渲染器组件
-		m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+		// Entity & Component
+		auto square = m_ActiveScene->CreateEntity("Green Square");
+		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+
+
 		//复制长方形实体
 		m_SquareEntity = square;
 	}
@@ -124,8 +124,22 @@ namespace CryDust {
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+		//如果存在square实体，单独开个区域展示
+		if (m_SquareEntity)
+		{
+			ImGui::Separator();
+			auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag; //拿到对应的tag
+			ImGui::Text("%s", tag.c_str());
+
+			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;	//拿到spriteRenderer的颜色
+			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor), 0);	//提供颜色编辑
+			ImGui::Separator();
+		}
+
 		ImGui::End();
+
+
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
 

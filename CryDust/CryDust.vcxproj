@@ -177,6 +177,7 @@
     <ClInclude Include="src\CryDust\Renderer\Texture.h" />
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h" />
     <ClInclude Include="src\CryDust\Scene\Components.h" />
+    <ClInclude Include="src\CryDust\Scene\Entity.h" />
     <ClInclude Include="src\CryDust\Scene\Scene.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -624,6 +625,7 @@
     <ClCompile Include="src\CryDust\Renderer\Shader.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Texture.cpp" />
     <ClCompile Include="src\CryDust\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\CryDust\Scene\Entity.cpp" />
     <ClCompile Include="src\CryDust\Scene\Scene.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />

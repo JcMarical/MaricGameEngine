@@ -1,8 +1,11 @@
 #include "cdpch.h"
 #include "Scene.h"
+
 #include "Components.h"
 #include "CryDust/Renderer/Renderer2D.h"
 #include <glm/glm.hpp>
+
+#include "Entity.h"
 namespace CryDust {
 	static void DoMath(const glm::mat4& transform)
 	{
@@ -22,7 +25,7 @@ namespace CryDust {
 		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));	//实体添加组件，并提供默认参数
 		m_Registry.on_construct<TransformComponent>().connect<&OnTransformConstruct>(); //添加变换构造方法，构造后调用
 
-		if (m_Registry.has<TransformComponent>(entity))  //判断entity是否存在某个组件
+		if (m_Registry.all_of<TransformComponent>(entity))  //判断entity是否存在某个组件
 			TransformComponent& transform = m_Registry.get<TransformComponent>(entity); // 拿到entity上的物体
 
 
@@ -47,9 +50,20 @@ namespace CryDust {
 	Scene::~Scene()
 	{
 	}
-	entt::entity Scene::CreateEntity()
+
+	/// <summary>
+	/// 构造实体
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	Entity Scene::CreateEntity(const std::string& name)
 	{
-		return m_Registry.create();
+
+		Entity entity = { m_Registry.create(), this };
+		entity.AddComponent<TransformComponent>();
+		auto& tag = entity.AddComponent<TagComponent>(); //创建tag组件
+		tag.Tag = name.empty() ? "Entity" : name;	//设置tag组件为名字
+		return entity;
 	}
 
 	//拿到组件
