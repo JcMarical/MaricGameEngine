@@ -145,7 +145,8 @@ project "SandBox"
             "CryDust/vendor/spdlog/include",
             "CryDust/src",
             "CryDust/vendor",
-            "%{IncludeDir.glm}"
+            "%{IncludeDir.glm}",
+            "%{IncludeDir.entt}"
         }
     
         links
