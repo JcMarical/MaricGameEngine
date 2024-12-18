@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
-#include "CryDust/Renderer/Camera.h"
+#include "SceneCamera.h"
 namespace CryDust {
 
 
@@ -39,11 +39,11 @@ namespace CryDust {
 
 	struct CameraComponent
 	{
-		CryDust::Camera Camera;//只存储了mat4投影矩阵
+		SceneCamera  Camera;//只存储了mat4投影矩阵
 		bool Primary = true; // TODO: think about moving to Scene
+		bool FixedAspectRatio = false;
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection)
-			: Camera(projection) {}
+
 	};
 }

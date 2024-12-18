@@ -117,6 +117,9 @@
     <ClInclude Include="src\CryDust\Renderer\Buffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\Camera.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Framebuffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
@@ -150,7 +153,16 @@
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Scene\Components.h">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Scene\Entity.h">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Scene\Scene.h">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Scene\SceneCamera.h">
       <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
@@ -1431,9 +1443,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Scene\Components.h" />
-    <ClInclude Include="src\CryDust\Scene\Entity.h" />
-    <ClInclude Include="src\CryDust\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CryDust\Core\Application.cpp">
@@ -1490,6 +1499,15 @@
     <ClCompile Include="src\CryDust\Renderer\VertexArray.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Scene\Entity.cpp">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Scene\Scene.cpp">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Scene\SceneCamera.cpp">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1523,7 +1541,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\CryDust\Scene\Scene.cpp" />
-    <ClCompile Include="src\CryDust\Scene\Entity.cpp" />
   </ItemGroup>
 </Project>
