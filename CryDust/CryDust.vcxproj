@@ -165,6 +165,7 @@
     <ClInclude Include="src\CryDust\Events\MouseEvent.h" />
     <ClInclude Include="src\CryDust\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\CryDust\Renderer\Buffer.h" />
+    <ClInclude Include="src\CryDust\Renderer\Camera.h" />
     <ClInclude Include="src\CryDust\Renderer\Framebuffer.h" />
     <ClInclude Include="src\CryDust\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h" />

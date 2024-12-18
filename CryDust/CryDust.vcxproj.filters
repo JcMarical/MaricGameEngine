@@ -1433,6 +1433,7 @@
     </ClInclude>
     <ClInclude Include="src\CryDust\Scene\Components.h" />
     <ClInclude Include="src\CryDust\Scene\Entity.h" />
+    <ClInclude Include="src\CryDust\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CryDust\Core\Application.cpp">

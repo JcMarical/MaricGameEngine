@@ -26,6 +26,12 @@ namespace CryDust {
 
 		//复制长方形实体
 		m_SquareEntity = square;
+
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
+		auto& cc = m_SecondCamera.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f));
+		cc.Primary = false;
 	}
 	void EditorLayer::OnDetach()
 	{
@@ -36,7 +42,7 @@ namespace CryDust {
 		CD_PROFILE_FUNCTION();
 		
 		// 帧缓冲，摄像机Resize
-		if (CryDust::FramebufferSpecification spec = m_Framebuffer->GetSpecification();
+		if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
 			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
@@ -57,10 +63,10 @@ namespace CryDust {
 		RenderCommand::Clear();
 		
 
-		Renderer2D::BeginScene(m_CameraController.GetCamera());
+	
 		// Update scene 拿到scene后，不断更新
 		m_ActiveScene->OnUpdate(ts);
-		Renderer2D::EndScene();
+
 		m_Framebuffer->Unbind();
 	}
 	void EditorLayer::OnImGuiRender()
@@ -135,6 +141,14 @@ namespace CryDust {
 			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;	//拿到spriteRenderer的颜色
 			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor), 0);	//提供颜色编辑
 			ImGui::Separator();
+		}
+
+		ImGui::DragFloat3("Camera Transform",
+			glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+		if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
+		{
+			m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
+			m_SecondCamera.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
 		}
 
 		ImGui::End();

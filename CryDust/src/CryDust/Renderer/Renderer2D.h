@@ -1,13 +1,15 @@
 #pragma once
-#include "OrthographicCamera.h"
-#include "Texture.h"
+#include "CryDust/Renderer/OrthographicCamera.h"
+#include "CryDust/Renderer/Texture.h"
+#include "CryDust/Renderer/Camera.h"
 namespace CryDust {
 	class Renderer2D
 	{
 	public:
 		static void Init();
 		static void Shutdown();
-		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
+		static void BeginScene(const OrthographicCamera& camera); // TODO: Remove
 		static void EndScene();
 		static void Flush();
 		// Primitives

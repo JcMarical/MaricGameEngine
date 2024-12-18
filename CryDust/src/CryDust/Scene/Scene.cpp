@@ -69,14 +69,37 @@ namespace CryDust {
 	//拿到组件
 	void Scene::OnUpdate(Timestep ts)
 	{
-		//注册组件
-		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-		for (auto entity : group)
-		{
-			//拿到对应的组件
-			
-			auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);	
-			Renderer2D::DrawQuad(transform, sprite.Color);
+		// 相机组件与其对应的transform组件
+		Camera* mainCamera = nullptr;
+		glm::mat4* cameraTransform = nullptr;
+		{	
+			auto group = m_Registry.view<TransformComponent, CameraComponent>();
+			for (auto entity : group)
+			{
+				auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+				//设置主相机
+				if (camera.Primary)
+				{
+					mainCamera = &camera.Camera;
+					cameraTransform = &transform.Transform;
+					break;
+				}
+			}
 		}
+		//如果主相机存在，再渲染
+		if (mainCamera)
+		{
+			//执行对应的渲染器逻辑
+			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			for (auto entity : group)
+			{
+				//拿到数据，执行逻辑
+				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				Renderer2D::DrawQuad(transform, sprite.Color);
+			}
+			Renderer2D::EndScene();
+		}
+
 	}
 }
