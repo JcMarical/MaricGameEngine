@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="..">
+      <UniqueIdentifier>{61705900-4DFC-870B-B6AA-880BA255880B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust">
+      <UniqueIdentifier>{9E342576-8AEC-66C3-F3F3-3F1FDFCA01B4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust\vendor">
+      <UniqueIdentifier>{3BADF7E6-A7C3-F57C-F03A-819E5C90C604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust\vendor\GLFW">
+      <UniqueIdentifier>{5AE5E6F2-46DF-0F45-2F4C-A6551BE575B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust\vendor\Glad">
+      <UniqueIdentifier>{0271E7F2-EE6A-1045-D7D7-A655C37076B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust\vendor\imgui">
+      <UniqueIdentifier>{E57A3D52-51B2-85E9-5ABC-E90CC672ACE2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust-Editor">
+      <UniqueIdentifier>{92DAA1DA-FEF0-9F70-4768-2B92B3BD70F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\SandBox">
+      <UniqueIdentifier>{1FF36A1D-0BAB-AC6A-74B2-85C66089475B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\CryDust-Editor\premake5.lua">
+      <Filter>..\CryDust-Editor</Filter>
+    </None>
+    <None Include="..\..\CryDust\premake5.lua">
+      <Filter>..\CryDust</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\GLFW\premake5.lua">
+      <Filter>..\CryDust\vendor\GLFW</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\Glad\premake5.lua">
+      <Filter>..\CryDust\vendor\Glad</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\imgui\premake5.lua">
+      <Filter>..\CryDust\vendor\imgui</Filter>
+    </None>
+    <None Include="..\..\SandBox\premake5.lua">
+      <Filter>..\SandBox</Filter>
+    </None>
+    <None Include="..\..\premake5.lua">
+      <Filter>..</Filter>
+    </None>
+    <None Include="premake5.lua" />
+  </ItemGroup>
+</Project>

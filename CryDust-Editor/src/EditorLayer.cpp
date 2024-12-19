@@ -37,7 +37,10 @@ namespace CryDust {
 		class CameraController : public ScriptableEntity
 		{
 		public:
+			void OnCreate()
+			{
 
+			}
 			void OnDestroy()
 			{
 			}
