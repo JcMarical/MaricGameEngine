@@ -2,6 +2,7 @@
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 namespace CryDust {
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
@@ -61,6 +62,7 @@ namespace CryDust {
 		};
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 	}
 	void EditorLayer::OnDetach()
@@ -155,6 +157,10 @@ namespace CryDust {
 			}
 			ImGui::EndMenuBar();
 		}
+
+		m_SceneHierarchyPanel.OnImGuiRender();
+
+
 		ImGui::Begin("Settings");
 		auto stats = CryDust::Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
