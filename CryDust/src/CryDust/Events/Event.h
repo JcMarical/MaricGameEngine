@@ -1,9 +1,9 @@
 #pragma once
-
-#include "CryDust/Core/Base.h"
 #include "cdpch.h"
+#include "CryDust/Core/Base.h"
+#include <functional>
 
-
+#include "CryDust/Debug/Instrumentor.h"
 namespace CryDust{
 
 	/// <summary>

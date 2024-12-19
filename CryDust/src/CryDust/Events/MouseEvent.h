@@ -1,13 +1,13 @@
 #pragma once
 
 #include "CryDust/Events/Event.h"
-
+#include "CryDust/Core/MouseCodes.h"
 namespace CryDust {
 
 	class  MouseMovedEvent : public Event
 	{
 	public:
-		MouseMovedEvent(float x,float y)
+		MouseMovedEvent(const MouseCode x,const MouseCode y)
 			: m_MouseX(x), m_MouseY(y){}
 
 		inline float GetX() const { return m_MouseX; }
@@ -31,7 +31,7 @@ namespace CryDust {
 	class  MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float xOffset, float yOffset)
+		MouseScrolledEvent(const MouseCode xOffset, const MouseCode yOffset)
 			: m_XOffset(xOffset), m_YOffset(yOffset) {}
 
 		inline float GetXOffset() const { return m_XOffset; }
@@ -64,7 +64,7 @@ namespace CryDust {
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	protected:
-		MouseButtonEvent(int button)
+		MouseButtonEvent(const MouseCode button)
 			: m_Button(button) {}
 
 		int m_Button;
@@ -75,7 +75,7 @@ namespace CryDust {
 	class  MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int button)
+		MouseButtonPressedEvent(const MouseCode button)
 			: MouseButtonEvent(button){}
 
 
@@ -92,7 +92,7 @@ namespace CryDust {
 	class  MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int button)
+		MouseButtonReleasedEvent(const MouseCode button)
 			: MouseButtonEvent(button) {}
 
 

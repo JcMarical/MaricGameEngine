@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "CryDust/Core/Base.h"
+#include <glm/glm.hpp>
 
 #include "CryDust/Core/KeyCodes.h"
 #include "CryDust/Core/MouseCodes.h"
@@ -13,7 +13,7 @@ namespace CryDust {
 	public:
 		static bool IsKeyPressed(KeyCode key);
 		static bool IsMouseButtonPressed(MouseCode button);
-		static std::pair<float, float> GetMousePosition();
+		static glm::vec2 GetMousePosition();
 		static float GetMouseX();
 		static float GetMouseY();
 	};

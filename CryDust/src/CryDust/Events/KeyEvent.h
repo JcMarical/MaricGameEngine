@@ -2,7 +2,7 @@
 
 #include "CryDust/Events/Event.h"
 
-
+#include "CryDust/Core/KeyCodes.h"
 namespace CryDust
 {
 	/// <summary>
@@ -11,15 +11,15 @@ namespace CryDust
 	class  KeyEvent : public Event
 	{
 	public:
-		inline int GetKeyCode() const{ return m_KeyCode; }
+		KeyCode GetKeyCode() const{ return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		int m_KeyCode;
 		//受保护的，所以不能在任何东西中创建，除了它的派生类
-		KeyEvent(int keycode) 
-			: m_KeyCode(keycode){}
-		
+		KeyEvent(const KeyCode keycode)
+			: m_KeyCode(keycode) {}
+
+		KeyCode m_KeyCode;
 	};
 
 	/// <summary>
@@ -28,14 +28,14 @@ namespace CryDust
 	class  KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int keycode,int repeatCount)
+		KeyPressedEvent(const KeyCode keycode,int repeatCount)
 			: KeyEvent(keycode),m_RepeatCount(repeatCount) {}
 
 		/// <summary>
 		/// 按下不动后，会持续的检测重复触发次数（不确定要使用，但是先设置了）
 		/// </summary>
 		/// <returns></returns>
-		inline int GetRepeatCount() const { return m_RepeatCount; }
+		uint16_t  GetRepeatCount() const { return m_RepeatCount; }
 
 		/// <summary>
 		/// ToString函数还是要单独重载下的
@@ -50,7 +50,7 @@ namespace CryDust
 
 		EVENT_CLASS_TYPE(KeyPressed);
 	private:
-		int m_RepeatCount;
+		uint16_t m_RepeatCount;
 
 	};
 
@@ -60,7 +60,7 @@ namespace CryDust
 	class  KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent (int keycode)
+		KeyReleasedEvent (const KeyCode keycode)
 			: KeyEvent(keycode) {}
 
 
@@ -85,7 +85,7 @@ namespace CryDust
 	class  KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(int keycode)
+		KeyTypedEvent(const KeyCode keycode)
 			: KeyEvent(keycode) {}
 		std::string ToString() const override
 		{

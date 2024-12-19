@@ -3,6 +3,8 @@
 //交由应用程序使用
 
 #include <stdio.h>
+#include "CryDust/Core/Base.h"
+
 #include "CryDust/Core/Application.h"
 #include "CryDust/Core/Layer.h"
 #include "CryDust/Core/Log.h"
@@ -12,7 +14,7 @@
 #include "CryDust/Core/Input.h"
 #include "CryDust/Core/KeyCodes.h"
 #include "CryDust/Core/MouseCodes.h"
-
+#include "CryDust/Renderer/OrthographicCameraController.h"
 
 
 #include "CryDust/ImGui/ImGuiLayer.h"
@@ -35,7 +37,7 @@
 #include "CryDust/Renderer/VertexArray.h"
 		  
 #include "CryDust/Renderer/OrthographicCamera.h"
-#include "CryDust/Renderer/OrthographicCameraController.h"
+
 // -----------------------------------
 
 

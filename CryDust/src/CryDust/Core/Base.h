@@ -2,25 +2,25 @@
 
 #include <memory>
 
-/*
-#ifdef CD_PLATFORM_WINDOWS
 
 
-#if CD_DYNAMIC_LINK
-	#ifdef CD_BUILD_DLL
-		#define CRYDUST_API __declspec(dllexport)
+#include "CryDust/Core/PlatformDetection.h"
+
+
+#ifdef CD_DEBUG
+	#if defined(CD_PLATFORM_WINDOWS)
+		#define CD_DEBUGBREAK() __debugbreak()
+		#elif defined(CD_PLATFORM_LINUX)
+			#include <signal.h>
+			#define CD_DEBUGBREAK() raise(SIGTRAP)
 	#else
-		#define CRYDUST_API __declspec(dllimport)
+		#error "Platform doesn't support debugbreak yet!"
 	#endif
+		#define CD_ENABLE_ASSERTS
 #else
-    #define CRYDUST_API
+	#define CD_DEBUGBREAK()
 #endif
 
-#else
-	#error CryDust only support Window!
-
-#endif // CD_PLATFORM_WINDOWS
-*/
 
 #ifdef CD_ENABLE_ASSERTS
 	#define DEBUG_ASSERT(x,...) {if(!(x)){ DEBUG_ERROR("Assertion Failed: {0}",__VA_ARGS__);__debugbreak();}}
@@ -30,6 +30,11 @@
 	#define DEBUG_ASSERT(x,...)
 	#define CORE_DEBUG_ASSERT(x,...)
 #endif
+
+
+
+
+
 
 #ifdef CD_DEBUG
 #define CD_ENABLE_ASSERTS

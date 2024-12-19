@@ -2,6 +2,7 @@ include "./vendor/premake/premake_customization/solution_items.lua"
 
 
 workspace "CryDust"
+	buildoptions "/utf-8"
 	architecture "x86_64"
 	startproject "CryDust-Editor"
 
