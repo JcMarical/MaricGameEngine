@@ -1,13 +1,16 @@
 [submodule "CryDust/vendor/spdlog"]
 	path = CryDust/vendor/spdlog
-	url = https://github.com/gabime/spdlog.git
+	url = ../../gabime/spdlog.git
+	branch = v1.x
 [submodule "CryDust/vendor/GLFW"]
 	path = CryDust/vendor/GLFW
-	url = https://github.com/TheCherno/glfw
-
+	url = ../../TheCherno/glfw.git
+	branch = master
 [submodule "CryDust/vendor/imgui"]
 	path = CryDust/vendor/imgui
-	url = https://github.com/TheCherno/imgui
+	url = ../../TheCherno/imgui.git
+	branch = docking
 [submodule "CryDust/vendor/glm"]
 	path = CryDust/vendor/glm
-	url = https://github.com/g-truc/glm
+	url = ../../g-truc/glm.git
+	branch = master

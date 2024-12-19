@@ -90,6 +90,9 @@
     <ClInclude Include="src\CryDust\Core\MouseCodes.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Core\PlatformDetection.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Core\Timestep.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
@@ -163,6 +166,9 @@
       <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Scene\SceneCamera.h">
+      <Filter>src\CryDust\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Scene\ScriptableEntity.h">
       <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">

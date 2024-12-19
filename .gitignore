@@ -1,15 +1,14 @@
-
-.vs/
-bin/
-/bin/
+# Binaries
+**/bin/
+!vendor/premake/bin/
 bin-int/
-/bin-int/
-bin-int\
 
-*.user
-/bin-int
+# Hazel files
+*.log
 
-/bin-int/Debug-windows-x86_64
-/bin-int/Debug-windows-x86_64/CryDust
-*.obj
-/bin-int
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
