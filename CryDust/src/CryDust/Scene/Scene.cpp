@@ -7,15 +7,6 @@
 
 #include "Entity.h"
 namespace CryDust {
-	static void DoMath(const glm::mat4& transform)
-	{
-	}
-
-	//变换构造
-	static void OnTransformConstruct(entt::registry& registry, entt::entity entity)
-	{
-	}
-
 
 
 	Scene::Scene()
@@ -76,13 +67,12 @@ namespace CryDust {
 				{
 					if (!nsc.Instance)
 					{
-						nsc.InstantiateFunction();
+						nsc.Instance = nsc.InstantiateScript();
 						nsc.Instance->m_Entity = Entity{ entity, this };
-						if (nsc.OnCreateFunction)
-							nsc.OnCreateFunction(nsc.Instance);
+						nsc.Instance->OnCreate();//执行OnCreate
 					}
-					if (nsc.OnUpdateFunction)
-						nsc.OnUpdateFunction(nsc.Instance, ts);
+					//执行脚本循环逻辑
+					nsc.Instance->OnUpdate(ts);
 				});
 		}
 
@@ -94,7 +84,7 @@ namespace CryDust {
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
 			{
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 				//设置主相机
 				if (camera.Primary)
 				{
@@ -113,7 +103,7 @@ namespace CryDust {
 			for (auto entity : group)
 			{
 				//拿到数据，执行逻辑
-				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 				Renderer2D::DrawQuad(transform, sprite.Color);
 			}
 			Renderer2D::EndScene();
