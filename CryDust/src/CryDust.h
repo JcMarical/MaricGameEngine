@@ -20,6 +20,7 @@
 #include "CryDust/Scene/Scene.h"
 
 #include "CryDust/Scene/Entity.h"
+#include "CryDust/Scene/ScriptableEntity.h"
 #include "CryDust/Scene/Components.h"
 // ---Renderer------------------------
 
