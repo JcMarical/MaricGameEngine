@@ -29,9 +29,9 @@ namespace CryDust {
 		//复制长方形实体
 		m_SquareEntity = square;
 
-		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
-		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
+		m_SecondCamera = m_ActiveScene->CreateEntity("Camera B");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
 
@@ -162,7 +162,7 @@ namespace CryDust {
 		m_SceneHierarchyPanel.OnImGuiRender();
 
 
-		ImGui::Begin("Settings");
+		ImGui::Begin("Stats");
 		auto stats = CryDust::Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
@@ -171,31 +171,7 @@ namespace CryDust {
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
 		//如果存在square实体，单独开个区域展示
-		if (m_SquareEntity)
-		{
-			ImGui::Separator();
-			auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag; //拿到对应的tag
-			ImGui::Text("%s", tag.c_str());
 
-			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;	//拿到spriteRenderer的颜色
-			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor), 0);	//提供颜色编辑
-			ImGui::Separator();
-		}
-
-		ImGui::DragFloat3("Camera Transform",
-			glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
-		if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
-		{
-			m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
-			m_SecondCamera.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
-		}
-
-		{
-			auto& camera = m_SecondCamera.GetComponent<CameraComponent>().Camera;
-			float orthoSize = camera.GetOrthographicSize();
-			if (ImGui::DragFloat("Second Camera Ortho Size", &orthoSize))
-				camera.SetOrthographicSize(orthoSize);
-		}
 
 		ImGui::End();
 
