@@ -1,5 +1,5 @@
 #include "cdpch.h"
-#include "OpenGLFramebuffer.h"
+#include "Platform/OpenGL/OpenGLFramebuffer.h"
 #include <glad/glad.h>
 namespace CryDust {
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& spec)

@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="src\CryDust.h" />
     <ClInclude Include="src\CryDust\Core\Application.h" />
+    <ClInclude Include="src\CryDust\Core\Assert.h" />
     <ClInclude Include="src\CryDust\Core\Base.h" />
     <ClInclude Include="src\CryDust\Core\EntryPoint.h" />
     <ClInclude Include="src\CryDust\Core\Input.h" />

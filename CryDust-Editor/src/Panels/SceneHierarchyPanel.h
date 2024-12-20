@@ -1,6 +1,6 @@
 #pragma once
 #include "CryDust/Core/Base.h"
-#include "CryDust/Core/Log.h"
+
 #include "CryDust/Scene/Scene.h"
 #include "CryDust/Scene/Entity.h"
 namespace CryDust {

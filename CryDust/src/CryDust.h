@@ -8,6 +8,7 @@
 #include "CryDust/Core/Application.h"
 #include "CryDust/Core/Layer.h"
 #include "CryDust/Core/Log.h"
+#include "CryDust/Core/Assert.h"
 
 #include "CryDust/Core/Timestep.h"
 

@@ -22,14 +22,8 @@
 #endif
 
 
-#ifdef CD_ENABLE_ASSERTS
-	#define DEBUG_ASSERT(x,...) {if(!(x)){ DEBUG_ERROR("Assertion Failed: {0}",__VA_ARGS__);__debugbreak();}}
-	#define CORE_DEBUG_ASSERT(x,...) {if(!(x)){ CORE_DEBUG_ERROR("Assertion Failed: {0}",__VA_ARGS__);__debugbreak();}}
-
-#else
-	#define DEBUG_ASSERT(x,...)
-	#define CORE_DEBUG_ASSERT(x,...)
-#endif
+#define CD_EXPAND_MACRO(x) x
+#define CD_STRINGIFY_MACRO(x) #x
 
 
 
@@ -65,3 +59,6 @@ namespace CryDust
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 }
+
+#include "CryDust/Core/Log.h"
+#include "CryDust/Core/Assert.h"
