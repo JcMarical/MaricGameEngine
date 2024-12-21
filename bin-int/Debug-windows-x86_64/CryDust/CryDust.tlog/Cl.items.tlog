@@ -28,6 +28,7 @@ D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp;D:\P
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLTexture.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLTexture.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLVertexArray.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLVertexArray.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsInput.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsInput.obj
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsPlatformUtils.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsPlatformUtils.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsWindow.obj
 D:\Project\Git Project\CryDust\CryDust\src\cdpch.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\cdpch.obj
 D:\Project\Git Project\CryDust\CryDust\vendor\stb_image\stb_image.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\stb_image.obj
