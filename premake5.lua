@@ -35,6 +35,7 @@ IncludeDir["ImGui"] = "%{wks.location}/CryDust/vendor/imgui"
 IncludeDir["glm"] = "%{wks.location}/CryDust/vendor/glm"
 IncludeDir["stb_image"] = "%{wks.location}/CryDust/vendor/stb_image"
 IncludeDir["entt"] = "%{wks.location}/CryDust/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "%{wks.location}/CryDust/vendor/yaml-cpp/include"
 -- 这个include，相当于把glfw下的premake5.lua内容拷贝到这里
 
 
@@ -43,6 +44,7 @@ group "Dependencies"
     include "CryDust/vendor/GLFW"
     include "CryDust/vendor/Glad"
     include "CryDust/vendor/imgui"
+	include "CryDust/vendor/yaml-cpp"
     
 group ""
 

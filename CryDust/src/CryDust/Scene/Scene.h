@@ -24,6 +24,7 @@ namespace CryDust {
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;//viewport信息
 
 		friend class Entity; //友元，Entity可以调用scene的所有东西
+		friend class SceneSerializer;
 		friend class SceneHierarchyPanel; //设置友元，比如让层次显示能调用registry注册表
 	};
 

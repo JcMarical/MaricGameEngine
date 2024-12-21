@@ -1,5 +1,6 @@
 #pragma once
 
+#define YAML_CPP_STATIC_DEFINE
 #include "CryDust/Core/PlatformDetection.h"
 #ifdef CD_PLATFORM_WINDOWS
 #ifndef NOMINMAX

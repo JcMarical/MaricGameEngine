@@ -25,9 +25,6 @@
     <Filter Include="src\CryDust\Scene">
       <UniqueIdentifier>{07509E45-7366-9CDB-BCDD-27FD28336D63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Panels">
-      <UniqueIdentifier>{DFE6F326-CB9E-3574-34A6-0ED0207DD064}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Core\Application.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Assert.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Core\Base.h">
@@ -171,11 +171,11 @@
     <ClInclude Include="src\CryDust\Scene\SceneCamera.h">
       <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Scene\ScriptableEntity.h">
+    <ClInclude Include="src\CryDust\Scene\SceneSerializer.h">
       <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\Panels\SceneHierarchyPanel.h">
-      <Filter>src\Panels</Filter>
+    <ClInclude Include="src\CryDust\Scene\ScriptableEntity.h">
+      <Filter>src\CryDust\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1520,8 +1520,8 @@
     <ClCompile Include="src\CryDust\Scene\SceneCamera.cpp">
       <Filter>src\CryDust\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\Panels\SceneHierarchyPanel.cpp">
-      <Filter>src\Panels</Filter>
+    <ClCompile Include="src\CryDust\Scene\SceneSerializer.cpp">
+      <Filter>src\CryDust\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>

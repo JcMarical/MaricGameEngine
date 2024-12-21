@@ -19,6 +19,9 @@
     <Filter Include="..\CryDust\vendor\imgui">
       <UniqueIdentifier>{E57A3D52-51B2-85E9-5ABC-E90CC672ACE2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\CryDust\vendor\yaml-cpp">
+      <UniqueIdentifier>{4D2620FE-3936-CCCE-A2EF-30ED8E1EBB67}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\CryDust-Editor">
       <UniqueIdentifier>{92DAA1DA-FEF0-9F70-4768-2B92B3BD70F8}</UniqueIdentifier>
     </Filter>
@@ -41,6 +44,9 @@
     </None>
     <None Include="..\..\CryDust\vendor\imgui\premake5.lua">
       <Filter>..\CryDust\vendor\imgui</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\yaml-cpp\premake5.lua">
+      <Filter>..\CryDust\vendor\yaml-cpp</Filter>
     </None>
     <None Include="..\..\SandBox\premake5.lua">
       <Filter>..\SandBox</Filter>
