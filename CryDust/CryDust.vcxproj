@@ -173,6 +173,7 @@
     <ClInclude Include="src\CryDust\Math\Math.h" />
     <ClInclude Include="src\CryDust\Renderer\Buffer.h" />
     <ClInclude Include="src\CryDust\Renderer\Camera.h" />
+    <ClInclude Include="src\CryDust\Renderer\EditorCamera.h" />
     <ClInclude Include="src\CryDust\Renderer\Framebuffer.h" />
     <ClInclude Include="src\CryDust\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h" />
@@ -628,6 +629,7 @@
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\CryDust\Math\Math.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\CryDust\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\CryDust\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\CryDust\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\CryDust\Renderer\OrthographicCamera.cpp" />

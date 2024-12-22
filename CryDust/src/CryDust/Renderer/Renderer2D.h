@@ -2,6 +2,7 @@
 #include "CryDust/Renderer/OrthographicCamera.h"
 #include "CryDust/Renderer/Texture.h"
 #include "CryDust/Renderer/Camera.h"
+#include "CryDust/Renderer/EditorCamera.h"
 namespace CryDust {
 	class Renderer2D
 	{
@@ -9,6 +10,7 @@ namespace CryDust {
 		static void Init();
 		static void Shutdown();
 		static void BeginScene(const Camera& camera, const glm::mat4& transform);
+		static void BeginScene(const EditorCamera& camera);
 		static void BeginScene(const OrthographicCamera& camera); // TODO: Remove
 		static void EndScene();
 		static void Flush();

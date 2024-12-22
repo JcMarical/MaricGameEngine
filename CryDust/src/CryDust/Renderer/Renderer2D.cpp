@@ -130,6 +130,15 @@ namespace CryDust {
 		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
 		StartBatch();
 	}
+	void Renderer2D::BeginScene(const EditorCamera& camera)
+	{
+		CD_PROFILE_FUNCTION();
+		glm::mat4 viewProj = camera.GetViewProjection();
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		StartBatch();
+	}
+
 	void Renderer2D::EndScene()
 	{
 		CD_PROFILE_FUNCTION();

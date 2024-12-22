@@ -26,6 +26,8 @@ namespace CryDust {
 		//创建Scene
 		m_ActiveScene = CreateRef<Scene>();
 
+		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
+
 		// Entity & Component
 		auto square = m_ActiveScene->CreateEntity("Green Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
@@ -92,6 +94,7 @@ namespace CryDust {
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
 
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
@@ -100,6 +103,8 @@ namespace CryDust {
 		// Update
 		if (m_ViewportFocused)
 			m_CameraController.OnUpdate(ts);
+		//场景相机
+		m_EditorCamera.OnUpdate(ts);
 		// Render
 		//帧缓冲重置
 		Renderer2D::ResetStats();
@@ -109,8 +114,8 @@ namespace CryDust {
 		
 
 	
-		// Update scene 拿到scene后，不断更新
-		m_ActiveScene->OnUpdate(ts);
+		// Update scene 拿到scene后，使用场景相机不断更新
+		m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
 		m_Framebuffer->Unbind();
 	}
@@ -228,10 +233,10 @@ namespace CryDust {
 			float windowHeight = (float)ImGui::GetWindowHeight();
 			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 			// 相机
-			auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
-			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
-			const glm::mat4& cameraProjection = camera.GetProjection();
-			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+			// Editor camera
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
+
 			// 实体Transform
 			auto& tc = selectedEntity.GetComponent<TransformComponent>();
 			glm::mat4 transform = tc.GetTransform();
@@ -254,6 +259,7 @@ namespace CryDust {
 				tc.Rotation += deltaRotation;
 				tc.Scale = scale;
 			}
+
 		}
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -267,6 +273,8 @@ namespace CryDust {
 	void EditorLayer::OnEvent(CryDust::Event& e)
 	{
 		m_CameraController.OnEvent(e);
+		m_EditorCamera.OnEvent(e);
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(CD_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 	}

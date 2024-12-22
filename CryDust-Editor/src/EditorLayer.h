@@ -3,6 +3,8 @@
 #include "CryDust.h"
 #include "Panels/SceneHierarchyPanel.h"
 
+#include "CryDust/Renderer/EditorCamera.h"
+
 namespace CryDust {
 
 	class EditorLayer : public Layer
@@ -40,6 +42,9 @@ namespace CryDust {
 		Entity m_SecondCamera;
 
 		bool m_PrimaryCamera = true;
+
+		EditorCamera m_EditorCamera;
+
 		Ref<Texture2D> m_CheckerboardTexture;
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;

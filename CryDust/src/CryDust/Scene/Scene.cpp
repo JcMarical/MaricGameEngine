@@ -63,7 +63,7 @@ namespace CryDust {
 	}
 
 	//拿到组件
-	void Scene::OnUpdate(Timestep ts) 
+	void Scene::OnUpdateRuntime(Timestep ts) 
 	{
 
 		// Update scripts
@@ -115,7 +115,22 @@ namespace CryDust {
 		}
 
 	}
-
+	/// <summary>
+	/// 使用场景相机更新
+	/// </summary>
+	/// <param name="ts"></param>
+	/// <param name="camera"></param>
+	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
+	{
+		Renderer2D::BeginScene(camera);
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		for (auto entity : group)
+		{
+			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+			Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+		}
+		Renderer2D::EndScene();
+	}
 	/// <summary>
 	/// 窗口設置
 	/// </summary>
