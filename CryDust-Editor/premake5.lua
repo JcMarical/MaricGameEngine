@@ -16,7 +16,8 @@ project "CryDust-Editor"
 		"%{wks.location}/CryDust/src",
 		"%{wks.location}/CryDust/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 	links
 	{

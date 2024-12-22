@@ -136,7 +136,18 @@ namespace CryDust {
 		}
 	}
 
-
+	//拿到主相机
+	Entity Scene::GetPrimaryCameraEntity()
+	{
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			const auto& camera = view.get<CameraComponent>(entity);
+			if (camera.Primary)
+				return Entity{ entity, this };
+		}
+		return {};
+	}
 	//-------------组件添加时触发的函数-------------------
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)

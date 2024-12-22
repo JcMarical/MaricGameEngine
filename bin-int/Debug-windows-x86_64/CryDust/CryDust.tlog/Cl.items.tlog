@@ -4,6 +4,7 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\LayerStack.cpp;D:\Projec
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Log.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Log.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiBuild.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiBuild.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiLayer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiLayer.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Math\Math.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Math.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Buffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Buffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Framebuffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Framebuffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\GraphicsContext.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\GraphicsContext.obj
@@ -31,4 +32,5 @@ D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsInput.cpp;D:\
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsPlatformUtils.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsPlatformUtils.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\WindowsWindow.obj
 D:\Project\Git Project\CryDust\CryDust\src\cdpch.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\cdpch.obj
+D:\Project\Git Project\CryDust\CryDust\vendor\ImGuizmo\ImGuizmo.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuizmo.obj
 D:\Project\Git Project\CryDust\CryDust\vendor\stb_image\stb_image.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\stb_image.obj

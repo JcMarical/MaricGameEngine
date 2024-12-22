@@ -36,6 +36,7 @@ IncludeDir["glm"] = "%{wks.location}/CryDust/vendor/glm"
 IncludeDir["stb_image"] = "%{wks.location}/CryDust/vendor/stb_image"
 IncludeDir["entt"] = "%{wks.location}/CryDust/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/CryDust/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "%{wks.location}/CryDust/vendor/ImGuizmo"
 -- 这个include，相当于把glfw下的premake5.lua内容拷贝到这里
 
 

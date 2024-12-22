@@ -17,3 +17,6 @@
 [submodule "CryDust/vendor/yaml-cpp"]
 	path = CryDust/vendor/yaml-cpp
 	url = https://github.com/thecherno/yaml-cpp
+[submodule "CryDust/vendor/ImGuizmo"]
+	path = CryDust/vendor/ImGuizmo
+	url = https://github.com/thecherno/imguizmo

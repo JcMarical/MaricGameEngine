@@ -1,6 +1,8 @@
 ﻿#include "cdpch.h"
 #include "ImGuiLayer.h"
 
+
+
 #include <imgui.h>
 
 
@@ -14,6 +16,8 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+
+#include <ImGuizmo.h>
 namespace CryDust {
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")
@@ -86,7 +90,7 @@ namespace CryDust {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
-
+		ImGuizmo::BeginFrame();
 	}
 
 	void ImGuiLayer::End()
