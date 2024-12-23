@@ -56,7 +56,7 @@ namespace CryDust {
 		{
 			switch (format)
 			{
-			case FramebufferTextureFormat::DEPTH24STENCIL8:  return true;
+				case FramebufferTextureFormat::DEPTH24STENCIL8:  return true;
 			}
 			return false;
 		}
@@ -95,10 +95,9 @@ namespace CryDust {
 		}
 
 		
-
-		//帧缓冲完整性检查
-		CORE_DEBUG_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!");
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//创建并绑定帧缓冲
+		glCreateFramebuffers(1, &m_RendererID);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
 
 
 		bool multisample = m_Specification.Samples > 1;
@@ -108,17 +107,20 @@ namespace CryDust {
 			//重新释放空间
 			m_ColorAttachments.resize(m_ColorAttachmentSpecifications.size());
 			Utils::CreateTextures(multisample, m_ColorAttachments.data(), m_ColorAttachments.size());//创建FBO
+
 			for (size_t i = 0; i < m_ColorAttachments.size(); i++)
 			{
 				Utils::BindTexture(multisample, m_ColorAttachments[i]);
 				switch (m_ColorAttachmentSpecifications[i].TextureFormat)
 				{
-				case FramebufferTextureFormat::RGBA8:
-					Utils::AttachColorTexture(m_ColorAttachments[i], m_Specification.Samples, GL_RGBA8, m_Specification.Width, m_Specification.Height, i);
-					break;
+					case FramebufferTextureFormat::RGBA8:
+						Utils::AttachColorTexture(m_ColorAttachments[i], m_Specification.Samples, GL_RGBA8, m_Specification.Width, m_Specification.Height, i);
+						break;
+
 				}
 			}
 		}
+
 		//深度纹理规格为空
 		if (m_DepthAttachmentSpecification.TextureFormat != FramebufferTextureFormat::None)
 		{
@@ -132,6 +134,7 @@ namespace CryDust {
 				break;
 			}
 		}
+
 		//多颜色纹理<=4
 		if (m_ColorAttachments.size() > 1)
 		{
@@ -144,6 +147,10 @@ namespace CryDust {
 			// Only depth-pass
 			glDrawBuffer(GL_NONE);
 		}
+
+		CORE_DEBUG_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Framebuffer is incomplete!%s");
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	}
 	void OpenGLFramebuffer::Bind()
@@ -163,4 +170,6 @@ namespace CryDust {
 
 		Invalidate();
 	}
+
+
 }

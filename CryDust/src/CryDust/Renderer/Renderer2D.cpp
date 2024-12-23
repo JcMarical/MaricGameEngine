@@ -24,13 +24,16 @@ namespace CryDust {
 		static const uint32_t MaxIndices = MaxQuads * 6;
 
 		static const uint32_t MaxTextureSlots = 32; // TODO: RenderCaps
+
 		Ref<VertexArray> QuadVertexArray;
 		Ref<VertexBuffer> QuadVertexBuffer;
 		Ref<Shader> TextureShader;
 		Ref<Texture2D> WhiteTexture;
+
 		uint32_t QuadIndexCount = 0;
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
+
 		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = white texture
 
@@ -40,6 +43,7 @@ namespace CryDust {
 	};
 
 	static Renderer2DData s_Data;
+
 	void Renderer2D::Init()
 	{
 		CD_PROFILE_FUNCTION();

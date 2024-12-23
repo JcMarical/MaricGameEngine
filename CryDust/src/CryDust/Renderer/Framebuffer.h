@@ -12,6 +12,7 @@ namespace CryDust {
 		// Defaults
 		Depth = DEPTH24STENCIL8
 	};
+
 	struct FramebufferTextureSpecification
 	{
 		FramebufferTextureSpecification() = default;
@@ -20,6 +21,7 @@ namespace CryDust {
 		FramebufferTextureFormat TextureFormat = FramebufferTextureFormat::None;
 		// TODO: filtering/wrap
 	};
+
 	struct FramebufferAttachmentSpecification
 	{
 		FramebufferAttachmentSpecification() = default;
