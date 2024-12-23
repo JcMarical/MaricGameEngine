@@ -131,7 +131,7 @@ namespace CryDust {
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			CORE_DEBUG_WARN("Pixel data = {0}", pixelData);
+			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
 		}
 
 		m_Framebuffer->Unbind();
@@ -210,6 +210,13 @@ namespace CryDust {
 
 
 		ImGui::Begin("Stats");
+
+		std::string name = "None";
+		if (m_HoveredEntity)
+			name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+		ImGui::Text("Hovered Entity: %s", name.c_str());
+
+
 		auto stats = CryDust::Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
@@ -334,17 +341,30 @@ namespace CryDust {
 		}
 		// Gizmos
 		case Key::Q:
-			m_GizmoType = -1;
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = -1;
 			break;
+		}
 		case Key::W:
-			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
 			break;
+		}
 		case Key::E:
-			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::ROTATE;
 			break;
+		}
 		case Key::R:
-			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+		{
+			if (!ImGuizmo::IsUsing())
+				m_GizmoType = ImGuizmo::OPERATION::SCALE;
 			break;
+		}
+
 		}
 	}
 
