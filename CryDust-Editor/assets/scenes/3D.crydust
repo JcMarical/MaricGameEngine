@@ -2,7 +2,34 @@ Scene: Untitled
 Entities:
   - Entity: 12837192831273
     TagComponent:
-      Tag: Empty Entity
+      Tag: Bottom Entity
+    TransformComponent:
+      Translation: [0, -0.5, -0.5]
+      Rotation: [1.57079637, 0, 0]
+      Scale: [1, 0.999985874, 0.999985874]
+    SpriteRendererComponent:
+      Color: [0.725490212, 0.712520123, 0.284505963, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Right Entity
+    TransformComponent:
+      Translation: [0.5, 0, -0.5]
+      Rotation: [0, 1.57079637, 0]
+      Scale: [0.999995947, 1, 0.999995947]
+    SpriteRendererComponent:
+      Color: [0.995098054, 0.925372362, 0.5999856, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Front Entity
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.656862736, 0.649286449, 0.399269521, 1]
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Camera
     TransformComponent:
       Translation: [0, 0, 0]
       Rotation: [0, 0, 0]
@@ -18,30 +45,3 @@ Entities:
         OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: Empty Entity
-    TransformComponent:
-      Translation: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    SpriteRendererComponent:
-      Color: [0.656862736, 0.649286449, 0.399269521, 1]
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: Empty Entity
-    TransformComponent:
-      Translation: [0.5, 0, -0.5]
-      Rotation: [0, 1.57079637, 0]
-      Scale: [0.999995947, 1, 0.999995947]
-    SpriteRendererComponent:
-      Color: [0.995098054, 0.925372362, 0.5999856, 1]
-  - Entity: 12837192831273
-    TagComponent:
-      Tag: Empty Entity
-    TransformComponent:
-      Translation: [0, -0.5, -0.5]
-      Rotation: [1.57079637, 0, 0]
-      Scale: [1, 0.999985874, 0.999985874]
-    SpriteRendererComponent:
-      Color: [0.725490212, 0.712520123, 0.284505963, 1]

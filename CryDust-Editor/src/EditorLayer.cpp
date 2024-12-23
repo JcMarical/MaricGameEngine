@@ -24,6 +24,7 @@ namespace CryDust {
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
+
 		//创建Scene
 		m_ActiveScene = CreateRef<Scene>();
 
@@ -233,8 +234,12 @@ namespace CryDust {
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
 
-		//获取光标位置
-		auto viewportOffset = ImGui::GetCursorPos(); // Includes tab bar
+		//获取光标位置以及边界
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		auto viewportOffset = ImGui::GetWindowPos();
+		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
 
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
@@ -247,15 +252,7 @@ namespace CryDust {
 
 		uint64_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image(reinterpret_cast<void*>(textureID), ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
-
-		//设置边界
-		auto windowSize = ImGui::GetWindowSize();
-		ImVec2 minBound = ImGui::GetWindowPos();
-		minBound.x += viewportOffset.x;
-		minBound.y += viewportOffset.y;
-		ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
-		m_ViewportBounds[0] = { minBound.x, minBound.y };
-		m_ViewportBounds[1] = { maxBound.x, maxBound.y };
+		 
 
 		// Gizmos
 		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
@@ -263,9 +260,10 @@ namespace CryDust {
 		{
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
-			float windowWidth = (float)ImGui::GetWindowWidth();
-			float windowHeight = (float)ImGui::GetWindowHeight();
-			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+			//gizmo窗口边界设置
+			ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
+
 			// 相机
 			// Editor camera
 			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
@@ -311,6 +309,7 @@ namespace CryDust {
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(CD_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(CD_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
 	}
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
 	{
@@ -374,6 +373,17 @@ namespace CryDust {
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
+
+	bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+	{
+		if (e.GetMouseButton() == Mouse::ButtonLeft)
+		{
+			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
+				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
+		}
+		return false;
+	}
+
 	void EditorLayer::OpenScene()
 	{
 		std::optional<std::string> filepath = FileDialogs::OpenFile("CryDust Scene (*.crydust)\0*.crydust\0");
