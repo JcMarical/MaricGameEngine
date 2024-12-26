@@ -2,6 +2,7 @@
 
 #include "CryDust.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/ContentBrowserPanel.h"
 
 #include "CryDust/Renderer/EditorCamera.h"
 
@@ -62,7 +63,7 @@ namespace CryDust {
 
 		//面板
 		SceneHierarchyPanel m_SceneHierarchyPanel;
-
+		ContentBrowserPanel m_ContentBrowserPanel;
 	};
 
 }
