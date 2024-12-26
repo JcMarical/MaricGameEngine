@@ -19,6 +19,9 @@
     <Filter Include="src\CryDust\ImGui">
       <UniqueIdentifier>{1458EE44-806E-ECDA-C9E5-77FC353BBD62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\CryDust\Math">
+      <UniqueIdentifier>{83925E19-6F8B-7D6B-98BD-62F084155D77}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\CryDust\Renderer">
       <UniqueIdentifier>{5036BEB6-3CC5-4780-E5E3-5B7BD1515826}</UniqueIdentifier>
     </Filter>
@@ -102,6 +105,9 @@
     <ClInclude Include="src\CryDust\Core\PlatformDetection.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Timer.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Core\Timestep.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
@@ -126,10 +132,16 @@
     <ClInclude Include="src\CryDust\ImGui\ImGuiLayer.h">
       <Filter>src\CryDust\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Math\Math.h">
+      <Filter>src\CryDust\Math</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Buffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Camera.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\EditorCamera.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Framebuffer.h">
@@ -160,6 +172,9 @@
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Texture.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\UniformBuffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\VertexArray.h">
@@ -202,6 +217,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLUniformBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
@@ -1487,7 +1505,13 @@
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp">
       <Filter>src\CryDust\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Math\Math.cpp">
+      <Filter>src\CryDust\Math</Filter>
+    </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Renderer\EditorCamera.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Framebuffer.cpp">
@@ -1518,6 +1542,9 @@
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Texture.cpp">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Renderer\UniformBuffer.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\VertexArray.cpp">
@@ -1551,6 +1578,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLUniformBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">

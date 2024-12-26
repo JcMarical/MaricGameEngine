@@ -8,7 +8,7 @@
 #include <GLFW/glfw3native.h>
 #include "CryDust/Core/Application.h"
 namespace CryDust {
-	std::optional<std::string> FileDialogs::OpenFile(const char* filter)
+	std::string FileDialogs::OpenFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -26,9 +26,9 @@ namespace CryDust {
 		if (GetOpenFileNameA(&ofn) == TRUE)
 			return ofn.lpstrFile;
 		
-		return std::nullopt;
+		return std::string();
 	}
-	std::optional<std::string> FileDialogs::SaveFile(const char* filter)
+	std::string FileDialogs::SaveFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
@@ -52,7 +52,7 @@ namespace CryDust {
 		if (GetSaveFileNameA(&ofn) == TRUE)
 		
 			return ofn.lpstrFile;
-		
-		return std::nullopt;
+
+		return std::string();
 	}
 }

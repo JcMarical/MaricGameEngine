@@ -22,7 +22,7 @@ public:
 };
 
 
-CryDust::Application* CryDust::CreateApplication()
+CryDust::Application* CryDust::CreateApplication(ApplicationCommandLineArgs args)
 {
 	return new Sandbox();
 }

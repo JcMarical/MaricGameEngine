@@ -15,10 +15,22 @@
 #include "CryDust/ImGui/ImGuiLayer.h"
 namespace CryDust {
 
+	struct ApplicationCommandLineArgs
+	{
+		int Count = 0;
+		char** Args = nullptr;
+		const char* operator[](int index) const
+		{
+			CORE_DEBUG_ASSERT(index < Count);
+			return Args[index];
+		}
+	};
+
+
 	class  Application
 	{
 	public:
-		Application(const std::string& name = "CryDust App");
+		Application(const std::string& name = "CryDust App", ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
 		virtual ~Application();
 		void OnEvent(Event& e);
 		void Run();
@@ -33,8 +45,9 @@ namespace CryDust {
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
-		inline static Application& Get() { return *s_Instance; }
+		static Application& Get() { return *s_Instance; }
 
+		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
 	private:
 
 
@@ -42,6 +55,8 @@ namespace CryDust {
 		bool OnWindowResize(WindowResizeEvent& e);
 	
 	private:
+		ApplicationCommandLineArgs m_CommandLineArgs;
+
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 
@@ -58,6 +73,6 @@ namespace CryDust {
 	};
 
 	//To be defined in client
-	Application* CreateApplication();
+	Application* CreateApplication(ApplicationCommandLineArgs args);
 
 }

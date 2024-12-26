@@ -5,8 +5,8 @@ namespace CryDust {
 	class CryDustEditor : public Application
 	{
 	public:
-		CryDustEditor()
-			: Application("CryDust Editor")
+		CryDustEditor(ApplicationCommandLineArgs args)
+			: Application("CryDust Editor",args)
 		{
 			PushLayer(new EditorLayer());
 		}
@@ -16,8 +16,8 @@ namespace CryDust {
 		{
 		}
 	};
-	Application* CreateApplication()
+	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new CryDustEditor();
+		return new CryDustEditor(args);
 	}
 }

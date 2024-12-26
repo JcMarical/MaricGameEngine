@@ -1,9 +1,13 @@
 #include "cdpch.h"
 #include "CryDust/Renderer/Renderer2D.h"
+
 #include "CryDust/Renderer/VertexArray.h"
 #include "CryDust/Renderer/Shader.h"
+#include "CryDust/Renderer/uniformBuffer.h"
 #include "CryDust/Renderer/RenderCommand.h"
+
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 namespace CryDust {
 	
 	struct QuadVertex
@@ -42,6 +46,13 @@ namespace CryDust {
 		glm::vec4 QuadVertexPositions[4];
 
 		Renderer2D::Statistics Stats;//统计
+
+		struct CameraData
+		{
+			glm::mat4 ViewProjection;
+		};
+		CameraData CameraBuffer;
+		Ref<UniformBuffer> CameraUniformBuffer;
 	};
 
 	static Renderer2DData s_Data;
@@ -76,6 +87,7 @@ namespace CryDust {
 			quadIndices[i + 0] = offset + 0;
 			quadIndices[i + 1] = offset + 1;
 			quadIndices[i + 2] = offset + 2;
+
 			quadIndices[i + 3] = offset + 2;
 			quadIndices[i + 4] = offset + 3;
 			quadIndices[i + 5] = offset + 0;
@@ -97,12 +109,9 @@ namespace CryDust {
 			samplers[i] = i;
 
 
-		//添加贴图shader
+		//添加纹理shader
 		s_Data.TextureShader = Shader::Create("assets/shaders/Texture.glsl");
-		s_Data.TextureShader->Bind();
 
-		//设置纹理
-		s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 		// Set all texture slots to 0
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
 
@@ -112,6 +121,8 @@ namespace CryDust {
 		s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+
+		s_Data.CameraUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::CameraData), 0);
 	}
 	void Renderer2D::Shutdown()
 	{
@@ -132,17 +143,16 @@ namespace CryDust {
 	void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
 	{
 		CD_PROFILE_FUNCTION();
-		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.ViewProjection = camera.GetProjection() * glm::inverse(transform);
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 		StartBatch();
 	}
 	void Renderer2D::BeginScene(const EditorCamera& camera)
 	{
 		CD_PROFILE_FUNCTION();
 		glm::mat4 viewProj = camera.GetViewProjection();
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.ViewProjection = camera.GetViewProjection();
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 		StartBatch();
 	}
 
@@ -175,6 +185,9 @@ namespace CryDust {
 		//重新绑定纹理插槽
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 			s_Data.TextureSlots[i]->Bind(i);
+
+		s_Data.TextureShader->Bind();
+
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 		s_Data.Stats.DrawCalls++;
 	}
