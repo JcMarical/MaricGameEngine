@@ -1,12 +1,14 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
 #include "SceneCamera.h"
 #include "ScriptableEntity.h"
-#include <glm/gtc/matrix_transform.hpp>
+#include "CryDust/Renderer/Texture.h"
+
 namespace CryDust {
 
 
@@ -43,6 +45,8 @@ namespace CryDust {
 	struct SpriteRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
+		Ref<Texture2D> Texture;
+		float TilingFactor = 1.0f;
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color)
