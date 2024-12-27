@@ -164,6 +164,7 @@
     <ClInclude Include="src\CryDust\Core\PlatformDetection.h" />
     <ClInclude Include="src\CryDust\Core\Timer.h" />
     <ClInclude Include="src\CryDust\Core\Timestep.h" />
+    <ClInclude Include="src\CryDust\Core\UUID.h" />
     <ClInclude Include="src\CryDust\Core\Window.h" />
     <ClInclude Include="src\CryDust\Debug\Instrumentor.h" />
     <ClInclude Include="src\CryDust\Events\ApplicationEvent.h" />
@@ -628,6 +629,7 @@
     <ClCompile Include="src\CryDust\Core\Layer.cpp" />
     <ClCompile Include="src\CryDust\Core\LayerStack.cpp" />
     <ClCompile Include="src\CryDust\Core\Log.cpp" />
+    <ClCompile Include="src\CryDust\Core\UUID.cpp" />
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\CryDust\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\CryDust\Math\Math.cpp" />

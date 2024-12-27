@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CryDust/Core/Timestep.h"
+#include "CryDust/Core/UUID.h"
 
 
 #include "CryDust/Renderer/EditorCamera.h"
@@ -19,7 +20,11 @@ namespace CryDust {
 
 		Scene();
 		~Scene();
+
+		static Ref<Scene> Copy(Ref<Scene> other);
+
 		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
 		void OnRuntimeStart();
@@ -29,6 +34,9 @@ namespace CryDust {
 		void OnUpdateRuntime(Timestep ts);
 		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
 		void OnViewportResize(uint32_t width, uint32_t height);
+
+		void DuplicateEntity(Entity entity);
+
 		Entity GetPrimaryCameraEntity();
 	private:
 		template<typename T>

@@ -2,16 +2,22 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "SceneCamera.h"
+#include "CryDust/Core/UUID.h"
+#include "CryDust/Renderer/Texture.h"
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "SceneCamera.h"
-#include "ScriptableEntity.h"
-#include "CryDust/Renderer/Texture.h"
 
 namespace CryDust {
 
-
+	struct IDComponent
+	{
+		UUID ID;
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
 
 	struct TagComponent
 	{
@@ -62,6 +68,9 @@ namespace CryDust {
 		CameraComponent(const CameraComponent&) = default;
 
 	};
+
+	// Forward declaration
+	class ScriptableEntity;
 
 	struct NativeScriptComponent
 	{
