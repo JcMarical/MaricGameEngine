@@ -29,6 +29,12 @@ namespace CryDust {
 		void OpenScene(const std::filesystem::path& path);
 		void SaveSceneAs();
 
+		void OnScenePlay();
+		void OnSceneStop();
+		// UI Panels
+		void UI_Toolbar();
+
+
 	private:
 		CryDust::OrthographicCameraController m_CameraController;
 
@@ -58,6 +64,13 @@ namespace CryDust {
 		glm::vec2 m_ViewportBounds[2];
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 		
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+
+		SceneState m_SceneState = SceneState::Edit;
+
 
 		//Gizmo
 		int m_GizmoType = -1;
@@ -65,6 +78,9 @@ namespace CryDust {
 		//面板
 		SceneHierarchyPanel m_SceneHierarchyPanel;
 		ContentBrowserPanel m_ContentBrowserPanel;
+
+		//编辑器资源
+		Ref<Texture2D> m_IconPlay, m_IconStop;
 	};
 
 }
