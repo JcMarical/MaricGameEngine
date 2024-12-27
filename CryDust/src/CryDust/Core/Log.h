@@ -60,3 +60,4 @@ inline OStream& operator<<(OStream& os, glm::qua<T, Q> quaternion)
 #define DEBUG_WARN(...)	::CryDust::Log::GetClientLogger()->warn(__VA_ARGS__);
 #define DEBUG_ERROR(...)	::CryDust::Log::GetClientLogger()->error(__VA_ARGS__);
 #define DEBUG_FATAL(...)	::CryDust::Log::GetClientLogger()->fatal(__VA_ARGS__);
+

@@ -10,6 +10,9 @@
     <Filter Include="..\CryDust\vendor">
       <UniqueIdentifier>{3BADF7E6-A7C3-F57C-F03A-819E5C90C604}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\CryDust\vendor\Box2D">
+      <UniqueIdentifier>{89177D4F-F54E-C5E6-FE58-290A6A0FECDF}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\CryDust\vendor\GLFW">
       <UniqueIdentifier>{5AE5E6F2-46DF-0F45-2F4C-A6551BE575B1}</UniqueIdentifier>
     </Filter>
@@ -35,6 +38,9 @@
     </None>
     <None Include="..\..\CryDust\premake5.lua">
       <Filter>..\CryDust</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\Box2D\premake5.lua">
+      <Filter>..\CryDust\vendor\Box2D</Filter>
     </None>
     <None Include="..\..\CryDust\vendor\GLFW\premake5.lua">
       <Filter>..\CryDust\vendor\GLFW</Filter>

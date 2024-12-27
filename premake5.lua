@@ -31,6 +31,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
     include "vendor/premake"
+	include "CryDust/vendor/Box2D"
     include "CryDust/vendor/GLFW"
     include "CryDust/vendor/Glad"
     include "CryDust/vendor/imgui"

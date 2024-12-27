@@ -20,3 +20,6 @@
 [submodule "CryDust/vendor/ImGuizmo"]
 	path = CryDust/vendor/ImGuizmo
 	url = https://github.com/thecherno/imguizmo
+[submodule "CryDust/vendor/Box2D"]
+	path = CryDust/vendor/Box2D
+	url = https://github.com/thecherno/box2d
