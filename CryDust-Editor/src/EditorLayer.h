@@ -52,7 +52,7 @@ namespace CryDust {
 
 		Entity m_HoveredEntity;
 
-
+		
 		bool m_PrimaryCamera = true;
 
 		EditorCamera m_EditorCamera;
