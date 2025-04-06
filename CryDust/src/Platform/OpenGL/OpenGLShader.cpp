@@ -3,7 +3,6 @@
 
 #include <glad/glad.h>
 
-#include <fstream>
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -94,7 +93,7 @@ namespace CryDust {
 			CompileOrGetVulkanBinaries(shaderSources);
 			CompileOrGetOpenGLBinaries();
 			CreateProgram();
-			CORE_DEBUG_WARN("Shader creation took {0} ms", timer.ElapsedMillis());
+			CORE_DEBUG_INFO("Shader creation took {0} ms", timer.ElapsedMillis());
 		}
 
 		// 从文件路径扩展名字（不传入名字则自动提供）
@@ -180,8 +179,9 @@ namespace CryDust {
 			CORE_DEBUG_ASSERT(Utils::ShaderTypeFromString(type), "Invalid shader type specified");
 
 			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
+			CORE_DEBUG_ASSERT(nextLinePos != std::string::npos, "Syntax error");
 			pos = source.find(typeToken, nextLinePos);
-			shaderSources[Utils::ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+			shaderSources[Utils::ShaderTypeFromString(type)] = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
 		}
 
 		return shaderSources;

@@ -11,7 +11,6 @@ int main(int argc, char** argv)
 	//logger日志系统
 	CryDust::Log::Init();
 
-
 	//
 	CD_PROFILE_BEGIN_SESSION("Startup", "CryDustProfile - Startup.json");
 	auto app = CryDust::CreateApplication({argc,argv});

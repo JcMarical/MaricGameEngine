@@ -1,3 +1,12 @@
-﻿  Scene.cpp
+﻿  OpenGLShader.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(326,92): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(378,24): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(380,20): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
 shaderc_sharedd.lib(shaderc_sharedd.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义
   CryDust.vcxproj -> D:\Project\Git Project\CryDust\bin\Debug-windows-x86_64\CryDust\CryDust.lib

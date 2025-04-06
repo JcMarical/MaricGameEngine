@@ -111,6 +111,9 @@
     <ClInclude Include="src\CryDust\Core\Timestep.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Core\UUID.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Core\Window.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
@@ -1485,7 +1488,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Core\UUID.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CryDust\Core\Application.cpp">
@@ -1498,6 +1500,9 @@
       <Filter>src\CryDust\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Core\Log.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Core\UUID.cpp">
       <Filter>src\CryDust\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp">
@@ -1605,6 +1610,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\CryDust\Core\UUID.cpp" />
   </ItemGroup>
 </Project>
