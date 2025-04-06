@@ -24,6 +24,9 @@ namespace CryDust {
 	private:
 		bool OnKeyPressed(KeyPressedEvent& e);
 		bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+
+		void OnOverlayRender();
+
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
@@ -35,6 +38,7 @@ namespace CryDust {
 
 
 		void OnScenePlay();
+		void OnSceneSimulate();
 		void OnSceneStop();
 
 		void OnDuplicateEntity();
@@ -76,7 +80,7 @@ namespace CryDust {
 		
 		enum class SceneState
 		{
-			Edit = 0, Play = 1
+			Edit = 0, Play = 1, Simulate = 2
 		};
 
 		SceneState m_SceneState = SceneState::Edit;
@@ -85,12 +89,15 @@ namespace CryDust {
 		//Gizmo
 		int m_GizmoType = -1;
 
+		//显示物理碰撞体
+		bool m_ShowPhysicsColliders = false;
+
 		//面板
 		SceneHierarchyPanel m_SceneHierarchyPanel;
 		ContentBrowserPanel m_ContentBrowserPanel;
 
 		//编辑器资源
-		Ref<Texture2D> m_IconPlay, m_IconStop;
+		Ref<Texture2D> m_IconPlay, m_IconSimulate, m_IconStop;
 	};
 
 }

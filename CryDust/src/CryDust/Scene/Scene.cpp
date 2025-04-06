@@ -14,6 +14,7 @@
 #include "box2d/b2_body.h"
 #include "box2d/b2_fixture.h"
 #include "box2d/b2_polygon_shape.h"
+#include "box2d/b2_circle_shape.h"
 
 namespace CryDust {
 
@@ -40,6 +41,7 @@ namespace CryDust {
 	}
 	Scene::~Scene()
 	{
+		delete m_PhysicsWorld;
 	}
 	/// <summary>
 	/// 复制component
@@ -95,6 +97,7 @@ namespace CryDust {
 		CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<BoxCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+		CopyComponent<CircleCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		return newScene;
 	}
 
@@ -125,57 +128,64 @@ namespace CryDust {
 		m_Registry.destroy(entity);
 	}
 
+
 	void Scene::OnRuntimeStart()
 	{
-		//1.设置一个物理世界，重力为-9.8f
-		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
-		//1.1为当前场景视图所有具有物理组件的实体创建b2Body
-		auto view = m_Registry.view<Rigidbody2DComponent>();
-		for (auto e : view)
-		{
-			//
-			Entity entity = { e, this };
-			auto& transform = entity.GetComponent<TransformComponent>();
-			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
-			// 2.1 主体定义用来指定动态类型和参数
-			b2BodyDef bodyDef;
-			bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
-			bodyDef.position.Set(transform.Translation.x, transform.Translation.y);
-			bodyDef.angle = transform.Rotation.z;
-
-			// 2.2 由b2BodyDef创建主体
-			b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
-			body->SetFixedRotation(rb2d.FixedRotation);// 是否固定旋转
-
-			rb2d.RuntimeBody = body;	
-
-
-			if (entity.HasComponent<BoxCollider2DComponent>())
-			{
-				auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
-				// 3.1定义盒子包围盒
-				b2PolygonShape boxShape;
-				boxShape.SetAsBox(bc2d.Size.x * transform.Scale.x, bc2d.Size.y * transform.Scale.y);// 包围盒跟随物体的size而变化
-
-				// 3.2定义fixture，fixture包含定义的包围盒
-				b2FixtureDef fixtureDef;
-				fixtureDef.shape = &boxShape;
-				fixtureDef.density = bc2d.Density;
-				fixtureDef.friction = bc2d.Friction;
-				fixtureDef.restitution = bc2d.Restitution;
-				fixtureDef.restitutionThreshold = bc2d.RestitutionThreshold;
-				body->CreateFixture(&fixtureDef);
-			}
-		}
+		OnPhysics2DStart();
 	}
+
 	void Scene::OnRuntimeStop()
 	{
-		delete m_PhysicsWorld;
-		m_PhysicsWorld = nullptr;
+		OnPhysics2DStop();
 	}
 
+	void Scene::OnSimulationStart()
+	{
+		OnPhysics2DStart();
 
+	}
 
+	void Scene::OnSimulationStop()
+	{
+		OnPhysics2DStop();
+
+	}
+
+	//物理更新
+	void Scene::OnUpdateSimulation(Timestep ts, EditorCamera& camera)
+	{
+		// Physics
+		{
+			const int32_t velocityIterations = 6;
+			const int32_t positionIterations = 2;
+			m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
+			// Retrieve transform from Box2D
+			auto view = m_Registry.view<Rigidbody2DComponent>();
+			for (auto e : view)
+
+			{
+				Entity entity = { e, this };
+				auto& transform = entity.GetComponent<TransformComponent>();
+				auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+
+				b2Body* body = (b2Body*)rb2d.RuntimeBody;
+				const auto& position = body->GetPosition();
+				transform.Translation.x = position.x;
+				transform.Translation.y = position.y;
+				transform.Rotation.z = body->GetAngle();
+			}
+		}
+
+		// Render
+		RenderScene(camera);
+	
+	}
+
+	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
+	{
+		// Render
+		RenderScene(camera);
+	}
 
 	//拿到组件
 	void Scene::OnUpdateRuntime(Timestep ts) 
@@ -264,35 +274,7 @@ namespace CryDust {
 		}
 
 	}
-	/// <summary>
-	/// 使用场景相机更新
-	/// </summary>
-	/// <param name="ts"></param>
-	/// <param name="camera"></param>
-	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
-	{
-		Renderer2D::BeginScene(camera);
-		// Draw sprites
-		{
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			for (auto entity : group)
-			{
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
-			}
-		}
-		// Draw circles
-		{
-			auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
-			for (auto entity : view)
-			{
-				auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
 
-				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
-			}
-		}
-		Renderer2D::EndScene();
-	}
 	/// <summary>
 	/// 窗口設置
 	/// </summary>
@@ -324,6 +306,7 @@ namespace CryDust {
 		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
 		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
 		CopyComponentIfExists<BoxCollider2DComponent>(newEntity, entity);
+		CopyComponentIfExists<CircleCollider2DComponent>(newEntity, entity);
 	}
 
 	//拿到主相机
@@ -338,6 +321,98 @@ namespace CryDust {
 		}
 		return {};
 	}
+	//生命周期--物理相关
+	void Scene::OnPhysics2DStart()
+	{
+		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
+
+		auto view = m_Registry.view<Rigidbody2DComponent>();
+		for (auto e : view)
+		{
+			Entity entity = { e, this };
+			auto& transform = entity.GetComponent<TransformComponent>();
+			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+
+			b2BodyDef bodyDef;
+			bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
+			bodyDef.position.Set(transform.Translation.x, transform.Translation.y);
+			bodyDef.angle = transform.Rotation.z;
+
+			b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
+			body->SetFixedRotation(rb2d.FixedRotation);
+			rb2d.RuntimeBody = body;
+
+			if (entity.HasComponent<BoxCollider2DComponent>())
+			{
+				auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
+
+				b2PolygonShape boxShape;
+				boxShape.SetAsBox(bc2d.Size.x * transform.Scale.x, bc2d.Size.y * transform.Scale.y);
+
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &boxShape;
+				fixtureDef.density = bc2d.Density;
+				fixtureDef.friction = bc2d.Friction;
+				fixtureDef.restitution = bc2d.Restitution;
+				fixtureDef.restitutionThreshold = bc2d.RestitutionThreshold;
+				body->CreateFixture(&fixtureDef);
+			}
+
+			if (entity.HasComponent<CircleCollider2DComponent>())
+			{
+				auto& cc2d = entity.GetComponent<CircleCollider2DComponent>();
+
+				b2CircleShape circleShape;
+				circleShape.m_p.Set(cc2d.Offset.x, cc2d.Offset.y);
+				circleShape.m_radius = transform.Scale.x * cc2d.Radius;
+
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &circleShape;
+				fixtureDef.density = cc2d.Density;
+				fixtureDef.friction = cc2d.Friction;
+				fixtureDef.restitution = cc2d.Restitution;
+				fixtureDef.restitutionThreshold = cc2d.RestitutionThreshold;
+				body->CreateFixture(&fixtureDef);
+			}
+		}
+	}
+	
+	void Scene::OnPhysics2DStop()
+	{
+		delete m_PhysicsWorld;
+		m_PhysicsWorld = nullptr;
+	}
+	//----------------渲染场景（画方画圆）------------------
+
+	void Scene::RenderScene(EditorCamera& camera)
+	{
+		Renderer2D::BeginScene(camera);
+
+		// Draw sprites
+		{
+			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			for (auto entity : group)
+			{
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+			}
+		}
+		// Draw circles
+		{
+			auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+			for (auto entity : view)
+			{
+				auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+
+				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
+			}
+		}
+
+		Renderer2D::EndScene();
+	}
+
+
 	//-------------组件添加时触发的函数-------------------
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)
@@ -383,5 +458,8 @@ namespace CryDust {
 	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component)
 	{
 	}
-
+	template<>
+	void Scene::OnComponentAdded<CircleCollider2DComponent>(Entity entity, CircleCollider2DComponent& component)
+	{
+	}
 }
