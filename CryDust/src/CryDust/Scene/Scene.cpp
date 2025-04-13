@@ -312,19 +312,6 @@ namespace CryDust {
 		}
 	}
 
-	void Scene::DuplicateEntity(Entity entity)
-	{
-		std::string name = entity.GetName();
-		Entity newEntity = CreateEntity(name);
-		CopyComponentIfExists<TransformComponent>(newEntity, entity);
-		CopyComponentIfExists<SpriteRendererComponent>(newEntity, entity);
-		CopyComponentIfExists<CircleRendererComponent>(newEntity, entity);
-		CopyComponentIfExists<CameraComponent>(newEntity, entity);
-		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
-		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
-		CopyComponentIfExists<BoxCollider2DComponent>(newEntity, entity);
-		CopyComponentIfExists<CircleCollider2DComponent>(newEntity, entity);
-	}
 
 	//拿到主相机
 	Entity Scene::GetPrimaryCameraEntity()
