@@ -25,33 +25,25 @@ namespace CryDust
 	/// <summary>
 	/// 按键按下事件
 	/// </summary>
-	class  KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(const KeyCode keycode,int repeatCount)
-			: KeyEvent(keycode),m_RepeatCount(repeatCount) {}
+		KeyPressedEvent(const KeyCode keycode, bool isRepeat = false)
+			: KeyEvent(keycode), m_IsRepeat(isRepeat) {
+		}
 
-		/// <summary>
-		/// 按下不动后，会持续的检测重复触发次数（不确定要使用，但是先设置了）
-		/// </summary>
-		/// <returns></returns>
-		uint16_t  GetRepeatCount() const { return m_RepeatCount; }
+		bool IsRepeat() const { return m_IsRepeat; }
 
-		/// <summary>
-		/// ToString函数还是要单独重载下的
-		/// </summary>
-		/// <returns></returns>
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent:" << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressedEvent: " << m_KeyCode << " (repeat = " << m_IsRepeat << ")";
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyPressed);
+		EVENT_CLASS_TYPE(KeyPressed)
 	private:
-		uint16_t m_RepeatCount;
-
+		bool m_IsRepeat;
 	};
 
 	/// <summary>
