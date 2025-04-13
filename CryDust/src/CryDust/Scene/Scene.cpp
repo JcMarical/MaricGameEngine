@@ -50,26 +50,49 @@ namespace CryDust {
 	/// <param name="dst"></param>
 	/// <param name="src"></param>
 	/// <param name="enttMap"></param>
-	template<typename Component>
+	template<typename... Component>
 	static void CopyComponent(entt::registry& dst, entt::registry& src, const std::unordered_map<UUID, entt::entity>& enttMap)
 	{
-		auto view = src.view<Component>();
-		for (auto e : view)
-		{
-			UUID uuid = src.get<IDComponent>(e).ID;
-			CORE_DEBUG_ASSERT(enttMap.find(uuid) != enttMap.end());
-			entt::entity dstEnttID = enttMap.at(uuid);
-			auto& component = src.get<Component>(e);
-			dst.emplace_or_replace<Component>(dstEnttID, component);
-		}
+		([&]()
+
+			{
+				auto view = src.view<Component>();                 // 获取源注册表中包含 Component 的所有实体视图
+				for (auto srcEntity : view) {                      // 遍历每个源实体
+					entt::entity dstEntity = enttMap.at(           // 通过 ID 映射查找目标实体
+						src.get<IDComponent>(srcEntity).ID
+					);
+
+					auto& srcComponent = src.get<Component>(srcEntity);  // 获取源组件
+					dst.emplace_or_replace<Component>(             // 复制到目标实体
+						dstEntity,
+						srcComponent
+					);
+				}
+			}(), ...);
+	}
+
+	//可变参数实现拷贝
+	template<typename... Component>
+	static void CopyComponent(ComponentGroup<Component...>, entt::registry& dst, entt::registry& src, const std::unordered_map<UUID, entt::entity>& enttMap)
+	{
+		CopyComponent<Component...>(dst, src, enttMap);
 	}
 
 	//复制component如果存在的话
-	template<typename Component>
+	template<typename... Component>
 	static void CopyComponentIfExists(Entity dst, Entity src)
 	{
-		if (src.HasComponent<Component>())
-			dst.AddOrReplaceComponent<Component>(src.GetComponent<Component>());
+		([&]()
+			{
+				if (src.HasComponent<Component>())
+					dst.AddOrReplaceComponent<Component>(src.GetComponent<Component>());
+			}(), ...);
+	}
+
+	template<typename... Component>
+	static void CopyComponentIfExists(ComponentGroup<Component...>, Entity dst, Entity src)
+	{
+		CopyComponentIfExists<Component...>(dst, src);
 	}
 	//复制场景
 	Ref<Scene> Scene::Copy(Ref<Scene> other)
@@ -423,43 +446,7 @@ namespace CryDust {
 	void Scene::OnComponentAdded<IDComponent>(Entity entity, IDComponent& component)
 	{
 	}
-	//--------------特化模板-------------
-	template<>
-	void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
-	{
-		if (m_ViewportWidth > 0 && m_ViewportHeight > 0)
-			component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
-	}
-	template<>
-	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<CircleRendererComponent>(Entity entity, CircleRendererComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<Rigidbody2DComponent>(Entity entity, Rigidbody2DComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component)
-	{
-	}
-	template<>
-	void Scene::OnComponentAdded<CircleCollider2DComponent>(Entity entity, CircleCollider2DComponent& component)
-	{
-	}
+	//--------------特化模板（改为了模版参数包）-------------
+
+	CopyComponent(AllComponents{}, dstSceneRegistry, srcSceneRegistry, enttMap);
 }
