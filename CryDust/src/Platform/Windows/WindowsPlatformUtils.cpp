@@ -8,6 +8,13 @@
 #include <GLFW/glfw3native.h>
 
 namespace CryDust {
+
+	float Time::GetTime()
+	{
+		return glfwGetTime();
+	}
+
+
 	std::string FileDialogs::OpenFile(const char* filter)
 	{
 		OPENFILENAMEA ofn;

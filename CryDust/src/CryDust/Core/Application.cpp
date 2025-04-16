@@ -13,7 +13,8 @@
 #include "CryDust/Events/ApplicationEvent.h"
 
 #include "CryDust/Renderer/Renderer.h"
-#include <glfw/glfw3.h>
+
+#include "CryDust/Utils/PlatformUtils.h"
 
 
 
@@ -111,7 +112,7 @@ namespace CryDust {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			RenderCommand::Clear();
 
-			float time = (float)glfwGetTime();
+			float time = Time::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
