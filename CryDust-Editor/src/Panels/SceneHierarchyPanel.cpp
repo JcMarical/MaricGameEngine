@@ -1,9 +1,11 @@
 #include "SceneHierarchyPanel.h"
+#include "CryDust/Scene/Components.h"
+
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
 #include <glm/gtc/type_ptr.hpp>
-#include "CryDust/Scene/Components.h"
+
 
 #include <cstring>
 /* The Microsoft C++ compiler is non-compliant with the C++ standard and needs

@@ -2,10 +2,12 @@
 #pragma once
 
 
-#include <glm/glm.hpp>
+
 
 #include "CryDust/Core/KeyCodes.h"
 #include "CryDust/Core/MouseCodes.h"
+
+#include <glm/glm.hpp>
 
 namespace CryDust {
 	class Input

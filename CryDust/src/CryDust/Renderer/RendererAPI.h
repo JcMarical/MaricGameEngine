@@ -1,8 +1,10 @@
 #pragma once
 
-#include <glm/glm.hpp>
+
 
 #include "VertexArray.h"
+
+#include <glm/glm.hpp>
 
 namespace CryDust {
 

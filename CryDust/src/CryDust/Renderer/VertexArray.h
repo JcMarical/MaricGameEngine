@@ -1,7 +1,9 @@
 #pragma once
 
-#include <memory>
+
 #include "CryDust/Renderer/Buffer.h"
+
+#include <memory>
 
 namespace CryDust  {
 

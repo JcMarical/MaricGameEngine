@@ -1,5 +1,7 @@
 #include "cdpch.h"
 #include "Scene.h"
+#include "Entity.h"
+
 
 #include "Components.h"
 #include "ScriptableEntity.h"

@@ -1,6 +1,8 @@
 #pragma once
-#include <filesystem>
+
 #include "CryDust/Renderer/Texture.h"
+
+#include <filesystem>
 namespace CryDust {
 	class ContentBrowserPanel
 	{

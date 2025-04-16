@@ -1,12 +1,12 @@
 #include "cdpch.h"
 #include "CryDust/Utils/PlatformUtils.h"
-
+#include "CryDust/Core/Application.h"
 
 #include <commdlg.h>
 #include <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
-#include "CryDust/Core/Application.h"
+
 namespace CryDust {
 	std::string FileDialogs::OpenFile(const char* filter)
 	{

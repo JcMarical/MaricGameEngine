@@ -1,7 +1,14 @@
 #pragma once
+
+
+#include "CryDust/Core/Log.h"
+
 #include <string>
 #include <chrono>
 #include <iomanip>
+
+
+
 #include <algorithm>
 #include <fstream>
 #include <thread>
@@ -9,7 +16,7 @@
 
 #include <mutex>
 #include <sstream>
-#include "CryDust/Core/Log.h"
+
 namespace CryDust {
 
 

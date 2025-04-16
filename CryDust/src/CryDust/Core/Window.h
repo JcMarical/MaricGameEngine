@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include <sstream>
+
 
 #include "CryDust/Core/Base.h"
 #include "Crydust/Events/Event.h"
 
-
+#include <sstream>
 
 namespace CryDust {
 

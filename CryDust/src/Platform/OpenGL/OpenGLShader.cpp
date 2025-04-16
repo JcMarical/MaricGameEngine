@@ -1,5 +1,7 @@
 #include "cdpch.h"
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "CryDust/Core/Timer.h"
+
 
 #include <glad/glad.h>
 
@@ -11,7 +13,7 @@
 #include <spirv_cross/spirv_cross.hpp>
 #include <spirv_cross/spirv_glsl.hpp>
 
-#include "CryDust/Core/Timer.h"
+
 
 namespace CryDust {
 

@@ -1,10 +1,9 @@
 #pragma once
 
-#include <memory>
-
-
 
 #include "CryDust/Core/PlatformDetection.h"
+
+#include <memory>
 
 
 #ifdef CD_DEBUG

@@ -1,15 +1,18 @@
 #include "EditorLayer.h"
+
+#include "CryDust/Scene/SceneSerializer.h"
+#include "CryDust/Utils/PlatformUtils.h"
+#include "CryDust/Math/Math.h"
+
 #include <imgui/imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "CryDust/Scene/SceneSerializer.h"
 
-#include "CryDust/Utils/PlatformUtils.h"
 
 
 #include "ImGuizmo.h"
-#include "CryDust/Math/Math.h"
+
 namespace CryDust {
 
 	extern const std::filesystem::path g_AssetPath;
