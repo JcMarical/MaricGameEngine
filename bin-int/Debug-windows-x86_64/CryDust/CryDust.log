@@ -1,13 +1,6 @@
 ﻿  Application.cpp
-  UUID.cpp
   ImGuiLayer.cpp
-  Renderer.cpp
   Renderer2D.cpp
-  Texture.cpp
-  Entity.cpp
-  Scene.cpp
-  SceneSerializer.cpp
-  OpenGLTexture.cpp
   WindowsInput.cpp
   WindowsPlatformUtils.cpp
 D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(74,9): warning C4005: “IMGUI_VERSION”: 宏重定义
@@ -30,18 +23,8 @@ D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(75,9): warning C4005
       D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(26,9):
       参见“IMGUI_VERSION_NUM”的前一个定义
   
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Application.h(60,66): error C2065: “m_CommandLineArgs”: 未声明的标识符
-  (编译源文件“/src/Platform/Windows/WindowsInput.cpp”)
-  
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Application.h(60,66): error C2065: “m_CommandLineArgs”: 未声明的标识符
-  (编译源文件“/src/Platform/Windows/WindowsPlatformUtils.cpp”)
-  
 D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsPlatformUtils.cpp(14,21): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
   (编译源文件“/src/Platform/Windows/WindowsPlatformUtils.cpp”)
   
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Application.h(60,66): error C2065: “m_CommandLineArgs”: 未声明的标识符
-  (编译源文件“/src/CryDust/ImGui/ImGuiLayer.cpp”)
-  
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Application.h(60,66): error C2065: “m_CommandLineArgs”: 未声明的标识符
-  (编译源文件“/src/CryDust/Core/Application.cpp”)
-  
+shaderc_sharedd.lib(shaderc_sharedd.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义
+  CryDust.vcxproj -> D:\Project\Git Project\CryDust\bin\Debug-windows-x86_64\CryDust\CryDust.lib
