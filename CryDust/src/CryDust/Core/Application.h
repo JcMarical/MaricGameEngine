@@ -27,10 +27,18 @@ namespace CryDust {
 	};
 
 
+	struct ApplicationSpecification
+	{
+		std::string Name = "CryDust Application";
+		std::string WorkingDirectory;
+		ApplicationCommandLineArgs CommandLineArgs;
+	};
+
 	class  Application
 	{
 	public:
-		Application(const std::string& name = "CryDust App", ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
+		Application(const ApplicationSpecification& specification);
+
 		virtual ~Application();
 		void OnEvent(Event& e);
 		void Run();
@@ -47,6 +55,8 @@ namespace CryDust {
 
 		static Application& Get() { return *s_Instance; }
 
+		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
+
 		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
 	private:
 
@@ -55,7 +65,7 @@ namespace CryDust {
 		bool OnWindowResize(WindowResizeEvent& e);
 	
 	private:
-		ApplicationCommandLineArgs m_CommandLineArgs;
+		ApplicationSpecification m_Specification;
 
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
@@ -68,6 +78,7 @@ namespace CryDust {
 		float m_LastFrameTime = 0.0f;
 
 	private:
+
 		static Application* s_Instance;
 
 	};
