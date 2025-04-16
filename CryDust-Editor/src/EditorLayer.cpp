@@ -1,5 +1,5 @@
 #include "EditorLayer.h"
-
+	
 #include "CryDust/Scene/SceneSerializer.h"
 #include "CryDust/Utils/PlatformUtils.h"
 #include "CryDust/Math/Math.h"
@@ -405,7 +405,11 @@ namespace CryDust {
 	void EditorLayer::OnEvent(CryDust::Event& e)
 	{
 		m_CameraController.OnEvent(e);
-		m_EditorCamera.OnEvent(e);
+
+		if (m_SceneState == SceneState::Edit)
+		{
+			m_EditorCamera.OnEvent(e);
+		}
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(CD_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
