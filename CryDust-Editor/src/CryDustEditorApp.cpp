@@ -12,9 +12,7 @@ namespace CryDust {
 		}
 
 
-		~CryDustEditor()
-		{
-		}
+
 	};
 	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
