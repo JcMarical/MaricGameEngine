@@ -57,7 +57,7 @@ namespace CryDust {
 
 		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 
-		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
+
 	private:
 
 
