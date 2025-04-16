@@ -48,6 +48,9 @@ namespace CryDust {
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
+		//设置线框绘制宽度
+		Renderer2D::SetLineWidth(4.0f);
+
 		// Entity & Component
 		auto square = m_ActiveScene->CreateEntity("Green Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
@@ -537,7 +540,7 @@ namespace CryDust {
 			}
 		}
 
-
+		//选定物体，轮廓渲染！！！
 		// Draw selected entity outline 
 		if (Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity()) {
 			TransformComponent transform = selectedEntity.GetComponent<TransformComponent>();

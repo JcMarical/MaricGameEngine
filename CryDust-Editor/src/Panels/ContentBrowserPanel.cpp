@@ -38,6 +38,7 @@ namespace CryDust {
 
 			auto relativePath = std::filesystem::relative(path, g_AssetPath);
 			std::string filenameString = path.filename().string();
+
 			ImGui::PushID(filenameString.c_str());
 
 			Ref<Texture2D> icon = directoryEntry.is_directory() ? m_DirectoryIcon : m_FileIcon;

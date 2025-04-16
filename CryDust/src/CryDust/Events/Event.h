@@ -1,8 +1,7 @@
 #pragma once
 #include "cdpch.h"
+
 #include "CryDust/Core/Base.h"
-
-
 #include "CryDust/Debug/Instrumentor.h"
 
 #include <functional>

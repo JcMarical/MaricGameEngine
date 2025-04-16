@@ -2,7 +2,6 @@
 #include "CryDust/Renderer/Texture.h"
 
 
-
 #include <glad/glad.h>
 
 namespace CryDust {
