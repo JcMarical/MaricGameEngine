@@ -542,14 +542,11 @@ namespace CryDust {
 
 		//选定物体，轮廓渲染！！！
 		// Draw selected entity outline 
-		if (Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity()) {
-			TransformComponent transform = selectedEntity.GetComponent<TransformComponent>();
-
-			//Red
-			Renderer2D::DrawRect(transform.GetTransform(), glm::vec4(1, 0, 0, 1));
+		if (Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity())
+		{
+			const TransformComponent& transform = selectedEntity.GetComponent<TransformComponent>();
+			Renderer2D::DrawRect(transform.GetTransform(), glm::vec4(1.0f, 0.5f, 0.0f, 1.0f));
 		}
-
-
 		Renderer2D::EndScene();
 	}
 
