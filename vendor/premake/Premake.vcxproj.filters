@@ -28,6 +28,9 @@
     <Filter Include="..\CryDust-Editor">
       <UniqueIdentifier>{92DAA1DA-FEF0-9F70-4768-2B92B3BD70F8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\CryDust-ScriptCore">
+      <UniqueIdentifier>{4930987C-B59C-5377-7E90-EBD4EABB75DF}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\SandBox">
       <UniqueIdentifier>{1FF36A1D-0BAB-AC6A-74B2-85C66089475B}</UniqueIdentifier>
     </Filter>
@@ -35,6 +38,9 @@
   <ItemGroup>
     <None Include="..\..\CryDust-Editor\premake5.lua">
       <Filter>..\CryDust-Editor</Filter>
+    </None>
+    <None Include="..\..\CryDust-ScriptCore\premake5.lua">
+      <Filter>..\CryDust-ScriptCore</Filter>
     </None>
     <None Include="..\..\CryDust\premake5.lua">
       <Filter>..\CryDust</Filter>

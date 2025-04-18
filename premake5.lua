@@ -39,6 +39,15 @@ group "Dependencies"
     
 group ""
 
-include "CryDust"
-include "Sandbox"
-include "CryDust-Editor"
+group "Core"
+	include "CryDust"
+	include "CryDust-ScriptCore"
+group ""
+
+group "Tools"
+	include "CryDust-Editor"
+group ""
+
+group "Misc"
+	include "Sandbox"
+group ""

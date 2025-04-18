@@ -28,6 +28,9 @@
     <Filter Include="src\CryDust\Scene">
       <UniqueIdentifier>{07509E45-7366-9CDB-BCDD-27FD28336D63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\CryDust\Scripting">
+      <UniqueIdentifier>{ECBCD86A-5829-9465-211D-2CC38D48B6CD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\CryDust\Utils">
       <UniqueIdentifier>{4AE4CB45-B6FA-C9DB-FF71-55FD6BC79A63}</UniqueIdentifier>
     </Filter>
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="src\CryDust\Scene\ScriptableEntity.h">
       <Filter>src\CryDust\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Scripting\ScriptEngine.h">
+      <Filter>src\CryDust\Scripting</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Utils\PlatformUtils.h">
       <Filter>src\CryDust\Utils</Filter>
@@ -1567,6 +1573,9 @@
     </ClCompile>
     <ClCompile Include="src\CryDust\Scene\SceneSerializer.cpp">
       <Filter>src\CryDust\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Scripting\ScriptEngine.cpp">
+      <Filter>src\CryDust\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>

@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\..\CryDust-Editor\premake5.lua" />
+    <None Include="..\..\CryDust-ScriptCore\premake5.lua" />
     <None Include="..\..\CryDust\premake5.lua" />
     <None Include="..\..\CryDust\vendor\Box2D\premake5.lua" />
     <None Include="..\..\CryDust\vendor\GLFW\premake5.lua" />

@@ -8,12 +8,15 @@
 
 #include "CryDust/Core/Application.h"
 
-#include "CryDust/Core/Input.h"
+
 
 #include "CryDust/Events/ApplicationEvent.h"
 
 #include "CryDust/Renderer/Renderer.h"
 
+#include "CryDust/Scripting/ScriptEngine.h"
+
+#include "CryDust/Core/Input.h"
 #include "CryDust/Utils/PlatformUtils.h"
 
 
@@ -43,6 +46,7 @@ namespace CryDust {
 
 
 		Renderer::Init();
+		ScriptEngine::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -54,6 +58,8 @@ namespace CryDust {
 	{
 
 		CD_PROFILE_FUNCTION();
+
+		ScriptEngine::Shutdown();
 		Renderer::Shutdown();
 	}
 
