@@ -25,6 +25,7 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scene\Scene.cpp;D:\Project\Gi
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scene\SceneCamera.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\SceneCamera.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scene\SceneSerializer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\SceneSerializer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scripting\ScriptEngine.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ScriptEngine.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scripting\ScriptGlue.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ScriptGlue.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLBuffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLBuffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLContext.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLContext.obj
 D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OpenGLFrameBuffer.obj

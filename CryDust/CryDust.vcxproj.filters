@@ -207,6 +207,9 @@
     <ClInclude Include="src\CryDust\Scripting\ScriptEngine.h">
       <Filter>src\CryDust\Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Scripting\ScriptGlue.h">
+      <Filter>src\CryDust\Scripting</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Utils\PlatformUtils.h">
       <Filter>src\CryDust\Utils</Filter>
     </ClInclude>
@@ -1575,6 +1578,9 @@
       <Filter>src\CryDust\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Scripting\ScriptEngine.cpp">
+      <Filter>src\CryDust\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Scripting\ScriptGlue.cpp">
       <Filter>src\CryDust\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">

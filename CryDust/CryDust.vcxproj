@@ -195,6 +195,7 @@
     <ClInclude Include="src\CryDust\Scene\SceneSerializer.h" />
     <ClInclude Include="src\CryDust\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\CryDust\Scripting\ScriptEngine.h" />
+    <ClInclude Include="src\CryDust\Scripting\ScriptGlue.h" />
     <ClInclude Include="src\CryDust\Utils\PlatformUtils.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -653,6 +654,7 @@
     <ClCompile Include="src\CryDust\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\CryDust\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\CryDust\Scripting\ScriptEngine.cpp" />
+    <ClCompile Include="src\CryDust\Scripting\ScriptGlue.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
