@@ -3,8 +3,8 @@ project "CryDust-ScriptCore"
     language "C#"
     dotnetframework "4.7.2"
 
-    targetdir ("%{wks.location}/CryDust-Editor/Resources/Scripts")
-	objdir ("%{wks.location}/CryDust-Editor/Resources/Scripts/Intermediates")
+    targetdir ("../CryDust-Editor/Resources/Scripts")
+	objdir ("../CryDust-Editor/Resources/Scripts/Intermediates")
 
     files 
 	{

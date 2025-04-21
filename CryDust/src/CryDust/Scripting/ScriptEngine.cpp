@@ -110,6 +110,9 @@ namespace CryDust {
 		MonoAssembly* CoreAssembly = nullptr;
 		MonoImage* CoreAssemblyImage = nullptr;
 
+		MonoAssembly* AppAssembly = nullptr;
+		MonoImage* AppAssemblyImage = nullptr;
+
 		ScriptClass EntityClass;
 
 		//存储名称和对应的脚本
@@ -130,14 +133,16 @@ namespace CryDust {
 
 		InitMono();
 		LoadAssembly("Resources/Scripts/CryDust-ScriptCore.dll");
-		LoadAssemblyClasses(s_Data->CoreAssembly);	//加载程序集中的所有类
+
+		LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+		LoadAssemblyClasses();
 
 		ScriptGlue::RegisterComponents();	//注册所有组件
 		ScriptGlue::RegisterFunctions();
 
 
 		// 检索并实例化类（不带构造器）并生成Monoclass
-		s_Data->EntityClass = ScriptClass("CryDust", "Entity");
+		s_Data->EntityClass = ScriptClass("CryDust", "Entity", true);
 #if 0
 		MonoObject* instance = s_Data->EntityClass.Instantiate();
 
@@ -210,6 +215,17 @@ namespace CryDust {
 		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
+	// 加载应用程序集
+	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
+	{
+		// Move this maybe
+		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath);
+		auto assemb = s_Data->AppAssembly;
+		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
+		auto assembi = s_Data->AppAssemblyImage;
+		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
+	}
+
 	//设置场景上下文（当前场景）
 	void ScriptEngine::OnRuntimeStart(Scene* scene)
 	{
@@ -269,20 +285,17 @@ namespace CryDust {
 	}
 
 	//加载所有的类
-	void ScriptEngine::LoadAssemblyClasses(MonoAssembly* assembly)
+	void ScriptEngine::LoadAssemblyClasses()
 	{
 		//先清除所有类
 		s_Data->EntityClasses.clear();
 
-		//加载映射，获取程序集的元数据镜像（包含类型信息）
-		MonoImage* image = mono_assembly_get_image(assembly);
-
-		// 获取类型定义表信息（MONO_TABLE_TYPEDEF对应C#类的元数据表）
-		const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
+		// 获取应用程序集的类型定义表信息（MONO_TABLE_TYPEDEF对应C#类的元数据表）
+		const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(s_Data->AppAssemblyImage, MONO_TABLE_TYPEDEF);
 		int32_t numTypes = mono_table_info_get_rows(typeDefinitionsTable);// 获取类型总数
 
 		// 获取基准类：CryDust命名空间下的Entity类（用于后续继承关系判断）
-		MonoClass* entityClass = mono_class_from_name(image, "CryDust", "Entity");
+		MonoClass* entityClass = mono_class_from_name(s_Data->CoreAssemblyImage, "CryDust", "Entity");
 
 		// 遍历程序集中的所有类型定义
 		for (int32_t i = 0; i < numTypes; i++)
@@ -292,8 +305,8 @@ namespace CryDust {
 			mono_metadata_decode_row(typeDefinitionsTable, i, cols, MONO_TYPEDEF_SIZE);
 
 			// 从元数据堆中获取命名空间和类名
-			const char* nameSpace = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
-			const char* name = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAME]);
+			const char* nameSpace = mono_metadata_string_heap(s_Data->AppAssemblyImage, cols[MONO_TYPEDEF_NAMESPACE]);
+			const char* name = mono_metadata_string_heap(s_Data->AppAssemblyImage, cols[MONO_TYPEDEF_NAME]);
 
 			// 构建完整类名（命名空间.类名 或直接类名）
 			std::string fullName;
@@ -303,7 +316,7 @@ namespace CryDust {
 				fullName = name;
 
 			// 通过命名空间和类名获取MonoClass对象
-			MonoClass* monoClass = mono_class_from_name(image, nameSpace, name);
+			MonoClass* monoClass = mono_class_from_name(s_Data->AppAssemblyImage, nameSpace, name);
 
 			// 跳过基类Entity本身（只缓存其派生类）
 			if (monoClass == entityClass)
@@ -338,10 +351,10 @@ namespace CryDust {
 
 	//---------------------------脚本类-------------------------
 	//初始化类
-	ScriptClass::ScriptClass(const std::string& classNamespace, const std::string& className)
+	ScriptClass::ScriptClass(const std::string& classNamespace, const std::string& className, bool isCore)
 		: m_ClassNamespace(classNamespace), m_ClassName(className)
 	{
-		m_MonoClass = mono_class_from_name(s_Data->CoreAssemblyImage, classNamespace.c_str(), className.c_str());
+		m_MonoClass = mono_class_from_name(isCore ? s_Data->CoreAssemblyImage : s_Data->AppAssemblyImage, classNamespace.c_str(), className.c_str());
 
 	}
 

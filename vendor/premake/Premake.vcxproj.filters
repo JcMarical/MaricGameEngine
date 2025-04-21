@@ -28,6 +28,15 @@
     <Filter Include="..\CryDust-Editor">
       <UniqueIdentifier>{92DAA1DA-FEF0-9F70-4768-2B92B3BD70F8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\CryDust-Editor\SandboxProject">
+      <UniqueIdentifier>{6777DDF5-53C8-C837-7C2C-B7F968DC5BA1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust-Editor\SandboxProject\Assets">
+      <UniqueIdentifier>{6984A085-D513-6270-DE0F-43884A1E9D7C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust-Editor\SandboxProject\Assets\Scripts">
+      <UniqueIdentifier>{A0C45F5B-0C00-C01E-15F5-3CAE81AF444F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\CryDust-ScriptCore">
       <UniqueIdentifier>{4930987C-B59C-5377-7E90-EBD4EABB75DF}</UniqueIdentifier>
     </Filter>
@@ -36,6 +45,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\CryDust-Editor\SandboxProject\Assets\Scripts\premake5.lua">
+      <Filter>..\CryDust-Editor\SandboxProject\Assets\Scripts</Filter>
+    </None>
     <None Include="..\..\CryDust-Editor\premake5.lua">
       <Filter>..\CryDust-Editor</Filter>
     </None>
