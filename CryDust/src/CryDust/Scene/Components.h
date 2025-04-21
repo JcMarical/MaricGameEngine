@@ -78,8 +78,20 @@ namespace CryDust {
 
 	};
 
-	// Forward declaration
+
+	struct ScriptComponent
+	{
+		std::string ClassName;
+
+		ScriptComponent() = default;
+		ScriptComponent(const ScriptComponent&) = default;
+	};
+
+
+	// Forward declaration 前向声明
 	class ScriptableEntity;
+
+
 
 	struct NativeScriptComponent
 	{
@@ -147,7 +159,8 @@ namespace CryDust {
 	};
 
 	using AllComponents =
-		ComponentGroup<TransformComponent, SpriteRendererComponent,
-		CircleRendererComponent, CameraComponent, NativeScriptComponent,
+		ComponentGroup<TransformComponent, SpriteRendererComponent, CircleRendererComponent,
+		CameraComponent, 
+		ScriptComponent,NativeScriptComponent,
 		Rigidbody2DComponent, BoxCollider2DComponent, CircleCollider2DComponent>;
 }

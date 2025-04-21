@@ -42,6 +42,8 @@ namespace CryDust {
 
 		void DuplicateEntity(Entity entity);
 
+		Entity GetEntityByUUID(UUID uuid);
+
 		Entity GetPrimaryCameraEntity();
 
 		//可变参数
@@ -66,6 +68,7 @@ namespace CryDust {
 
 		b2World* m_PhysicsWorld = nullptr;
 
+		std::unordered_map<UUID, entt::entity> m_EntityMap;
 
 		friend class Entity; //友元，Entity可以调用scene的所有东西
 		friend class SceneSerializer;

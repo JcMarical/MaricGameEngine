@@ -5,6 +5,7 @@
 
 #include "Components.h"
 #include "ScriptableEntity.h"
+#include "CryDust/Scripting/ScriptEngine.h"
 #include "CryDust/Renderer/Renderer2D.h"
 #include <glm/glm.hpp>
 
@@ -139,23 +140,42 @@ namespace CryDust {
 		entity.AddComponent<TransformComponent>();
 		auto& tag = entity.AddComponent<TagComponent>(); //创建tag组件
 		tag.Tag = name.empty() ? "Entity" : name;	//设置tag组件为名字
+		m_EntityMap[uuid] = entity;
 		return entity;
 	}
 
 	void Scene::DestroyEntity(Entity entity)
 	{
 		m_Registry.destroy(entity);
+		m_EntityMap.erase(entity.GetUUID());
 	}
 
 
 	void Scene::OnRuntimeStart()
 	{
 		OnPhysics2DStart();
+
+		// Scripting
+		{
+			//主要是设置场景上下文
+			ScriptEngine::OnRuntimeStart(this);
+			
+			// Instantiate all script entities
+			// 获得所有含有Script组件的组件，
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnCreateEntity(entity);
+			}
+		}
 	}
 
 	void Scene::OnRuntimeStop()
 	{
 		OnPhysics2DStop();
+
+		ScriptEngine::OnRuntimeStop();
 	}
 
 	void Scene::OnSimulationStart()
@@ -212,8 +232,21 @@ namespace CryDust {
 
 		// Update scripts
 		{
+
+			// C# Entity OnUpdate
+			auto view = m_Registry.view<ScriptComponent>();
+			for (auto e : view)
+			{
+				Entity entity = { e, this };
+				ScriptEngine::OnUpdateEntity(entity, ts);
+			}
+
+
+			// Native Entity OnUpdate
 			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 				{
+
+
 					if (!nsc.Instance)
 					{
 						nsc.Instance = nsc.InstantiateScript();
@@ -223,7 +256,7 @@ namespace CryDust {
 					//执行脚本循环逻辑
 					nsc.Instance->OnUpdate(ts);
 				});
-		}
+			}
 
 
 		// Physics--根据物理更新transform
@@ -327,6 +360,17 @@ namespace CryDust {
 		}
 		return {};
 	}
+
+	// 通过UUID 获得 实体
+	Entity Scene::GetEntityByUUID(UUID uuid)
+	{
+		// TODO(Yan): Maybe should be assert
+		if (m_EntityMap.find(uuid) != m_EntityMap.end())
+			return { m_EntityMap.at(uuid), this };
+
+		return {};
+	}
+
 	//生命周期--物理相关
 	void Scene::OnPhysics2DStart()
 	{
@@ -448,6 +492,12 @@ namespace CryDust {
 		if (m_ViewportWidth > 0 && m_ViewportHeight > 0)
 			component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
 	}
+
+	template<>
+	void Scene::OnComponentAdded<ScriptComponent>(Entity entity, ScriptComponent& component)
+	{
+	}
+
 	template<>
 	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
 	{

@@ -111,6 +111,14 @@ namespace CryDust {
 		MonoImage* CoreAssemblyImage = nullptr;
 
 		ScriptClass EntityClass;
+
+		//存储名称和对应的脚本
+		std::unordered_map<std::string, Ref<ScriptClass>> EntityClasses;
+		//存储UUID，和对应的脚本实例
+		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
+
+		// Runtime
+		Scene* SceneContext = nullptr;
 	};
 
 	//单例
@@ -122,12 +130,15 @@ namespace CryDust {
 
 		InitMono();
 		LoadAssembly("Resources/Scripts/CryDust-ScriptCore.dll");
+		LoadAssemblyClasses(s_Data->CoreAssembly);	//加载程序集中的所有类
 
+		ScriptGlue::RegisterComponents();	//注册所有组件
 		ScriptGlue::RegisterFunctions();
 
 
-		// 检索并实例化类（带构造器）并生成Monoclass
+		// 检索并实例化类（不带构造器）并生成Monoclass
 		s_Data->EntityClass = ScriptClass("CryDust", "Entity");
+#if 0
 		MonoObject* instance = s_Data->EntityClass.Instantiate();
 
 		// 调用方法
@@ -156,6 +167,7 @@ namespace CryDust {
 		s_Data->EntityClass.InvokeMethod(instance, printCustomMessageFunc, &stringParam);
 
 		CORE_DEBUG_ASSERT(false);
+#endif
 	}
 
 	void ScriptEngine::Shutdown()
@@ -198,6 +210,122 @@ namespace CryDust {
 		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
+	//设置场景上下文（当前场景）
+	void ScriptEngine::OnRuntimeStart(Scene* scene)
+	{
+		s_Data->SceneContext = scene;
+	}
+
+	//判断是否存在某个类
+	bool ScriptEngine::EntityClassExists(const std::string& fullClassName)
+	{
+		return s_Data->EntityClasses.find(fullClassName) != s_Data->EntityClasses.end();
+	}
+
+	//创建实体时：
+	//拿到脚本组件（一个名称）
+	//如果当前类存在
+	//根据类实例化对象，并将该对象和对应UUID存到哈希表中。
+	//创建并调用构造函数（初始化函数）
+	void ScriptEngine::OnCreateEntity(Entity entity)
+	{
+		const auto& sc = entity.GetComponent<ScriptComponent>();
+		if (ScriptEngine::EntityClassExists(sc.ClassName))
+		{
+			Ref<ScriptInstance> instance = CreateRef<ScriptInstance>(s_Data->EntityClasses[sc.ClassName], entity);
+			s_Data->EntityInstances[entity.GetUUID()] = instance;
+			instance->InvokeOnCreate();
+		}
+	}
+
+	//更新时的逻辑
+	//通过UUID拿到脚本实例，并且格局【时间步】调用更新相关的方法。
+	void ScriptEngine::OnUpdateEntity(Entity entity, Timestep ts)
+	{
+		UUID entityUUID = entity.GetUUID();
+		CORE_DEBUG_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+		instance->InvokeOnUpdate((float)ts);
+	}
+
+	Scene* ScriptEngine::GetSceneContext()
+	{
+		return s_Data->SceneContext;
+	}
+
+	///运行状态停止,场景上下文设置为空，清除所有脚本实例
+	void ScriptEngine::OnRuntimeStop()
+	{
+		s_Data->SceneContext = nullptr;
+
+		s_Data->EntityInstances.clear();
+	}
+
+	//获得所有类型
+	std::unordered_map<std::string, Ref<ScriptClass>> ScriptEngine::GetEntityClasses()
+	{
+		return s_Data->EntityClasses;
+	}
+
+	//加载所有的类
+	void ScriptEngine::LoadAssemblyClasses(MonoAssembly* assembly)
+	{
+		//先清除所有类
+		s_Data->EntityClasses.clear();
+
+		//加载映射，获取程序集的元数据镜像（包含类型信息）
+		MonoImage* image = mono_assembly_get_image(assembly);
+
+		// 获取类型定义表信息（MONO_TABLE_TYPEDEF对应C#类的元数据表）
+		const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
+		int32_t numTypes = mono_table_info_get_rows(typeDefinitionsTable);// 获取类型总数
+
+		// 获取基准类：CryDust命名空间下的Entity类（用于后续继承关系判断）
+		MonoClass* entityClass = mono_class_from_name(image, "CryDust", "Entity");
+
+		// 遍历程序集中的所有类型定义
+		for (int32_t i = 0; i < numTypes; i++)
+		{
+			// 解码类型定义表的元数据行（MONO_TYPEDEF_SIZE定义每行列数）
+			uint32_t cols[MONO_TYPEDEF_SIZE];
+			mono_metadata_decode_row(typeDefinitionsTable, i, cols, MONO_TYPEDEF_SIZE);
+
+			// 从元数据堆中获取命名空间和类名
+			const char* nameSpace = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAMESPACE]);
+			const char* name = mono_metadata_string_heap(image, cols[MONO_TYPEDEF_NAME]);
+
+			// 构建完整类名（命名空间.类名 或直接类名）
+			std::string fullName;
+			if (strlen(nameSpace) != 0)
+				fullName = fmt::format("{}.{}", nameSpace, name);
+			else
+				fullName = name;
+
+			// 通过命名空间和类名获取MonoClass对象
+			MonoClass* monoClass = mono_class_from_name(image, nameSpace, name);
+
+			// 跳过基类Entity本身（只缓存其派生类）
+			if (monoClass == entityClass)
+				continue;
+
+			// 检查当前类是否是Entity的派生类（参数false表示不检查接口）
+			bool isEntity = mono_class_is_subclass_of(monoClass, entityClass, false);
+
+			// 如果是Entity派生类，则创建脚本类包装器并缓存
+			if (isEntity)
+				s_Data->EntityClasses[fullName] = CreateRef<ScriptClass>(nameSpace, name);
+
+
+		}
+	}
+
+	MonoImage* ScriptEngine::GetCoreAssemblyImage()
+	{
+		return s_Data->CoreAssemblyImage;
+	}
+
+
 	/// <summary>
 	/// 封装：生成类
 	/// </summary>
@@ -231,5 +359,43 @@ namespace CryDust {
 	MonoObject* ScriptClass::InvokeMethod(MonoObject* instance, MonoMethod* method, void** params)
 	{
 		return mono_runtime_invoke(method, instance, params, nullptr);
+	}
+
+	//脚本实例构造函数
+	ScriptInstance::ScriptInstance(Ref<ScriptClass> scriptClass, Entity entity)
+		: m_ScriptClass(scriptClass)
+	{
+		m_Instance = scriptClass->Instantiate();
+
+		//获取构造函数、创建时方法和帧更新方法
+		m_Constructor = s_Data->EntityClass.GetMethod(".ctor", 1);
+		m_OnCreateMethod = scriptClass->GetMethod("OnCreate", 0);
+		m_OnUpdateMethod = scriptClass->GetMethod("OnUpdate", 1);
+
+		
+		// Call Entity constructor
+		// 调用构造函数
+		{
+			UUID entityID = entity.GetUUID();
+			void* param = &entityID;
+			m_ScriptClass->InvokeMethod(m_Instance, m_Constructor, &param);
+		}
+	}
+
+	//调用创建时的方法
+	void ScriptInstance::InvokeOnCreate()
+	{
+		if (m_OnCreateMethod)
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnCreateMethod);
+	}
+
+	//调用帧更新的方法
+	void ScriptInstance::InvokeOnUpdate(float ts)
+	{
+		if (m_OnUpdateMethod)
+		{
+			void* param = &ts;
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnUpdateMethod, &param);
+		}
 	}
 }
