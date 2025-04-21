@@ -6,10 +6,35 @@
 #include "mono/jit/jit.h"
 #include "mono/metadata/assembly.h"
 #include "mono/metadata/object.h"
+#include "mono/metadata/tabledefs.h"
+
 
 namespace CryDust {
 
+	static std::unordered_map<std::string, ScriptFieldType> s_ScriptFieldTypeMap =
+	{
+		{ "System.Single", ScriptFieldType::Float },
+		{ "System.Double", ScriptFieldType::Double },
+		{ "System.Boolean", ScriptFieldType::Bool },
+		{ "System.Char", ScriptFieldType::Char },
+		{ "System.Int16", ScriptFieldType::Short },
+		{ "System.Int32", ScriptFieldType::Int },
+		{ "System.Int64", ScriptFieldType::Long },
+		{ "System.Byte", ScriptFieldType::Byte },
+		{ "System.UInt16", ScriptFieldType::UShort },
+		{ "System.UInt32", ScriptFieldType::UInt },
+		{ "System.UInt64", ScriptFieldType::ULong },
+
+		{ "CryDust.Vector2", ScriptFieldType::Vector2 },
+		{ "CryDust.Vector3", ScriptFieldType::Vector3 },
+		{ "CryDust.Vector4", ScriptFieldType::Vector4 },
+
+		{ "CryDust.Entity", ScriptFieldType::Entity },
+	};
+
 	namespace Utils {
+
+
 
 		// TODO: move to FileSystem class
 		static char* ReadBytes(const std::filesystem::path& filepath, uint32_t* outSize)
@@ -98,8 +123,51 @@ namespace CryDust {
 				CORE_DEBUG_TRACE("{}.{}", nameSpace, name);
 			}
 		}
+
+		//通过monoType获取字段Type
+		ScriptFieldType MonoTypeToScriptFieldType(MonoType* monoType)
+		{
+			std::string typeName = mono_type_get_name(monoType);
+
+			auto it = s_ScriptFieldTypeMap.find(typeName);
+			if (it == s_ScriptFieldTypeMap.end())
+			{
+				CORE_DEBUG_ERROR("Unknown type: {}", typeName);
+				return ScriptFieldType::None;
+			}
+
+			return it->second;
+		}
 	
+		//脚本字段Type 字符串表示
+		const char* ScriptFieldTypeToString(ScriptFieldType type)
+		{
+			switch (type)
+			{
+			case ScriptFieldType::Float:   return "Float";
+			case ScriptFieldType::Double:  return "Double";
+			case ScriptFieldType::Bool:    return "Bool";
+			case ScriptFieldType::Char:    return "Char";
+			case ScriptFieldType::Byte:    return "Byte";
+			case ScriptFieldType::Short:   return "Short";
+			case ScriptFieldType::Int:     return "Int";
+			case ScriptFieldType::Long:    return "Long";
+			case ScriptFieldType::UByte:   return "UByte";
+			case ScriptFieldType::UShort:  return "UShort";
+			case ScriptFieldType::UInt:    return "UInt";
+			case ScriptFieldType::ULong:   return "ULong";
+			case ScriptFieldType::Vector2: return "Vector2";
+			case ScriptFieldType::Vector3: return "Vector3";
+			case ScriptFieldType::Vector4: return "Vector4";
+			case ScriptFieldType::Entity:  return "Entity";
+			}
+			return "<Invalid>";
+		}
 	}
+
+
+
+	
 
 	//集中管理Mono域和程序集指针，确保全局唯一访问。
 	struct ScriptEngineData
@@ -270,6 +338,17 @@ namespace CryDust {
 		return s_Data->SceneContext;
 	}
 
+	//获取脚本实例
+	Ref<ScriptInstance> ScriptEngine::GetEntityScriptInstance(UUID entityID)
+	{
+		auto it = s_Data->EntityInstances.find(entityID);
+		if (it == s_Data->EntityInstances.end())
+			return nullptr;
+
+		return it->second;
+	}
+
+
 	///运行状态停止,场景上下文设置为空，清除所有脚本实例
 	void ScriptEngine::OnRuntimeStop()
 	{
@@ -306,17 +385,18 @@ namespace CryDust {
 
 			// 从元数据堆中获取命名空间和类名
 			const char* nameSpace = mono_metadata_string_heap(s_Data->AppAssemblyImage, cols[MONO_TYPEDEF_NAMESPACE]);
-			const char* name = mono_metadata_string_heap(s_Data->AppAssemblyImage, cols[MONO_TYPEDEF_NAME]);
+
+			const char* className = mono_metadata_string_heap(s_Data->AppAssemblyImage, cols[MONO_TYPEDEF_NAME]);
 
 			// 构建完整类名（命名空间.类名 或直接类名）
 			std::string fullName;
 			if (strlen(nameSpace) != 0)
-				fullName = fmt::format("{}.{}", nameSpace, name);
+				fullName = fmt::format("{}.{}", nameSpace, className);
 			else
-				fullName = name;
+				fullName = className;
 
 			// 通过命名空间和类名获取MonoClass对象
-			MonoClass* monoClass = mono_class_from_name(s_Data->AppAssemblyImage, nameSpace, name);
+			MonoClass* monoClass = mono_class_from_name(s_Data->AppAssemblyImage, nameSpace, className);
 
 			// 跳过基类Entity本身（只缓存其派生类）
 			if (monoClass == entityClass)
@@ -325,12 +405,42 @@ namespace CryDust {
 			// 检查当前类是否是Entity的派生类（参数false表示不检查接口）
 			bool isEntity = mono_class_is_subclass_of(monoClass, entityClass, false);
 
-			// 如果是Entity派生类，则创建脚本类包装器并缓存
-			if (isEntity)
-				s_Data->EntityClasses[fullName] = CreateRef<ScriptClass>(nameSpace, name);
+			//如果不是派生类，跳过
+			if (!isEntity)
+				continue;
 
+			// 如果是Entity派生类，则创建脚本类包装器并缓存
+			Ref<ScriptClass> scriptClass = CreateRef<ScriptClass>(nameSpace, className);
+			s_Data->EntityClasses[fullName] = scriptClass;
+
+
+			// This routine is an iterator routine for retrieving the fields in a class.
+			// You must pass a gpointer that points to zero and is treated as an opaque handle
+			// to iterate over all of the elements. When no more values are available, the return value is NULL.
+			// 一个迭代器历程，用于检索所有的C#字段
+
+			int fieldCount = mono_class_num_fields(monoClass);
+			CORE_DEBUG_WARN("{} has {} fields:", className, fieldCount);
+			void* iterator = nullptr;
+			while (MonoClassField* field = mono_class_get_fields(monoClass, &iterator))
+			{
+				const char* fieldName = mono_field_get_name(field);
+				uint32_t flags = mono_field_get_flags(field);
+				if (flags & FIELD_ATTRIBUTE_PUBLIC)
+				{
+					MonoType* type = mono_field_get_type(field);
+					ScriptFieldType fieldType = Utils::MonoTypeToScriptFieldType(type);
+					CORE_DEBUG_WARN("  {} ({})", fieldName, Utils::ScriptFieldTypeToString(fieldType));
+
+					scriptClass->m_Fields[fieldName] = { fieldType, fieldName, field };
+				}
+			}
 
 		}
+
+		auto& entityClasses = s_Data->EntityClasses;
+
+		//mono_field_get_value()
 	}
 
 	MonoImage* ScriptEngine::GetCoreAssemblyImage()
@@ -410,5 +520,30 @@ namespace CryDust {
 			void* param = &ts;
 			m_ScriptClass->InvokeMethod(m_Instance, m_OnUpdateMethod, &param);
 		}
+	}
+	
+	//获取内部字段
+	bool ScriptInstance::GetFieldValueInternal(const std::string& name, void* buffer)
+	{
+		const auto& fields = m_ScriptClass->GetFields();
+		auto it = fields.find(name);
+		if (it == fields.end())
+			return false;
+
+		const ScriptField& field = it->second;
+		mono_field_get_value(m_Instance, field.ClassField, buffer);
+		return true;
+	}
+
+	bool ScriptInstance::SetFieldValueInternal(const std::string& name, const void* value)
+	{
+		const auto& fields = m_ScriptClass->GetFields();
+		auto it = fields.find(name);
+		if (it == fields.end())
+			return false;
+
+		const ScriptField& field = it->second;
+		mono_field_set_value(m_Instance, field.ClassField, (void*)value);
+		return true;
 	}
 }
