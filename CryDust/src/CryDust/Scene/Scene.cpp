@@ -153,6 +153,7 @@ namespace CryDust {
 
 	void Scene::OnRuntimeStart()
 	{
+		m_IsRunning = true;
 		OnPhysics2DStart();
 
 		// Scripting
@@ -173,6 +174,7 @@ namespace CryDust {
 
 	void Scene::OnRuntimeStop()
 	{
+		m_IsRunning = false;
 		OnPhysics2DStop();
 
 		ScriptEngine::OnRuntimeStop();

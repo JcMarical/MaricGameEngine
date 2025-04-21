@@ -187,7 +187,8 @@ namespace CryDust {
 		std::unordered_map<std::string, Ref<ScriptClass>> EntityClasses;
 		//存储UUID，和对应的脚本实例
 		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
-
+		//UUID，和他对应的实体字段
+		std::unordered_map<UUID, ScriptFieldMap> EntityScriptFields;
 		// Runtime
 		Scene* SceneContext = nullptr;
 	};
@@ -316,9 +317,18 @@ namespace CryDust {
 		const auto& sc = entity.GetComponent<ScriptComponent>();
 		if (ScriptEngine::EntityClassExists(sc.ClassName))
 		{
+			UUID entityID = entity.GetUUID();
 			Ref<ScriptInstance> instance = CreateRef<ScriptInstance>(s_Data->EntityClasses[sc.ClassName], entity);
-			s_Data->EntityInstances[entity.GetUUID()] = instance;
-			instance->InvokeOnCreate();
+			s_Data->EntityInstances[entityID] = instance;
+
+			// Copy field values 复制字段的值
+			if (s_Data->EntityScriptFields.find(entityID) != s_Data->EntityScriptFields.end())
+			{
+				const ScriptFieldMap& fieldMap = s_Data->EntityScriptFields.at(entityID);
+				for (const auto& [name, fieldInstance] : fieldMap)
+					instance->SetFieldValueInternal(name, fieldInstance.m_Buffer);
+			}
+
 		}
 	}
 
@@ -348,6 +358,14 @@ namespace CryDust {
 		return it->second;
 	}
 
+	//获取实体类
+	Ref<ScriptClass> ScriptEngine::GetEntityClass(const std::string& name)
+	{
+		if (s_Data->EntityClasses.find(name) == s_Data->EntityClasses.end())
+			return nullptr;
+
+		return s_Data->EntityClasses.at(name);
+	}
 
 	///运行状态停止,场景上下文设置为空，清除所有脚本实例
 	void ScriptEngine::OnRuntimeStop()
@@ -361,6 +379,15 @@ namespace CryDust {
 	std::unordered_map<std::string, Ref<ScriptClass>> ScriptEngine::GetEntityClasses()
 	{
 		return s_Data->EntityClasses;
+	}
+
+	//获取脚本字段集
+	ScriptFieldMap& ScriptEngine::GetScriptFieldMap(Entity entity)
+	{
+		CORE_DEBUG_ASSERT(entity);
+
+		UUID entityID = entity.GetUUID();
+		return s_Data->EntityScriptFields[entityID];
 	}
 
 	//加载所有的类

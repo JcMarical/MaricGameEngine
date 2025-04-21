@@ -1,5 +1,7 @@
 ﻿  Application.cpp
+  Entity.cpp
   Scene.cpp
+  SceneSerializer.cpp
   ScriptEngine.cpp
   ScriptGlue.cpp
 D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(74,9): warning C4005: “IMGUI_VERSION”: 宏重定义

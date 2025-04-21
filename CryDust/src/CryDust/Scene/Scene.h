@@ -46,6 +46,8 @@ namespace CryDust {
 
 		Entity GetPrimaryCameraEntity();
 
+		bool IsRunning() const { return m_IsRunning; }
+
 		//可变参数
 		template<typename... Components>
 		auto GetAllEntitiesWith()
@@ -65,6 +67,8 @@ namespace CryDust {
 	private:
 		entt::registry m_Registry;//注册表--存储实体数据
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;//viewport信息
+
+		bool m_IsRunning = false;
 
 		b2World* m_PhysicsWorld = nullptr;
 
