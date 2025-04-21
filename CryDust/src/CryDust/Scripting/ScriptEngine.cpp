@@ -452,6 +452,12 @@ namespace CryDust {
 		return s_Data->CoreAssemblyImage;
 	}
 
+	//获取对应的Instance
+	MonoObject* ScriptEngine::GetManagedInstance(UUID uuid)
+	{
+		CORE_DEBUG_ASSERT(s_Data->EntityInstances.find(uuid) != s_Data->EntityInstances.end());
+		return s_Data->EntityInstances.at(uuid)->GetManagedObject();
+	}
 
 	/// <summary>
 	/// 封装：生成类

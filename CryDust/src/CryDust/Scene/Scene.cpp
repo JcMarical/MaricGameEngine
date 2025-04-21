@@ -336,7 +336,8 @@ namespace CryDust {
 	/// <param name="height"></param>
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
-		
+		if (m_ViewportWidth == width && m_ViewportHeight == height)
+			return;
 		m_ViewportWidth = width;
 		m_ViewportHeight = height;
 		// Resize our non-FixedAspectRatio cameras
@@ -363,6 +364,18 @@ namespace CryDust {
 		return {};
 	}
 
+	//通过名字找到uuid
+	Entity Scene::FindEntityByName(std::string_view name)
+	{
+		auto view = m_Registry.view<TagComponent>();
+		for (auto entity : view)
+		{
+			const TagComponent& tc = view.get<TagComponent>(entity);
+			if (tc.Tag == name)
+				return Entity{ entity, this };
+		}
+		return {};
+	}
 	// 通过UUID 获得 实体
 	Entity Scene::GetEntityByUUID(UUID uuid)
 	{

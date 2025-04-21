@@ -12,6 +12,15 @@ namespace CryDust
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]
 		internal extern static bool Entity_HasComponent(ulong entityID, Type componentType);
 
+		//通过名字获取实例
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		internal extern static ulong Entity_FindEntityByName(string name);
+
+		//通过ID获取实例
+		[MethodImplAttribute(MethodImplOptions.InternalCall)]
+		internal extern static object GetScriptInstance(ulong entityID);
+
+
 		//获取变换矩阵
 		[MethodImplAttribute(MethodImplOptions.InternalCall)]
 		internal extern static void TransformComponent_GetTranslation(ulong entityID, out Vector3 translation);
