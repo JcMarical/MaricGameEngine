@@ -1,5 +1,4 @@
 ﻿  Application.cpp
-  Entity.cpp
   Scene.cpp
   SceneSerializer.cpp
   ScriptEngine.cpp
