@@ -41,7 +41,6 @@ namespace CryDust {
 			std::filesystem::current_path(m_Specification.WorkingDirectory);
 
 		m_Window = Window::Create(WindowProps(m_Specification.Name));
-
 		m_Window->SetEventCallback(CD_BIND_EVENT_FN(Application::OnEvent));
 
 
@@ -87,6 +86,14 @@ namespace CryDust {
 		m_Running = false;
 	}
 
+	void Application::SubmitToMainThread(const std::function<void()>& function)
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
+
+		m_MainThreadQueue.emplace_back(function);
+	}
+
+
 	//----------Event------------
 
 	void Application:: OnEvent(Event& e)
@@ -119,13 +126,12 @@ namespace CryDust {
 		{
 
 			CD_PROFILE_FUNCTION();
-			//循环绘制
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			RenderCommand::Clear();
 
 			float time = Time::GetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			ExecuteMainThreadQueue();
 
 			//没有缩小化
 			if (!m_Minimized)
@@ -178,6 +184,14 @@ namespace CryDust {
 	}
 
 
+	void Application::ExecuteMainThreadQueue()
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
 
+		for (auto& func : m_MainThreadQueue)
+			func();
+
+		m_MainThreadQueue.clear();
+	}
 }
 

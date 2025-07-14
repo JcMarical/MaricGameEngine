@@ -19,6 +19,8 @@ IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 LibraryDir = {}
 
 LibraryDir["VulkanSDK"] = "%{VULKAN_SDK}/Lib"
+IncludeDir["msdfgen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdfgen"
+IncludeDir["msdf_atlas_gen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdf-atlas-gen"
 LibraryDir["mono"] = "%{wks.location}/CryDust/vendor/mono/lib/%{cfg.buildcfg}"
 
 Library = {}

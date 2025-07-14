@@ -8,9 +8,4 @@ namespace CryDust {
 
 	}
 
-	Layer::~Layer()
-	{
-
-	}
-
 }

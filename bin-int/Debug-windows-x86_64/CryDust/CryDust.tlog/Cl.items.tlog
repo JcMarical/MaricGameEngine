@@ -1,8 +1,10 @@
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Application.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Application.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\FileSystem.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\FileSystem.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Layer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Layer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\LayerStack.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\LayerStack.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Log.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Log.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\UUID.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\UUID.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Window.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Window.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiBuild.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiBuild.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiLayer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiLayer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Math\Math.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Math.obj

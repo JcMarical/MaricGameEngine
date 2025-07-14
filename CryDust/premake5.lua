@@ -32,6 +32,8 @@ project "CryDust"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.mono}",
@@ -44,10 +46,10 @@ project "CryDust"
 		"Box2D",
 		"GLFW",
 		"Glad",
-		"ImGui",
+		"ImGui",	
 		"yaml-cpp",
 		"opengl32.lib",
-
+		"msdf-atlas-gen",
 		"%{Library.mono}",
 	}
 

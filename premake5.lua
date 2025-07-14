@@ -34,6 +34,7 @@ group "Dependencies"
 	include "CryDust/vendor/Box2D"
     include "CryDust/vendor/GLFW"
     include "CryDust/vendor/Glad"
+	include "CryDust/vendor/msdf-atlas-gen"
     include "CryDust/vendor/imgui"
 	include "CryDust/vendor/yaml-cpp"
     

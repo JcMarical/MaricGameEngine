@@ -124,7 +124,7 @@ namespace CryDust {
 	{
 		glm::vec2 Offset = { 0.0f, 0.0f };
 		glm::vec2 Size = { 0.5f, 0.5f };
-		// TODO(Yan): move into physics material in the future maybe
+		// TODO(Yan): move into physics material in the future maybe（类似于Unity的物理材质）
 		float Density = 1.0f;
 		float Friction = 0.5f;
 		float Restitution = 0.0f;
@@ -140,7 +140,7 @@ namespace CryDust {
 		glm::vec2 Offset = { 0.0f, 0.0f };
 		float Radius = 0.5f;
 
-		// TODO(Yan): move into physics material in the future maybe
+		// TODO(Yan): move into physics material in the future maybe（类似于Unity的物理材质）
 		float Density = 1.0f;
 		float Friction = 0.5f;
 		float Restitution = 0.0f;
@@ -152,6 +152,18 @@ namespace CryDust {
 		CircleCollider2DComponent() = default;
 		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
 	};
+
+
+	struct TextComponent
+	{
+		std::string TextString;
+		Ref<Font> FontAsset = Font::GetDefault();
+		glm::vec4 Color{ 1.0f };
+		float Kerning = 0.0f;
+		float LineSpacing = 0.0f;
+	};
+
+
 
 	template<typename... Component>
 	struct ComponentGroup

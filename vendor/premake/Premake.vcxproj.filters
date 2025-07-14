@@ -22,6 +22,12 @@
     <Filter Include="..\CryDust\vendor\imgui">
       <UniqueIdentifier>{E57A3D52-51B2-85E9-5ABC-E90CC672ACE2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="..\CryDust\vendor\msdf-atlas-gen">
+      <UniqueIdentifier>{BDB1FFD5-A902-EB17-D266-D9D9BE167E81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\CryDust\vendor\msdf-atlas-gen\msdfgen">
+      <UniqueIdentifier>{30972EA9-1C14-22EC-4591-2200316DBE7F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="..\CryDust\vendor\yaml-cpp">
       <UniqueIdentifier>{4D2620FE-3936-CCCE-A2EF-30ED8E1EBB67}</UniqueIdentifier>
     </Filter>
@@ -68,6 +74,12 @@
     </None>
     <None Include="..\..\CryDust\vendor\imgui\premake5.lua">
       <Filter>..\CryDust\vendor\imgui</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\msdf-atlas-gen\msdfgen\premake5.lua">
+      <Filter>..\CryDust\vendor\msdf-atlas-gen\msdfgen</Filter>
+    </None>
+    <None Include="..\..\CryDust\vendor\msdf-atlas-gen\premake5.lua">
+      <Filter>..\CryDust\vendor\msdf-atlas-gen</Filter>
     </None>
     <None Include="..\..\CryDust\vendor\yaml-cpp\premake5.lua">
       <Filter>..\CryDust\vendor\yaml-cpp</Filter>

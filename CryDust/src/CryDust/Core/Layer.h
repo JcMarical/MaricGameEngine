@@ -9,7 +9,7 @@ namespace CryDust
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		virtual ~Layer() = default;
 		//链接
 		virtual void OnAttach() {}
 		//分离

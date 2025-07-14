@@ -22,6 +22,12 @@
     <Filter Include="src\CryDust\Math">
       <UniqueIdentifier>{83925E19-6F8B-7D6B-98BD-62F084155D77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\CryDust\Physics2D">
+      <UniqueIdentifier>{92F64FDC-FE62-0BD7-C756-A33433822D3F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\CryDust\Project">
+      <UniqueIdentifier>{B0E93363-1C4B-1171-A5B8-572311194830}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\CryDust\Renderer">
       <UniqueIdentifier>{5036BEB6-3CC5-4780-E5E3-5B7BD1515826}</UniqueIdentifier>
     </Filter>
@@ -84,7 +90,13 @@
     <ClInclude Include="src\CryDust\Core\Base.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Core\Buffer.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Core\EntryPoint.h">
+      <Filter>src\CryDust\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Core\FileSystem.h">
       <Filter>src\CryDust\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Core\Input.h">
@@ -141,6 +153,15 @@
     <ClInclude Include="src\CryDust\Math\Math.h">
       <Filter>src\CryDust\Math</Filter>
     </ClInclude>
+    <ClInclude Include="src\CryDust\Physics2D\Physics2D.h">
+      <Filter>src\CryDust\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Project\Project.h">
+      <Filter>src\CryDust\Project</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Project\ProjectSerializer.h">
+      <Filter>src\CryDust\Project</Filter>
+    </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Buffer.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
@@ -148,6 +169,9 @@
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\EditorCamera.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\Font.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\Framebuffer.h">
@@ -1502,6 +1526,9 @@
     <ClCompile Include="src\CryDust\Core\Application.cpp">
       <Filter>src\CryDust\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Core\FileSystem.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\CryDust\Core\Layer.cpp">
       <Filter>src\CryDust\Core</Filter>
     </ClCompile>
@@ -1514,6 +1541,9 @@
     <ClCompile Include="src\CryDust\Core\UUID.cpp">
       <Filter>src\CryDust\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Core\Window.cpp">
+      <Filter>src\CryDust\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\CryDust\ImGui\ImGuiBuild.cpp">
       <Filter>src\CryDust\ImGui</Filter>
     </ClCompile>
@@ -1523,10 +1553,19 @@
     <ClCompile Include="src\CryDust\Math\Math.cpp">
       <Filter>src\CryDust\Math</Filter>
     </ClCompile>
+    <ClCompile Include="src\CryDust\Project\Project.cpp">
+      <Filter>src\CryDust\Project</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Project\ProjectSerializer.cpp">
+      <Filter>src\CryDust\Project</Filter>
+    </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Buffer.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\EditorCamera.cpp">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryDust\Renderer\Font.cpp">
       <Filter>src\CryDust\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\CryDust\Renderer\Framebuffer.cpp">

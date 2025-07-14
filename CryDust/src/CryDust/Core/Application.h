@@ -13,6 +13,9 @@
 #include "CryDust/Core/Timestep.h"
 
 #include "CryDust/ImGui/ImGuiLayer.h"
+
+int main(int argc, char** argv);
+
 namespace CryDust {
 
 	struct ApplicationCommandLineArgs
@@ -41,7 +44,7 @@ namespace CryDust {
 
 		virtual ~Application();
 		void OnEvent(Event& e);
-		void Run();
+
 
 
 		void PushLayer(Layer* layer);
@@ -57,13 +60,13 @@ namespace CryDust {
 
 		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 
-
+		void SubmitToMainThread(const std::function<void()>& function);
 	private:
 
-
+		void Run();
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
-	
+		void ExecuteMainThreadQueue();	
 	private:
 		ApplicationSpecification m_Specification;
 
@@ -77,10 +80,13 @@ namespace CryDust {
 
 		float m_LastFrameTime = 0.0f;
 
+
+		std::vector<std::function<void()>> m_MainThreadQueue;
+		std::mutex m_MainThreadQueueMutex;
 	private:
 
 		static Application* s_Instance;
-
+		friend int ::main(int argc, char** argv);
 	};
 
 	//To be defined in client
