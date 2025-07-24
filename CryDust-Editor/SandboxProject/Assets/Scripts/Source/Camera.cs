@@ -1,5 +1,4 @@
 ﻿
-
 using CryDust;
 
 namespace Sandbox
@@ -16,7 +15,6 @@ namespace Sandbox
 		{
 			m_Player = FindEntityByName("Player");
 		}
-
 
 		void OnUpdate(float ts)
 		{
@@ -42,5 +40,6 @@ namespace Sandbox
 			translation += velocity * ts;
 			Translation = translation;
 		}
+
 	}
 }

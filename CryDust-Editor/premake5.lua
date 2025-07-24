@@ -3,6 +3,7 @@ project "CryDust-Editor"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
+
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 	files
@@ -27,6 +28,8 @@ project "CryDust-Editor"
 	{
 		"CryDust"
 	}
+
+
 	filter "system:windows"
 		systemversion "latest"
 

@@ -1,23 +1,16 @@
 ﻿using CryDust;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sandbox
 {
 	public class Player : Entity
 	{
-		// 获得组件
 		private TransformComponent m_Transform;
 		private Rigidbody2DComponent m_Rigidbody;
 
 		public float Speed;
 		public float Time = 0.0f;
 
-
-		//初始化组件
 		void OnCreate()
 		{
 			Console.WriteLine($"Player.OnCreate - {ID}");
@@ -26,12 +19,12 @@ namespace Sandbox
 			m_Rigidbody = GetComponent<Rigidbody2DComponent>();
 		}
 
-
 		void OnUpdate(float ts)
 		{
+			Time += ts;
 			// Console.WriteLine($"Player.OnUpdate: {ts}");
 
-			float speed = 0.01f;
+			float speed = Speed;
 			Vector3 velocity = Vector3.Zero;
 
 			if (Input.IsKeyDown(KeyCode.W))
@@ -63,5 +56,6 @@ namespace Sandbox
 			//translation += velocity * ts;
 			//m_Transform.Translation = translation;
 		}
+
 	}
 }

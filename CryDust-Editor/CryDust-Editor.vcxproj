@@ -154,8 +154,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Hazel\Hazelnut\SandboxProject\Assets\Scenes\3DExample.hazel" />
-    <None Include="..\..\Hazel\Hazelnut\SandboxProject\Assets\Scenes\Physics2D.hazel" />
     <None Include="SandboxProject\Sandbox.cproj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

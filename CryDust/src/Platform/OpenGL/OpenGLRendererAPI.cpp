@@ -1,4 +1,4 @@
-#include "cdpch.h"
+	#include "cdpch.h"
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 #include <glad/glad.h>
@@ -16,10 +16,10 @@ namespace CryDust {
 	{
 		switch (severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:         CORE_DEBUG_CRITICAL(message); return;
-		case GL_DEBUG_SEVERITY_MEDIUM:       CORE_DEBUG_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_LOW:          CORE_DEBUG_WARN(message); return;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: CORE_DEBUG_TRACE(message); return;
+			case GL_DEBUG_SEVERITY_HIGH:         CORE_DEBUG_CRITICAL(message); return;
+			case GL_DEBUG_SEVERITY_MEDIUM:       CORE_DEBUG_ERROR(message); return;
+			case GL_DEBUG_SEVERITY_LOW:          CORE_DEBUG_WARN(message); return;
+			case GL_DEBUG_SEVERITY_NOTIFICATION: CORE_DEBUG_TRACE(message); return;
 		}
 
 		CORE_DEBUG_ASSERT(false, "Unknown severity leve!");
@@ -61,7 +61,6 @@ namespace CryDust {
 
 	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
-		//glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 		vertexArray->Bind();
 		uint32_t count = indexCount ? vertexArray->GetIndexBuffer()->GetCount() : indexCount;
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
