@@ -4,9 +4,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/string_cast.hpp"
 
-
+	
 #pragma warning(push, 0)
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 #pragma warning(pop)
 
@@ -48,15 +48,19 @@ inline OStream& operator<<(OStream& os, glm::qua<T, Q> quaternion)
 //Core Logger define
 #define CORE_DEBUG_TRACE(...)	::CryDust::Log::GetCoreLogger()->trace(__VA_ARGS__);
 #define CORE_DEBUG_INFO(...)	::CryDust::Log::GetCoreLogger()->info(__VA_ARGS__);
-#define CORE_DEBUG_WARN(...)	::CryDust::Log::GetCoreLogger()->warn(__VA_ARGS__);
-#define CORE_DEBUG_ERROR(...)	::CryDust::Log::GetCoreLogger()->error(__VA_ARGS__);
-#define CORE_DEBUG_CRITICAL(...) ::CryDust::Log::GetCoreLogger()->critical(__VA_ARGS__)
-
 
 //Client Logger define
 #define DEBUG_TRACE(...)	::CryDust::Log::GetClientLogger()->trace(__VA_ARGS__);
 #define DEBUG_INFO(...)	::CryDust::Log::GetClientLogger()->info(__VA_ARGS__);
-#define DEBUG_WARN(...)	::CryDust::Log::GetClientLogger()->warn(__VA_ARGS__);
-#define DEBUG_ERROR(...)	::CryDust::Log::GetClientLogger()->error(__VA_ARGS__);
-#define DEBUG_CRITICAL(...)      ::CryDust::Log::GetClientLogger()->critical(__VA_ARGS__)
+
+
+// 增强版Core Logger定义
+#define CORE_DEBUG_WARN(...)     ::CryDust::Log::GetCoreLogger()->warn("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
+#define CORE_DEBUG_ERROR(...)    ::CryDust::Log::GetCoreLogger()->error("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
+#define CORE_DEBUG_CRITICAL(...) ::CryDust::Log::GetCoreLogger()->critical("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
+
+// 增强版Client Logger定义
+#define DEBUG_WARN(...)          ::CryDust::Log::GetClientLogger()->warn("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
+#define DEBUG_ERROR(...)         ::CryDust::Log::GetClientLogger()->error("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
+#define DEBUG_CRITICAL(...)      ::CryDust::Log::GetClientLogger()->critical("[{}:{}:{}] {}", __FILE__, __LINE__, __FUNCTION__, fmt::format(__VA_ARGS__))
 
