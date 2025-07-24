@@ -100,6 +100,8 @@ void main()
 	if (texColor.a == 0.0)
 		discard;
 
+	float normalized = clamp(float(v_EntityID), 0.0, 255.0f) / float(255.0f);
+	texColor = vec4(normalized, 0.0f, 0.0f, 1.0f);
 
 	o_Color = texColor;
 	o_EntityID = v_EntityID;

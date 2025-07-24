@@ -33,7 +33,15 @@ namespace CryDust {
 		template<typename T>
 		T& GetComponent()
 		{
-			CORE_DEBUG_ASSERT(HasComponent<T>(), "Entity does not have component!");
+			try {
+
+				CORE_DEBUG_ASSERT(HasComponent<T>(), "Entity does not have component!");
+			}
+			catch (const std::exception& e) {
+				std::cerr << "Crash: " << e.what() << std::endl;
+				// 记录堆栈或生成Dump文件
+			}
+
 			return m_Scene->m_Registry.get<T>(m_EntityHandle);
 		}
 		template<typename T>

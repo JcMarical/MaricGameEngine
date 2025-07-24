@@ -1,5 +1,5 @@
 Project:
   Name: Sandbox
-  StartScene: "Scenes/3DExample.crydust"
+  StartScene: "Scenes/Physics2D.crydust"
   AssetDirectory: "Assets"
   ScriptModulePath: "Scripts/Binaries/Sandbox.dll"

@@ -8,14 +8,14 @@
 
 #ifdef CD_DEBUG
 	#if defined(CD_PLATFORM_WINDOWS)
-		#define CD_DEBUGBREAK() __debugbreak()
-		#elif defined(CD_PLATFORM_LINUX)
+			#define CD_DEBUGBREAK() __debugbreak()
+	#elif defined(CD_PLATFORM_LINUX)
 			#include <signal.h>
 			#define CD_DEBUGBREAK() raise(SIGTRAP)
 	#else
 		#error "Platform doesn't support debugbreak yet!"
 	#endif
-		#define CD_ENABLE_ASSERTS
+	#define CD_ENABLE_ASSERTS
 #else
 	#define CD_DEBUGBREAK()
 #endif
@@ -25,16 +25,8 @@
 #define CD_STRINGIFY_MACRO(x) #x
 
 
-
-
-
-
-#ifdef CD_DEBUG
-#define CD_ENABLE_ASSERTS
-#endif
-
-
 #define BIT(x)  (1 << x)
+
 
 //#define CD_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 #define CD_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }

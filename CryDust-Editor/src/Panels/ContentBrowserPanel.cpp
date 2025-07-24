@@ -4,8 +4,6 @@
 #include "CryDust/Project/Project.h"
 #include <imgui/imgui.h>
 namespace CryDust {
-	// Once we have projects, change this
-	extern const std::filesystem::path g_AssetPath = "assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
 		: m_BaseDirectory(Project::GetAssetDirectory()), m_CurrentDirectory(m_BaseDirectory)
@@ -16,7 +14,7 @@ namespace CryDust {
 	void ContentBrowserPanel::OnImGuiRender()
 	{
 		ImGui::Begin("Content Browser");
-		if (m_CurrentDirectory != std::filesystem::path(g_AssetPath))
+		if (m_CurrentDirectory != std::filesystem::path(m_BaseDirectory))
 		{
 			if (ImGui::Button("<-"))
 			{

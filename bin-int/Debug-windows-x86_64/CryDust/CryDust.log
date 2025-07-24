@@ -1,11 +1,13 @@
-﻿  Renderer2D.cpp
-  OpenGLRendererAPI.cpp
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(584,73): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-  (编译源文件“/src/CryDust/Renderer/Renderer2D.cpp”)
+﻿  OpenGLShader.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(328,92): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
   
-D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(584,33): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
-  (编译源文件“/src/CryDust/Renderer/Renderer2D.cpp”)
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(380,24): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(382,20): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
   
 Ws2_32.lib(WS2_32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义
 Winmm.lib(WINMM.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义

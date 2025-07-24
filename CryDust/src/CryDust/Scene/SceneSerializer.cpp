@@ -379,7 +379,7 @@ namespace CryDust {
 		}
 		catch (YAML::ParserException e)
 		{
-			CORE_DEBUG_ERROR("Failed to load .hazel file '{0}'\n     {1}", filepath, e.what());
+			CORE_DEBUG_ERROR("Failed to load .crydust file '{0}'\n     {1}", filepath, e.what());
 			return false;
 		}
 		if (!data["Scene"])
