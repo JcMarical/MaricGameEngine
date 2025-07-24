@@ -15,17 +15,22 @@ project "CryDust-Editor"
 		"%{wks.location}/CryDust/vendor/spdlog/include",
 		"%{wks.location}/CryDust/src",
 		"%{wks.location}/CryDust/vendor",
+		"%{IncludeDir.filewatch}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
+
 		"%{IncludeDir.ImGuizmo}"
 	}
+
+	
 	links
 	{
 		"CryDust"
 	}
 	filter "system:windows"
-        buildoptions "/utf-8"
 		systemversion "latest"
+
+
 	filter "configurations:Debug"
 		defines "CD_DEBUG"
 		runtime "Debug"
@@ -42,4 +47,3 @@ project "CryDust-Editor"
 		optimize "on"
 
 
-   

@@ -3,29 +3,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 namespace CryDust {
 
-	void SceneCamera::RecalculateProjection()
-	{
-		float orthoLeft = -m_OrthographicSize * m_AspectRatio * 0.5f;
-		float orthoRight = m_OrthographicSize * m_AspectRatio * 0.5f;
-		float orthoBottom = -m_OrthographicSize * 0.5f;
-		float orthoTop = m_OrthographicSize * 0.5f;
-		m_Projection = glm::ortho(orthoLeft, orthoRight,
-			orthoBottom, orthoTop, m_OrthographicNear, m_OrthographicFar);
-	}
 
 	SceneCamera::SceneCamera()
 	{
 		RecalculateProjection();
 	}
 
-
-
-	/// <summary>
-	/// 目前还是正交相机的实现
-	/// </summary>
-	/// <param name="verticalFOV"></param>
-	/// <param name="nearClip"></param>
-	/// <param name="farClip"></param>
 	void SceneCamera::SetPerspective(float verticalFOV, float nearClip, float farClip)
 	{
 		m_ProjectionType = ProjectionType::Perspective;
@@ -50,6 +33,28 @@ namespace CryDust {
 		m_AspectRatio = (float)width / (float)height;
 		RecalculateProjection();
 	}
+
+
+	void SceneCamera::RecalculateProjection()
+	{
+		if (m_ProjectionType == ProjectionType::Perspective)
+		{
+			m_Projection = glm::perspective(m_PerspectiveFOV, m_AspectRatio, m_PerspectiveNear, m_PerspectiveFar);
+		}
+		else
+		{
+			float orthoLeft = -m_OrthographicSize * m_AspectRatio * 0.5f;
+			float orthoRight = m_OrthographicSize * m_AspectRatio * 0.5f;
+			float orthoBottom = -m_OrthographicSize * 0.5f;
+			float orthoTop = m_OrthographicSize * 0.5f;
+
+			m_Projection = glm::ortho(orthoLeft, orthoRight,
+				orthoBottom, orthoTop, m_OrthographicNear, m_OrthographicFar);
+		}
+	}
+
+
+
 
 
 }

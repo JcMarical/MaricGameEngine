@@ -1,14 +1,419 @@
-﻿  Application.cpp
-  Window.cpp
-D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(74,9): warning C4005: “IMGUI_VERSION”: 宏重定义
-  (编译源文件“/src/CryDust/Core/Application.cpp”)
-      D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(25,9):
-      参见“IMGUI_VERSION”的前一个定义
+﻿  cdpch.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Debug\Instrumentor.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/cdpch.cpp”)
   
-D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(75,9): warning C4005: “IMGUI_VERSION_NUM”: 宏重定义
-  (编译源文件“/src/CryDust/Core/Application.cpp”)
-      D:\Project\Git Project\CryDust\CryDust\vendor\ImGui\imgui.h(26,9):
-      参见“IMGUI_VERSION_NUM”的前一个定义
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,31):
+      模板实例化上下文(最早的实例化上下文)为
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3342,28):
+          查看对正在编译的 类 模板 实例化“fmt::v5::arg_formatter<fmt::v5::vformat_to::range>”的引用
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(2308,51):
+          查看对正在编译的 类 模板 实例化“fmt::v5::internal::arg_formatter_base<Range>”的引用
+          with
+          [
+              Range=fmt::v5::vformat_to::range
+          ]
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(1434,15):
+          查看对正在编译的 类 模板 实例化“fmt::v5::basic_writer<fmt::v5::back_insert_range<fmt::v5::internal::buffer>>”的引用
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(2754,8):
+          在编译 类 模板 成员函数“void fmt::v5::basic_writer<fmt::v5::back_insert_range<fmt::v5::internal::buffer>>::write(fmt::v5::string_view)”时
+              D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(176,12):
+              请参阅 "fmt::v5::`anonymous-namespace'::format_error_code" 中对 "fmt::v5::basic_writer<fmt::v5::back_insert_range<fmt::v5::internal::buffer>>::write" 的第一个引用
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(2756,15):
+          查看对正在编译的函数 模板 实例化“_OutIt std::copy<const char*,stdext::checked_array_iterator<T *>>(_InIt,_InIt,_OutIt)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<char *>,
+              T=char,
+              _InIt=const char *
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4761,31):
+          查看对正在编译的函数 模板 实例化“decltype(auto) std::_Get_unwrapped_n<_OutIt&,__int64>(_Iter,const _Diff)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<char *>,
+              _Iter=stdext::checked_array_iterator<char *> &,
+              _Diff=__int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1394,26):
+          查看指向正在编译的变量模板“const bool _Unwrappable_for_offset_v<stdext::checked_array_iterator<char *> &>”的引用
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1388,44):
+          查看指向正在编译的变量模板“const bool _Unwrappable_v<stdext::checked_array_iterator<char *> &,void>”的引用
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1317,5):
+          查看指向正在编译的变量模板“const bool _Allow_inheriting_unwrap_v<stdext::checked_array_iterator<char *>,void>”的引用
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,22): warning C4996: 'stdext::checked_array_iterator<T *>::_Prevent_inheriting_unwrap': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,22): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,22): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,22): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1289,22): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,40):
+      模板实例化上下文(最早的实例化上下文)为
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1384,93):
+          查看对正在编译的 别名 模板 实例化“std::_Iter_diff_t<_Iter>”的引用
+          with
+          [
+              _Iter=stdext::checked_array_iterator<char *>
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1193,55):
+          查看对正在编译的 类 模板 实例化“std::iterator_traits<_Iter>”的引用
+          with
+          [
+              _Iter=stdext::checked_array_iterator<char *>
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(515,26):
+          查看对正在编译的 类 模板 实例化“std::_Iterator_traits_base<_Iter,void>”的引用
+          with
+          [
+              _Iter=stdext::checked_array_iterator<char *>
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,31): warning C4996: 'stdext::checked_array_iterator<T *>::iterator_category': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(495,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,40): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,40): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,40): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,40): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,40): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,31): warning C4996: 'stdext::checked_array_iterator<T *>::value_type': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(496,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,40): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,40): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,40): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,40): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,40): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,31): warning C4996: 'stdext::checked_array_iterator<T *>::difference_type': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(497,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,40): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,40): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,40): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,40): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,40): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,31): warning C4996: 'stdext::checked_array_iterator<T *>::pointer': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(498,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,40): warning C4996: 'stdext::checked_array_iterator<T *>': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,40): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,40): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,40): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,40): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\iterator(1493,35):
+      参见“stdext::checked_array_iterator”的声明
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,31): warning C4996: 'stdext::checked_array_iterator<T *>::reference': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,31): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,31): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,31): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\__msvc_iter_core.hpp(499,31): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996: 'stdext::checked_array_iterator<T *>::_Verify_offset': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996: 'stdext::checked_array_iterator<T *>::_Unwrapped': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996: 'stdext::checked_array_iterator<T *>::_Seek_to': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:             T=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13):
+      模板实例化上下文(最早的实例化上下文)为
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(2756,15):
+          查看对正在编译的函数 模板 实例化“_OutIt std::copy<const char*,stdext::checked_array_iterator<T *>>(_InIt,_InIt,_OutIt)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<char *>,
+              T=char,
+              _InIt=const char *
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4762,10):
+          查看对正在编译的函数 模板 实例化“void std::_Seek_wrapped<_OutIt,char*>(_Iter &,_UIter &&)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<char *>,
+              _Iter=stdext::checked_array_iterator<char *>,
+              _UIter=char *
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996: 'stdext::checked_array_iterator<T *>::_Verify_offset': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:             T=wchar_t
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1405,13):
+      模板实例化上下文(最早的实例化上下文)为
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3457,10):
+          查看对正在编译的函数 模板 实例化“OutputIt fmt::v5::vformat_to<fmt::v5::arg_formatter<fmt::v5::vformat_to::range>,wchar_t,fmt::v5::wformat_context>(fmt::v5::back_insert_range<fmt::v5::internal::wbuffer>,fmt::v5::basic_string_view<wchar_t>,fmt::v5::basic_format_args<fmt::v5::wformat_context>)”的引用
+          with
+          [
+              OutputIt=std::back_insert_iterator<fmt::v5::internal::basic_buffer<wchar_t>>
+          ]
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3345,47):
+          查看对正在编译的 类 模板 实例化“fmt::v5::format_handler<ArgFormatter,Char,Context>”的引用
+          with
+          [
+              ArgFormatter=fmt::v5::arg_formatter<fmt::v5::vformat_to::range>,
+              Char=wchar_t,
+              Context=fmt::v5::wformat_context
+          ]
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3296,8):
+          在编译 类 模板 成员函数“void fmt::v5::format_handler<ArgFormatter,Char,Context>::on_text(const Char *,const Char *)”时
+          with
+          [
+              ArgFormatter=fmt::v5::arg_formatter<fmt::v5::vformat_to::range>,
+              Char=wchar_t,
+              Context=fmt::v5::wformat_context
+          ]
+              D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(2155,11):
+              请参阅 "fmt::v5::internal::parse_format_string::writer::operator ()" 中对 "fmt::v5::format_handler<ArgFormatter,Char,Context>::on_text" 的第一个引用
+          with
+          [
+              ArgFormatter=fmt::v5::arg_formatter<fmt::v5::vformat_to::range>,
+              Char=wchar_t,
+              Context=fmt::v5::wformat_context
+          ]
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3300,15):
+          查看对正在编译的函数 模板 实例化“_OutIt std::copy_n<const Char*,unsigned __int64,stdext::checked_array_iterator<T *>>(_InIt,_Diff,_OutIt)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<wchar_t *>,
+              Char=wchar_t,
+              T=wchar_t,
+              _InIt=const wchar_t *,
+              _Diff=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4932,33):
+          查看对正在编译的函数 模板 实例化“_Ptr *std::_Get_unwrapped_n<_OutIt&,unsigned __int64>(_Iter,const _Diff)”的引用
+          with
+          [
+              _Ptr=wchar_t *,
+              _OutIt=stdext::checked_array_iterator<wchar_t *>,
+              _Iter=stdext::checked_array_iterator<wchar_t *> &,
+              _Diff=unsigned __int64
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996: 'stdext::checked_array_iterator<T *>::_Unwrapped': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:             T=wchar_t
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1406,42): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996: 'stdext::checked_array_iterator<T *>::_Seek_to': warning STL4043: stdext::checked_array_iterator, stdext::unchecked_array_iterator, and related factory functions are non-Standard extensions and will be removed in the future. std::span (since C++20) and gsl::span can be used instead. You can define _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING or _SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS to suppress this warning.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:             T=wchar_t
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13): warning C4996:         ]
+  (编译源文件“src/cdpch.cpp”)
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(1427,13):
+      模板实例化上下文(最早的实例化上下文)为
+          D:\Project\Git Project\CryDust\CryDust\vendor\spdlog\include\spdlog\fmt\bundled\format.h(3300,15):
+          查看对正在编译的函数 模板 实例化“_OutIt std::copy_n<const Char*,unsigned __int64,stdext::checked_array_iterator<T *>>(_InIt,_Diff,_OutIt)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<wchar_t *>,
+              Char=wchar_t,
+              T=wchar_t,
+              _InIt=const wchar_t *,
+              _Diff=unsigned __int64
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xutility(4939,26):
+          查看对正在编译的函数 模板 实例化“void std::_Seek_wrapped<_OutIt,_Ptr&>(_Iter &,_UIter)”的引用
+          with
+          [
+              _OutIt=stdext::checked_array_iterator<wchar_t *>,
+              _Ptr=wchar_t *,
+              _Iter=stdext::checked_array_iterator<wchar_t *>,
+              _UIter=wchar_t *&
+          ]
+  
+  Application.cpp
+  FileSystem.cpp
+  Layer.cpp
+  LayerStack.cpp
+  Log.cpp
+  UUID.cpp
+  Window.cpp
+  ImGuiBuild.cpp
+  ImGuiLayer.cpp
+  Math.cpp
+  Project.cpp
+  ProjectSerializer.cpp
+  Buffer.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\FileSystem.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  EditorCamera.cpp
+  Font.cpp
+  Framebuffer.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Math\Math.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“/src/CryDust/Core/Window.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Math\Math.cpp(28,16): warning C4101: “Pdum3”: 未引用的局部变量
+  (编译源文件“/src/CryDust/Math/Math.cpp”)
+  
+  GraphicsContext.cpp
+  OrthographicCamera.cpp
+  OrthographicCameraController.cpp
+  RenderCommand.cpp
+  Renderer.cpp
+  Renderer2D.cpp
+  RendererAPI.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  Shader.cpp
+  Texture.cpp
+  UniformBuffer.cpp
+  VertexArray.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Font.cpp(108,27): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/CryDust/Renderer/Font.cpp”)
+  
+  Entity.cpp
+  Scene.cpp
+  SceneCamera.cpp
+  SceneSerializer.cpp
+  ScriptEngine.cpp
+  ScriptGlue.cpp
+  OpenGLBuffer.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLBuffer.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  OpenGLContext.cpp
+  OpenGLFrameBuffer.cpp
+  OpenGLRendererAPI.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  OpenGLShader.cpp
+  OpenGLTexture.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  OpenGLUniformBuffer.cpp
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(584,73): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“/src/CryDust/Renderer/Renderer2D.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Renderer2D.cpp(584,33): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+  (编译源文件“/src/CryDust/Renderer/Renderer2D.cpp”)
+  
+  OpenGLVertexArray.cpp
+  WindowsInput.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(93,43): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(103,44): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(123,89): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(131,146): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(134,152): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLFrameBuffer.cpp(159,41): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLFrameBuffer.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLVertexArray.cpp(78,7): warning C4312: “类型强制转换”: 从“const uint32_t”转换到更大的“const void *”
+  (编译源文件“/src/Platform/OpenGL/OpenGLVertexArray.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLVertexArray.cpp(94,7): warning C4312: “类型强制转换”: 从“const uint32_t”转换到更大的“const void *”
+  (编译源文件“/src/Platform/OpenGL/OpenGLVertexArray.cpp”)
+  
+  WindowsPlatformUtils.cpp
+  WindowsWindow.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+  stb_image.cpp
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsPlatformUtils.cpp(14,21): warning C4244: “return”: 从“double”转换到“float”，可能丢失数据
+  (编译源文件“/src/Platform/Windows/WindowsPlatformUtils.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(53,4): warning C4002: 类函数宏的调用“CD_PROFILE_FUNCTION”参数过多
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(167,53): warning C4244: “参数”: 从“float”转换到“const CryDust::MouseCode”，可能丢失数据
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(167,37): warning C4244: “参数”: 从“float”转换到“const CryDust::MouseCode”，可能丢失数据
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(175,47): warning C4244: “参数”: 从“float”转换到“const CryDust::MouseCode”，可能丢失数据
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\Windows\WindowsWindow.cpp(175,34): warning C4244: “参数”: 从“float”转换到“const CryDust::MouseCode”，可能丢失数据
+  (编译源文件“/src/Platform/Windows/WindowsWindow.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scripting\ScriptEngine.cpp(56,88): warning C4244: “参数”: 从“uint64_t”转换到“uint32_t”，可能丢失数据
+  (编译源文件“/src/CryDust/Scripting/ScriptEngine.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Scripting\ScriptEngine.cpp(73,98): warning C4244: “参数”: 从“uint64_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/CryDust/Scripting/ScriptEngine.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(328,92): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(380,24): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
+  
+D:\Project\Git Project\CryDust\CryDust\src\Platform\OpenGL\OpenGLShader.cpp(382,20): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“/src/Platform/OpenGL/OpenGLShader.cpp”)
   
 Ws2_32.lib(WS2_32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义
 Winmm.lib(WINMM.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR 已在 opengl32.lib(OPENGL32.dll) 中定义；已忽略第二个定义

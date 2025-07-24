@@ -8,8 +8,11 @@ D:\Project\Git Project\CryDust\CryDust\src\CryDust\Core\Window.cpp;D:\Project\Gi
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiBuild.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiBuild.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\ImGui\ImGuiLayer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ImGuiLayer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Math\Math.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Math.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Project\Project.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Project.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Project\ProjectSerializer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\ProjectSerializer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Buffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Buffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\EditorCamera.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\EditorCamera.obj
+D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Font.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Font.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\Framebuffer.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\Framebuffer.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\GraphicsContext.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\GraphicsContext.obj
 D:\Project\Git Project\CryDust\CryDust\src\CryDust\Renderer\OrthographicCamera.cpp;D:\Project\Git Project\CryDust\bin-int\Debug-windows-x86_64\CryDust\OrthographicCamera.obj

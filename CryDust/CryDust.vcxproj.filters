@@ -22,8 +22,8 @@
     <Filter Include="src\CryDust\Math">
       <UniqueIdentifier>{83925E19-6F8B-7D6B-98BD-62F084155D77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\CryDust\Physics2D">
-      <UniqueIdentifier>{92F64FDC-FE62-0BD7-C756-A33433822D3F}</UniqueIdentifier>
+    <Filter Include="src\CryDust\Physics">
+      <UniqueIdentifier>{DC489A4C-48AA-775A-D117-BE0C3D78AE19}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\CryDust\Project">
       <UniqueIdentifier>{B0E93363-1C4B-1171-A5B8-572311194830}</UniqueIdentifier>
@@ -36,6 +36,9 @@
     </Filter>
     <Filter Include="src\CryDust\Scripting">
       <UniqueIdentifier>{ECBCD86A-5829-9465-211D-2CC38D48B6CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\CryDust\UI">
+      <UniqueIdentifier>{578EC591-435C-B997-2CF0-29BE185D95FC}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\CryDust\Utils">
       <UniqueIdentifier>{4AE4CB45-B6FA-C9DB-FF71-55FD6BC79A63}</UniqueIdentifier>
@@ -153,8 +156,8 @@
     <ClInclude Include="src\CryDust\Math\Math.h">
       <Filter>src\CryDust\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\CryDust\Physics2D\Physics2D.h">
-      <Filter>src\CryDust\Physics2D</Filter>
+    <ClInclude Include="src\CryDust\Physics\Physics2D.h">
+      <Filter>src\CryDust\Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Project\Project.h">
       <Filter>src\CryDust\Project</Filter>
@@ -178,6 +181,9 @@
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\GraphicsContext.h">
+      <Filter>src\CryDust\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\Renderer\MSDFData.h">
       <Filter>src\CryDust\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Renderer\OrthographicCamera.h">
@@ -233,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="src\CryDust\Scripting\ScriptGlue.h">
       <Filter>src\CryDust\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CryDust\UI\UI.h">
+      <Filter>src\CryDust\UI</Filter>
     </ClInclude>
     <ClInclude Include="src\CryDust\Utils\PlatformUtils.h">
       <Filter>src\CryDust\Utils</Filter>

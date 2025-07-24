@@ -113,6 +113,8 @@ namespace CryDust {
 
 
 		bool multisample = m_Specification.Samples > 1;
+
+
 		// 颜色纹理Attachments
 		if (m_ColorAttachmentSpecifications.size())
 		{
@@ -179,6 +181,11 @@ namespace CryDust {
 
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 	{
+		if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
+		{
+			CORE_DEBUG_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
+			return;
+		}
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 

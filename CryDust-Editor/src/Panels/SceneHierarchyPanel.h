@@ -9,6 +9,7 @@ namespace CryDust {
 	public:
 		SceneHierarchyPanel() = default;
 		SceneHierarchyPanel(const Ref<Scene>& scene);
+
 		void SetContext(const Ref<Scene>& scene);
 		void OnImGuiRender();
 

@@ -1,12 +1,13 @@
 -- CryDust Dependencies
 VULKAN_SDK = os.getenv("VULKAN_SDK")
-IncludeDir = {}
 
+IncludeDir = {}
 IncludeDir["stb_image"] = "%{wks.location}/CryDust/vendor/stb_image"
-IncludeDir["GLFW"] = "%{wks.location}/CryDust/vendor/GLFW/include"
-IncludeDir["Glad"] = "%{wks.location}/CryDust/vendor/Glad/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/CryDust/vendor/yaml-cpp/include"
 IncludeDir["Box2D"] = "%{wks.location}/CryDust/vendor/Box2D/include"
+IncludeDir["filewatch"] = "%{wks.location}/CryDust/vendor/filewatch"
+IncludeDir["GLFW"] = "%{wks.location}/CryDust/vendor/GLFW/include"
+IncludeDir["Glad"] = "%{wks.location}/CryDust/vendor/Glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/CryDust/vendor/ImGui"
 IncludeDir["ImGuizmo"] = "%{wks.location}/CryDust/vendor/ImGuizmo"
 IncludeDir["glm"] = "%{wks.location}/CryDust/vendor/glm"
@@ -15,12 +16,12 @@ IncludeDir["mono"] = "%{wks.location}/CryDust/vendor/mono/include"
 IncludeDir["shaderc"] = "%{wks.location}/CryDust/vendor/shaderc/include"
 IncludeDir["SPIRV_Cross"] = "%{wks.location}/CryDust/vendor/SPIRV-Cross"
 IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
-
+IncludeDir["msdfgen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdfgen"
+IncludeDir["msdf_atlas_gen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdf-atlas-gen"
 LibraryDir = {}
 
 LibraryDir["VulkanSDK"] = "%{VULKAN_SDK}/Lib"
-IncludeDir["msdfgen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdfgen"
-IncludeDir["msdf_atlas_gen"] = "%{wks.location}/CryDust/vendor/msdf-atlas-gen/msdf-atlas-gen"
+
 LibraryDir["mono"] = "%{wks.location}/CryDust/vendor/mono/lib/%{cfg.buildcfg}"
 
 Library = {}

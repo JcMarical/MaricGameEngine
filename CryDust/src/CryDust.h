@@ -2,7 +2,6 @@
 
 //交由应用程序使用
 
-#include <stdio.h>
 #include "CryDust/Core/Base.h"
 
 #include "CryDust/Core/Application.h"
@@ -25,6 +24,9 @@
 #include "CryDust/Scene/Entity.h"
 #include "CryDust/Scene/ScriptableEntity.h"
 #include "CryDust/Scene/Components.h"
+
+
+#include "CryDust/Project/Project.h"
 // ---Renderer------------------------
 
 #include "CryDust/Renderer/Renderer.h"

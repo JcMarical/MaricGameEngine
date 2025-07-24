@@ -1,15 +1,13 @@
 #pragma once
 
 #include "CryDust/Core/Base.h"
-#include "CryDust/Events/Event.h"
 
+
+#include "CryDust/Events/Event.h"
 #include "CryDust/Events/ApplicationEvent.h"
 #include "CryDust/Core/Window.h"
 #include "CryDust/Core/LayerStack.h"
-#include "CryDust/ImGui/ImGuiLayer.h"
-#include "CryDust/Renderer/Shader.h"
-#include "CryDust/Renderer/Buffer.h"
-#include "CryDust/Renderer/VertexArray.h"
+
 #include "CryDust/Core/Timestep.h"
 
 #include "CryDust/ImGui/ImGuiLayer.h"

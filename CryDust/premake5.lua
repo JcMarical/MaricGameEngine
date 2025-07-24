@@ -3,8 +3,10 @@ project "CryDust"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
+
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+
 	pchheader "cdpch.h"
 	pchsource "src/cdpch.cpp"
 	files
@@ -15,6 +17,7 @@ project "CryDust"
 		"vendor/stb_image/**.cpp",
 		"vendor/glm/glm/**.hpp",
 		"vendor/glm/glm/**.inl",
+
 		"vendor/ImGuizmo/ImGuizmo.h",
 		"vendor/ImGuizmo/ImGuizmo.cpp"
 	}
@@ -28,6 +31,7 @@ project "CryDust"
 		"src",
 		"vendor/spdlog/include",
 		"%{IncludeDir.Box2D}",
+		"%{IncludeDir.filewatch}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
@@ -58,7 +62,6 @@ project "CryDust"
 
 
 	filter "system:windows"
-        buildoptions "/utf-8"
 		systemversion "latest"
 		defines
 		{

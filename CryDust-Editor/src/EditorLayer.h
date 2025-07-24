@@ -27,6 +27,13 @@ namespace CryDust {
 
 		void OnOverlayRender();
 
+
+		void NewProject();
+		bool OpenProject();
+		void OpenProject(const std::filesystem::path& path);
+		void SaveProject();
+
+
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
@@ -40,6 +47,8 @@ namespace CryDust {
 		void OnScenePlay();
 		void OnSceneSimulate();
 		void OnSceneStop();
+		void OnScenePause();
+
 
 		void OnDuplicateEntity();
 
@@ -78,6 +87,10 @@ namespace CryDust {
 		glm::vec2 m_ViewportBounds[2];
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 		
+		int m_GizmoType = -1;
+
+		bool m_ShowPhysicsColliders = false;
+
 		enum class SceneState
 		{
 			Edit = 0, Play = 1, Simulate = 2
@@ -85,19 +98,12 @@ namespace CryDust {
 
 		SceneState m_SceneState = SceneState::Edit;
 
-
-		//Gizmo
-		int m_GizmoType = -1;
-
-		//显示物理碰撞体
-		bool m_ShowPhysicsColliders = false;
-
-		//面板
+		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
-		ContentBrowserPanel m_ContentBrowserPanel;
+		Scope<ContentBrowserPanel> m_ContentBrowserPanel;
 
-		//编辑器资源
-		Ref<Texture2D> m_IconPlay, m_IconSimulate, m_IconStop;
+		// Editor resources
+		Ref<Texture2D> m_IconPlay, m_IconPause, m_IconStep, m_IconSimulate, m_IconStop;
 	};
 
 }

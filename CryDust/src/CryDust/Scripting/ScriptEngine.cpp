@@ -7,7 +7,17 @@
 #include "mono/metadata/assembly.h"
 #include "mono/metadata/object.h"
 #include "mono/metadata/tabledefs.h"
+#include "mono/metadata/mono-debug.h"
+#include "mono/metadata/threads.h"
 
+#include "FileWatch.h"
+
+#include "CryDust/Core/Application.h"
+#include "CryDust/Core/Timer.h"
+#include "CryDust/Core/Buffer.h"
+#include "CryDust/Core/FileSystem.h"
+
+#include "CryDust/Project/Project.h"
 
 namespace CryDust {
 
@@ -34,47 +44,16 @@ namespace CryDust {
 
 	namespace Utils {
 
-
-
-		// TODO: move to FileSystem class
-		static char* ReadBytes(const std::filesystem::path& filepath, uint32_t* outSize)
-		{
-			std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
-
-			if (!stream)
-			{
-				// Failed to open the file
-				return nullptr;
-			}
-
-			std::streampos end = stream.tellg();
-			stream.seekg(0, std::ios::beg);
-			uint64_t size = end - stream.tellg();
-
-			if (size == 0)
-			{
-				// File is empty
-				return nullptr;
-			}
-
-			char* buffer = new char[size];
-			stream.read((char*)buffer, size);
-			stream.close();
-
-			*outSize = (uint32_t)size;
-			return buffer;
-		}
 		/// <summary>
 		/// 读取程序集为二进制数据，确保非托管加载
 		/// </summary>
-		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath)
+		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath, bool loadPDB = false)
 		{
-			uint32_t fileSize = 0;
-			char* fileData = ReadBytes(assemblyPath, &fileSize);
+			ScopedBuffer fileData = FileSystem::ReadFileBinary(assemblyPath);
 
 			// NOTE: We can't use this image for anything other than loading the assembly because this image doesn't have a reference to the assembly
 			MonoImageOpenStatus status;
-			MonoImage* image = mono_image_open_from_data_full(fileData, fileSize, 1, &status, 0);
+			MonoImage* image = mono_image_open_from_data_full(fileData.As<char>(), fileData.Size(), 1, &status, 0);
 
 			if (status != MONO_IMAGE_OK)
 			{
@@ -83,14 +62,23 @@ namespace CryDust {
 				return nullptr;
 			}
 
+			if (loadPDB)
+			{
+				std::filesystem::path pdbPath = assemblyPath;
+				pdbPath.replace_extension(".pdb");
+
+				if (std::filesystem::exists(pdbPath))
+				{
+					ScopedBuffer pdbFileData = FileSystem::ReadFileBinary(pdbPath);
+					mono_debug_open_image_from_memory(image, pdbFileData.As<const mono_byte>(), pdbFileData.Size());
+					CORE_DEBUG_INFO("Loaded PDB {}", pdbPath);
+				}
+			}	
+
 			std::string pathString = assemblyPath.string();
 			MonoAssembly* assembly = mono_assembly_load_from_full(image, pathString.c_str(), &status, 0);
 			mono_image_close(image);
 
-
-
-			// Don't forget to free the file data
-			delete[] fileData;
 
 
 			return assembly;
@@ -103,10 +91,6 @@ namespace CryDust {
 /// 遍历程序集的所有类型并打印命名空间和类名，用于验证加载结果
 /// </summary>
 		void PrintAssemblyTypes(MonoAssembly* assembly)
-
-
-
-
 		{
 			MonoImage* image = mono_assembly_get_image(assembly);
 			const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
@@ -169,6 +153,19 @@ namespace CryDust {
 		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
 		//UUID，和他对应的实体字段
 		std::unordered_map<UUID, ScriptFieldMap> EntityScriptFields;
+		
+		Scope<filewatch::FileWatch<std::string>> AppAssemblyFileWatcher;
+		bool AssemblyReloadPending = false;
+
+#ifdef HZ_DEBUG
+		bool EnableDebugging = true;
+#else
+		bool EnableDebugging = false;
+#endif
+		
+		
+		
+		
 		// Runtime
 		Scene* SceneContext = nullptr;
 	};
@@ -176,15 +173,45 @@ namespace CryDust {
 	//单例
 	static ScriptEngineData* s_Data = nullptr;
 
+	static void OnAppAssemblyFileSystemEvent(const std::string& path, const filewatch::Event change_type)
+	{
+		if (!s_Data->AssemblyReloadPending && change_type == filewatch::Event::modified)
+		{
+			s_Data->AssemblyReloadPending = true;
+
+			Application::Get().SubmitToMainThread([]()
+				{
+					s_Data->AppAssemblyFileWatcher.reset();
+					ScriptEngine::ReloadAssembly();
+				});
+		}
+	}
+
+
 	void ScriptEngine::Init()
 	{
 		s_Data = new ScriptEngineData();
 
 		InitMono();
 		ScriptGlue::RegisterFunctions();
-		LoadAssembly("Resources/Scripts/CryDust-ScriptCore.dll");
 
-		LoadAppAssembly("SandboxProject/Assets/Scripts/Binaries/Sandbox.dll");
+		bool status = LoadAssembly("Resources/Scripts/CryDust-ScriptCore.dll");
+		if (!status)
+		{
+			CORE_DEBUG_ERROR("[ScriptEngine] Could not load CryDust-ScriptCore assembly.");
+			return;
+		}
+
+		auto scriptModulePath = Project::GetAssetDirectory() / Project::GetActive()->GetConfig().ScriptModulePath;
+
+		status = LoadAppAssembly(scriptModulePath);
+
+
+		if (!status)
+		{
+			CORE_DEBUG_ERROR("[ScriptEngine] Could not load app assembly.");
+			return;
+		}
 		LoadAssemblyClasses();
 
 		ScriptGlue::RegisterComponents();	//注册所有组件
@@ -193,36 +220,7 @@ namespace CryDust {
 
 		// 检索并实例化类（不带构造器）并生成Monoclass
 		s_Data->EntityClass = ScriptClass("CryDust", "Entity", true);
-#if 0
-		MonoObject* instance = s_Data->EntityClass.Instantiate();
 
-		// 调用方法
-		MonoMethod* printMessageFunc = s_Data->EntityClass.GetMethod("PrintMessage", 0);
-		s_Data->EntityClass.InvokeMethod(instance, printMessageFunc);
-
-		// 调用含参方法
-		MonoMethod* printIntFunc = s_Data->EntityClass.GetMethod("PrintInt", 1);
-		int value = 5;
-		void* param = &value;
-		s_Data->EntityClass.InvokeMethod(instance, printIntFunc, &param);
-
-		MonoMethod* printIntsFunc = s_Data->EntityClass.GetMethod("PrintInts", 2);
-		int value2 = 508;
-		void* params[2] =
-		{
-			&value,
-			&value2
-		};
-
-		s_Data->EntityClass.InvokeMethod(instance, printIntsFunc, params);
-
-		MonoString* monoString = mono_string_new(s_Data->AppDomain, "Hello World from C++!");
-		MonoMethod* printCustomMessageFunc = s_Data->EntityClass.GetMethod("PrintCustomMessage", 1);
-		void* stringParam = monoString;
-		s_Data->EntityClass.InvokeMethod(instance, printCustomMessageFunc, &stringParam);
-
-		CORE_DEBUG_ASSERT(false);
-#endif
 	}
 
 	void ScriptEngine::Shutdown()
@@ -246,14 +244,33 @@ namespace CryDust {
 	{
 		mono_set_assemblies_path("mono/lib");
 
+		//DEBUG
+		if (s_Data->EnableDebugging)
+		{
+			const char* argv[2] = {
+				"--debugger-agent=transport=dt_socket,address=127.0.0.1:2550,server=y,suspend=n,loglevel=3,logfile=MonoDebugger.log",
+				"--soft-breakpoints"
+			};
+
+			mono_jit_parse_options(2, (char**)argv);
+			mono_debug_init(MONO_DEBUG_FORMAT_MONO);
+		}
+
+		// Store the root domain pointer
 		MonoDomain* rootDomain = mono_jit_init("CryDustJITRuntime");
-		CORE_DEBUG_ASSERT(rootDomain);
+		CORE_DEBUG_ASSERT(rootDomain);	
 
 		// Store the root domain pointer
 		s_Data->RootDomain = rootDomain;
+
+		if (s_Data->EnableDebugging)
+			mono_debug_domain_create(s_Data->RootDomain);
+
+		mono_thread_set_main(mono_thread_current());
 	}
 
-	void ScriptEngine::LoadAssembly(const std::filesystem::path& filepath)
+	//加载核心程序集
+	bool ScriptEngine::LoadAssembly(const std::filesystem::path& filepath)
 	{
 		// Create an App Domain
 		s_Data->AppDomain = mono_domain_create_appdomain("CryDustScriptRuntime", nullptr);
@@ -263,20 +280,28 @@ namespace CryDust {
 		s_Data->CoreAssemblyFilepath = filepath;
 
 		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath);
+
+		if (s_Data->CoreAssembly == nullptr)
+			return false;
+	
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
-		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
+		return true;
 	}
 
 	// 加载应用程序集
-	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
+	bool ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
 	{
 		// Move this maybe
 		s_Data->AppAssemblyFilepath = filepath;
-		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath);
-		auto assemb = s_Data->AppAssembly;
+		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
+		if (s_Data->AppAssembly == nullptr)
+			return false;
+
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
-		auto assembi = s_Data->AppAssemblyImage;
-		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
+
+		s_Data->AppAssemblyFileWatcher = CreateScope<filewatch::FileWatch<std::string>>(filepath.string(), OnAppAssemblyFileSystemEvent);
+		s_Data->AssemblyReloadPending = false;
+		return true;
 	}
 
 	//重新加载程序集
@@ -293,7 +318,7 @@ namespace CryDust {
 		ScriptGlue::RegisterComponents();
 
 		// Retrieve and instantiate class
-		s_Data->EntityClass = ScriptClass("Hazel", "Entity", true);
+		s_Data->EntityClass = ScriptClass("CryDust", "Entity", true);
 	}
 
 	//设置场景上下文（当前场景）
@@ -330,6 +355,7 @@ namespace CryDust {
 					instance->SetFieldValueInternal(name, fieldInstance.m_Buffer);
 			}
 
+			instance->InvokeOnCreate();
 		}
 	}
 
@@ -338,10 +364,15 @@ namespace CryDust {
 	void ScriptEngine::OnUpdateEntity(Entity entity, Timestep ts)
 	{
 		UUID entityUUID = entity.GetUUID();
-		CORE_DEBUG_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
-
-		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnUpdate((float)ts);
+		if (s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end())
+		{
+			Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+			instance->InvokeOnUpdate((float)ts);
+		}
+		else
+		{
+			CORE_DEBUG_ERROR("Could not find ScriptInstance for entity {}", entityUUID);
+		}
 	}
 
 	Scene* ScriptEngine::GetSceneContext()
@@ -481,6 +512,11 @@ namespace CryDust {
 	{
 		CORE_DEBUG_ASSERT(s_Data->EntityInstances.find(uuid) != s_Data->EntityInstances.end());
 		return s_Data->EntityInstances.at(uuid)->GetManagedObject();
+	}
+
+	MonoString* ScriptEngine::CreateString(const char* string)
+	{
+		return mono_string_new(s_Data->AppDomain, string);
 	}
 
 	/// <summary>

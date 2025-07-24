@@ -1,10 +1,13 @@
 #pragma once
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+
 
 #include "SceneCamera.h"
 #include "CryDust/Core/UUID.h"
 #include "CryDust/Renderer/Texture.h"
+#include "CryDust/Renderer/Font.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -174,5 +177,6 @@ namespace CryDust {
 		ComponentGroup<TransformComponent, SpriteRendererComponent, CircleRendererComponent,
 		CameraComponent, 
 		ScriptComponent,NativeScriptComponent,
-		Rigidbody2DComponent, BoxCollider2DComponent, CircleCollider2DComponent>;
+		Rigidbody2DComponent, BoxCollider2DComponent, CircleCollider2DComponent,
+		TextComponent>;
 }
