@@ -33,14 +33,8 @@ namespace CryDust {
 		template<typename T>
 		T& GetComponent()
 		{
-			try {
-
-				CORE_DEBUG_ASSERT(HasComponent<T>(), "Entity does not have component!");
-			}
-			catch (const std::exception& e) {
-				std::cerr << "Crash: " << e.what() << std::endl;
-				// 记录堆栈或生成Dump文件
-			}
+			CORE_DEBUG_ASSERT(IsValid(), "Entity is not valid!");
+			CORE_DEBUG_ASSERT(HasComponent<T>(), "Entity does not have component!");
 
 			return m_Scene->m_Registry.get<T>(m_EntityHandle);
 		}
@@ -56,6 +50,12 @@ namespace CryDust {
 			m_Scene->m_Registry.remove<T>(m_EntityHandle);
 		}
 		operator bool() const { return m_EntityHandle != entt::null; }
+
+		// 句柄是否在所属 Scene 的注册表中真实有效。
+		// 鼠标拾取/悬停时像素读回的 EntityID 可能是垃圾值（着色器缓存过期、
+		// 场景切换后的陈旧句柄等），用 operator bool 无法甄别，必须先调用本函数
+		// 再使用 GetComponent，否则注册表越界访问会直接崩溃。
+		bool IsValid() const { return m_Scene && m_Scene->m_Registry.valid(m_EntityHandle); }
 	
 		operator entt::entity() const { return m_EntityHandle; }
 		operator uint32_t() const { return (uint32_t)m_EntityHandle; }

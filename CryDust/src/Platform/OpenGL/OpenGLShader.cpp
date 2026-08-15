@@ -78,6 +78,39 @@ namespace CryDust {
 			CORE_DEBUG_ASSERT(false);
 			return "";
 		}
+
+		// FNV-1a 哈希，用于着色器缓存失效判断
+		static uint64_t HashData(const void* data, size_t size)
+		{
+			const uint8_t* bytes = static_cast<const uint8_t*>(data);
+			uint64_t hash = 14695981039346656037ull;
+			for (size_t i = 0; i < size; i++)
+			{
+				hash ^= bytes[i];
+				hash *= 1099511628211ull;
+			}
+			return hash;
+		}
+
+		// 缓存文件旁边存一个 .hash 文件记录源数据哈希，
+		// 源变动后哈希不匹配即视为缓存失效（不再靠手动删除缓存目录）
+		static bool IsCacheValid(const std::filesystem::path& cachedPath, uint64_t hash)
+		{
+			std::filesystem::path hashPath = cachedPath.string() + ".hash";
+			std::ifstream in(hashPath, std::ios::in | std::ios::binary);
+			if (!in.is_open())
+				return false;
+			uint64_t cachedHash = 0;
+			in.read((char*)&cachedHash, sizeof(uint64_t));
+			return in.good() && cachedHash == hash;
+		}
+
+		static void WriteCacheHash(const std::filesystem::path& cachedPath, uint64_t hash)
+		{
+			std::filesystem::path hashPath = cachedPath.string() + ".hash";
+			std::ofstream out(hashPath, std::ios::out | std::ios::binary);
+			out.write((const char*)&hash, sizeof(uint64_t));
+		}
 	}
 
 	OpenGLShader::OpenGLShader(const std::string& filepath)
@@ -212,10 +245,12 @@ namespace CryDust {
 			std::filesystem::path shaderFilePath = m_FilePath;
 			std::filesystem::path cachedPath = cacheDirectory / (shaderFilePath.filename().string() + Utils::GLShaderStageCachedVulkanFileExtension(stage));
 
+			// 源内容哈希：源被修改后旧缓存自动失效
+			uint64_t sourceHash = Utils::HashData(source.data(), source.size());
 			std::ifstream in(cachedPath, std::ios::in | std::ios::binary);
-			
-			//如果文件已经被打开，读
-			if (in.is_open())
+
+			//如果文件已经被打开且哈希匹配，读
+			if (in.is_open() && Utils::IsCacheValid(cachedPath, sourceHash))
 			{
 				in.seekg(0, std::ios::end);
 				auto size = in.tellg();
@@ -247,6 +282,7 @@ namespace CryDust {
 					out.write((char*)data.data(), data.size() * sizeof(uint32_t));
 					out.flush();
 					out.close();
+					Utils::WriteCacheHash(cachedPath, sourceHash);
 				}
 			}
 		}
@@ -276,8 +312,10 @@ namespace CryDust {
 			std::filesystem::path shaderFilePath = m_FilePath;
 			std::filesystem::path cachedPath = cacheDirectory / (shaderFilePath.filename().string() + Utils::GLShaderStageCachedOpenGLFileExtension(stage));
 
+			// 以上游 Vulkan SPIR-V 内容哈希作为缓存有效性依据，源改动会层层传导到这里
+			uint64_t spirvHash = Utils::HashData(spirv.data(), spirv.size() * sizeof(uint32_t));
 			std::ifstream in(cachedPath, std::ios::in | std::ios::binary);
-			if (in.is_open())
+			if (in.is_open() && Utils::IsCacheValid(cachedPath, spirvHash))
 			{
 				in.seekg(0, std::ios::end);
 				auto size = in.tellg();
@@ -309,6 +347,7 @@ namespace CryDust {
 					out.write((char*)data.data(), data.size() * sizeof(uint32_t));
 					out.flush();
 					out.close();
+					Utils::WriteCacheHash(cachedPath, spirvHash);
 				}
 			}
 		}

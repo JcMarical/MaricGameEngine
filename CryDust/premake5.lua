@@ -78,7 +78,7 @@ project "CryDust"
 
 	filter "configurations:Debug"
 		defines "CD_DEBUG"
-		runtime "Debug"
+		runtime "Release"
 		symbols "on"
 
 		links

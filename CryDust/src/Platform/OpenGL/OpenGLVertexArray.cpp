@@ -86,10 +86,11 @@ namespace CryDust {
 				case ShaderDataType::Bool:
 				{
 					glEnableVertexAttribArray(m_VertexBufferIndex);
-					glVertexAttribPointer(m_VertexBufferIndex,
+					// 整型顶点属性必须用 IPointer，否则 EntityID 等整型数据
+					// 会被当作浮点归一化转换，拾取缓冲里全是垃圾值
+					glVertexAttribIPointer(m_VertexBufferIndex,
 						element.GetComponentCount(),
 						ShaderDataTypeToOpenGLBaseType(element.Type),
-						element.Normalized ? GL_TRUE : GL_FALSE,
 						layout.GetStride(),
 						(const void*)element.Offset);
 					m_VertexBufferIndex++;
@@ -102,9 +103,11 @@ namespace CryDust {
 					for (uint8_t i = 0; i < count; i++)
 					{
 						glEnableVertexAttribArray(m_VertexBufferIndex);
-						glVertexAttribIPointer(m_VertexBufferIndex,
+						// 矩阵是浮点数据，每列一个属性槽位
+						glVertexAttribPointer(m_VertexBufferIndex,
 							count,
 							ShaderDataTypeToOpenGLBaseType(element.Type),
+							element.Normalized ? GL_TRUE : GL_FALSE,
 							layout.GetStride(),
 							(const void*)(element.Offset + sizeof(float) * count * i));
 						glVertexAttribDivisor(m_VertexBufferIndex, 1);

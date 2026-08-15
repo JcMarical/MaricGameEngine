@@ -31,7 +31,7 @@ project "ImGui"
 		staticruntime "On"
 
 	filter "configurations:Debug"
-		runtime "Debug"
+		runtime "Release"
 		symbols "on"
 
 	filter "configurations:Release"

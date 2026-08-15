@@ -142,7 +142,11 @@ namespace CryDust {
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
+			// 防御：读回的 EntityID 可能是垃圾值（着色器缓存过期导致属性错位、
+			// 场景切换后 ID 缓冲残留等），直接构造 Entity 后在 GetComponent
+			// 时会访问非法句柄导致引擎崩溃，必须先校验有效性
+			Entity hoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
+			m_HoveredEntity = hoveredEntity.IsValid() ? hoveredEntity : Entity();
 		}
 
 		OnOverlayRender();
@@ -241,12 +245,10 @@ namespace CryDust {
 		m_ContentBrowserPanel->OnImGuiRender();
 		ImGui::Begin("Stats");
 
-#if 0
 		std::string name = "None";
 		if (m_HoveredEntity)
 			name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
 		ImGui::Text("Hovered Entity: %s", name.c_str());
-#endif
 
 
 		auto stats = Renderer2D::GetStats();
@@ -263,9 +265,6 @@ namespace CryDust {
 
 		ImGui::Begin("Settings");
 		ImGui::Checkbox("Show physics colliders", &m_ShowPhysicsColliders);
-
-		ImGui::Image((ImTextureID)s_Font->GetAtlasTexture()->GetRendererID(), { 512,512 }, { 0, 1 }, { 1, 0 });
-		
 		ImGui::End();
 
 

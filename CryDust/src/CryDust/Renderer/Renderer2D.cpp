@@ -249,6 +249,9 @@ namespace CryDust {
 		CD_PROFILE_FUNCTION();
 
 		delete[] s_Data.QuadVertexBufferBase;
+		delete[] s_Data.CircleVertexBufferBase;
+		delete[] s_Data.LineVertexBufferBase;
+		delete[] s_Data.TextVertexBufferBase;
 	}
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
@@ -502,9 +505,9 @@ namespace CryDust {
 	void Renderer2D::DrawCircle(const glm::mat4& transform, const glm::vec4& color, float thickness /*= 1.0f*/, float fade /*= 0.005f*/, int entityID /*= -1*/)
 	{
 		CD_PROFILE_FUNCTION();
-		// TODO: implement for circles
-		// if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
-		// 	NextBatch();
+		// 批次满时先 flush，否则顶点指针越界写入导致内存损坏/崩溃
+		if (s_Data.CircleIndexCount >= Renderer2DData::MaxIndices)
+			NextBatch();
 		for (size_t i = 0; i < 4; i++)
 		{
 			s_Data.CircleVertexBufferPtr->WorldPosition = transform * s_Data.QuadVertexPositions[i];
@@ -521,6 +524,10 @@ namespace CryDust {
 
 	void Renderer2D::DrawLine(const glm::vec3& p0, glm::vec3& p1, const glm::vec4& color, int entityID)
 	{
+		// 线段顶点缓冲溢出保护（每条线 2 个顶点）
+		if (s_Data.LineVertexCount >= Renderer2DData::MaxVertices)
+			NextBatch();
+
 		s_Data.LineVertexBufferPtr->Position = p0;
 		s_Data.LineVertexBufferPtr->Color = color;
 		s_Data.LineVertexBufferPtr->EntityID = entityID;
@@ -571,9 +578,14 @@ namespace CryDust {
 
 	void Renderer2D::DrawString(const std::string& string, Ref<Font> font, const glm::mat4& transform, const TextParams& textParams, int entityID)
 	{
+		if (!font || !font->GetMSDFData())
+			return;
+
 		const auto& fontGeometry = font->GetMSDFData()->FontGeometry;
 		const auto& metrics = fontGeometry.getMetrics();
 		Ref<Texture2D> fontAtlas = font->GetAtlasTexture();
+		if (!fontAtlas)
+			return;
 
 		s_Data.FontAtlasTexture = fontAtlas;
 
@@ -581,7 +593,9 @@ namespace CryDust {
 		double fsScale = 1.0 / (metrics.ascenderY - metrics.descenderY);
 		double y = 0.0;
 
-		const float spaceGlyphAdvance = fontGeometry.getGlyph(' ')->getAdvance();
+		// 某些字体可能不包含空格字形，直接解引用会崩溃
+		auto spaceGlyph = fontGeometry.getGlyph(' ');
+		const float spaceGlyphAdvance = spaceGlyph ? (float)spaceGlyph->getAdvance() : 0.5f;
 
 		for (size_t i = 0; i < string.size(); i++)
 		{
@@ -623,6 +637,10 @@ namespace CryDust {
 				glyph = fontGeometry.getGlyph('?');
 			if (!glyph)
 				return;
+
+			// 文本批次满时先 flush（每个字符 4 顶点 / 6 索引），防止顶点缓冲越界
+			if (s_Data.TextIndexCount >= Renderer2DData::MaxIndices)
+				NextBatch();
 
 			double al, ab, ar, at;
 			glyph->getQuadAtlasBounds(al, ab, ar, at);
