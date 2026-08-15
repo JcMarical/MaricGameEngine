@@ -1,7 +1,8 @@
 # Binaries
-**/bin/
+/bin/
 bin-int/
 Intermediates/
+obj/
 
 # Hazel files
 *.log
@@ -13,6 +14,10 @@ Intermediates/
 **.vcxproj.filters
 **.vcxproj.user
 **.csproj
+
+# C# 脚本核心构建产物（首次构建自动生成）
+CryDust-Editor/Resources/Scripts/*.dll
+CryDust-Editor/Resources/Scripts/*.pdb
 
 # Directories
 CryDust/vendor/VulkanSDK
