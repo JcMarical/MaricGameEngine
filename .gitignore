@@ -1,5 +1,6 @@
 # Binaries
-/bin/
+**/bin/
+!vendor/premake/bin/
 bin-int/
 Intermediates/
 obj/
